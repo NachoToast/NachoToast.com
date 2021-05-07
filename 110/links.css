@@ -28,6 +28,7 @@
 .link_card * {
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 .link_card > p:first-child {

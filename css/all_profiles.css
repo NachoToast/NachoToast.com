@@ -17,9 +17,15 @@ h1 {
 }
 
 #profiles_config {
+    top: 0px;
     display: flex;
+    position: sticky;
     flex-flow: column nowrap;
     align-items: center;
+    background-color: #272727;
+    width: 100%;
+    padding-bottom: 5px;
+    z-index: 10;
 }
 
 #profiles_config > p {
@@ -41,7 +47,7 @@ h1 {
 }
 
 #profiles_div {
-    width: clamp(300px, 90%, 1024px);
+    width: clamp(300px, 90%, 1920px);
     display: flex;
     flex-flow: row wrap;
     justify-content: center;

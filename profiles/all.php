@@ -11,19 +11,20 @@
     <?php include_once 'header.php'?>
     <h1>NachoToast User Profiles</h1>
     <div id="profiles_config">
-        <p>
+        <p class='noselect'>
             <span class='users_per_page uppa' onclick="change_users_per_page(0)">10</span>
             <span class='users_per_page' onclick="change_users_per_page(1)">20</span>
             <span class='users_per_page' onclick="change_users_per_page(2)">50</span>
              Users Per Page
         </p>
-        <p style='display: none'>
-            <span class='page_skip'><< </span>
-            <span class='page_skip'> <</span>
-             Page 1 of 2 
-            <span class='page_skip'>> </span>
-            <span class='page_skip'> >></span>
+        <p class='noselect'>
+            <span class='page_skip' onclick='change_page(-2)'><< </span>
+            <span class='page_skip' onclick='change_page(-1)'> <</span>
+            <span id="page_display_number">Page 1 of 2</span>
+            <span class='page_skip' onclick='change_page(1)'>> </span>
+            <span class='page_skip' onclick='change_page(2)'> >></span>
         </p>
+        <p class='noselect' id='user_display_number'>Displaying 50 of 89 users.</p>
     </div>
     <input
     <?php

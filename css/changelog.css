@@ -1,0 +1,59 @@
+#changelog_container {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 40px;
+}
+
+#changelog_container * {
+    margin: 0;
+    padding: 0;
+}
+
+#changelog_container > div {
+    background-color: #272727;
+    border-top: solid 1px transparent;
+    border-bottom: solid 1px transparent;
+    transition: background-color 0.1s linear;
+    transition: border 0.3s linear;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 10px 0;
+}
+
+
+
+#changelog_container > div:hover {
+    background-color: #333;
+    border-top: solid 1px gray;
+    border-bottom: solid 1px gray;
+}
+
+#changelog_container > div > * {
+    width: clamp(300px, 90%, 1440px);
+}
+
+#changelog_container > div > h4 {
+    font-weight: lighter;
+    padding-bottom: 5px;
+    width: 98%;
+}
+
+#changelog_container > * a {
+    color: aquamarine;
+    cursor: pointer;
+}
+
+#changelog_container > * a:hover {
+    text-decoration: underline 1px;
+}
+
+#changelog_container > div > ul > li {
+    line-height: 1.5;
+}
+
+#changelog_container *:target, #changelog_container *:target:hover {
+    border-top: solid 1px aquamarine;
+    border-bottom: solid 1px aquamarine;
+    background-color: #333;
+}

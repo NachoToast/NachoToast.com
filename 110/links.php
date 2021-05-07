@@ -37,6 +37,11 @@
             <p>Pretty much everything you need.</p>
             <a href="https://www.researchgate.net/publication/225954921_Some_Problems_with_Employee_Monitoring" target="_blank">Article</a>
         </div>
+        <div class="link_card">
+            <p>Ethical Surveillance Considerations</p>
+            <p>Ethical considerations of electronic surveillance of nurses in the workplace.</p>
+            <a href="https://ojin.nursingworld.org/MainMenuCategories/ANAMarketplace/ANAPeriodicals/OJIN/TableofContents/Vol-23-2018/No2-May-2018/Electronic-Surveillance-of-Nurses.html" target="_blank">Article</a>
+        </div>
     </div>
 </body>
 </html>

@@ -60,6 +60,9 @@ input {
     color: white;
     font-size: 22px;
     width: 100%;
+    /*position: sticky;*/
+    top: 0px;
+    z-index: 19;
 }
 
 #header a {
@@ -69,8 +72,11 @@ input {
     border: solid 1px transparent;
     background-color: #333;
     cursor: pointer;
-    text-align: center;
     padding: 4px 8px;
+}
+
+#header > a {
+    text-align: center;
 }
 
 @keyframes header_notif_fade {
@@ -85,7 +91,6 @@ input {
 }
 
 #header .n {
-    cursor: default;
     right: 0;
     animation-name: header_notif_fade;
     animation-fill-mode: forwards;
@@ -111,9 +116,32 @@ input {
     position: absolute;
     flex-flow: column nowrap;
     color: white;
+    border: solid 1px #333;
+    z-index: 20;
+    left: 37px;
+}
+
+.dropdown-content > * {
+    text-align: left;
+    border: solid 1px #333;
+}
+
+@media screen and (min-width: 375px) {
+    .dropdown-content {
+        left: unset;
+    }
 }
 
 .dropdown:hover .dropdown-content {
     display: flex;
     top: 37px;
+}
+
+.complete {
+    color: lightgreen;
+}
+
+.complete > a:hover {
+    cursor: pointer;
+    text-decoration: solid 1px underline;
 }

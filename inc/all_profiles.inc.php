@@ -3,39 +3,58 @@ if (!isset($_POST["mode"])) {
     header("location: ../profiles.php?e=wrongway");
     exit();
 }
-if ($_POST["mode"] == "search") {
-    session_start();
-    if (!isset($_SESSION["id"])) {
-        header ("location: ../profiles.php?e=login");
-        exit();
-    }
-    $stmt = "SELECT id, username, lastonline, extension, cpfp, description FROM `breadcrumbs` WHERE username LIKE ? LIMIT ? OFFSET ?";
-    $loggedin = true;
-
-} else {$stmt = "SELECT id, username, lastonline, extension, cpfp, description FROM `breadcrumbs` LIMIT ? OFFSET ?"; $loggedin = false;}
 
 // limit
 if (!isset($_POST["users_per_page"])) {header("location: ../profiles.php?e=usersperpage"); exit();}
 if ($_POST["users_per_page"] == 10) $limit = 10;
 else if ($_POST["users_per_page"] == 20) $limit = 20;
 else if ($_POST["users_per_page"] == 50) $limit = 50;
-else $limit = 100;
+else $limit = 50;
 
 // offset
 if (!isset($_POST["page"])) {header("location: ../profiles.php?e=page"); exit();}
 $offset = $_POST["page"] * $limit;
 
+// init connection
 include_once 'dbh.inc.php';
-$sql = $conn -> prepare($stmt);
-if ($loggedin) {
-    $search_string = "%" . $_POST["input"] . "%";
-    $sql -> bind_param("sii", $search_string, $limit, $offset);
-}
-else $sql -> bind_param("ii", $limit, $offset);
 
+// search mode
+if ($_POST["mode"] == "search") {
+    session_start();
+    if (!isset($_SESSION["id"])) {
+        header ("location: ../profiles.php?e=login");
+        exit();
+    }
+    // limited relevant results
+    $stmt = "SELECT id, username, lastonline, extension, cpfp, description FROM `breadcrumbs` WHERE username LIKE ? LIMIT ? OFFSET ?";
+    $search_string = "%" . $_POST["input"] . "%";
+    $sql = $conn -> prepare($stmt);
+    $sql -> bind_param("sii", $search_string, $limit, $offset);
+    // all relevant results
+    $stmt2 = "SELECT id FROM `breadcrumbs` WHERE username LIKE ?";
+    $sql2 = $conn -> prepare($stmt2);
+    $sql2 -> bind_param("s", $search_string);
+    $sql2 -> execute();
+    $totalresults = mysqli_num_rows($sql2 -> get_result());
+
+} else {
+    // limited relevant results
+    $stmt = "SELECT id, username, lastonline, extension, cpfp, description FROM `breadcrumbs` LIMIT ? OFFSET ?";
+    $sql = $conn -> prepare($stmt);
+    $sql -> bind_param("ii", $limit, $offset);
+    // all relevant results
+    $stmt2 = "SELECT id FROM `breadcrumbs`";
+    $sql2 = $conn -> prepare($stmt2);
+    $sql2 -> execute();
+    $totalresults = mysqli_num_rows($sql2 -> get_result());
+}
+
+// collating results
 $now = time();
+$output = "";
 $sql -> execute();
 $result = $sql -> get_result();
+$displaying = mysqli_num_rows($result);
 while ($profile = mysqli_fetch_array($result)) {
     if ($profile["cpfp"] == 0) $src = "img/pfp_default.png";
     else $src = "uploads/profiles/" . $profile["id"] . "." . $profile["extension"];
@@ -43,11 +62,12 @@ while ($profile = mysqli_fetch_array($result)) {
     if ($ts < 1) $ts = "Today";
     else if ($ts < 2) $ts = "1 day ago";
     else $ts = $ts . " days ago";
-    echo "<a class='profile_card' href='profiles.php?user=" . $profile["id"] . "'>
+    $output .= "<a class='profile_card' href='profiles.php?user=" . $profile["id"] . "'>
             <img src=" . $src .">
             <div>
-                <p>" . $profile["username"] . " <span style='font-weight: lighter; color: gray;'>($ts)</span></p>
-                <p>" . $profile["description"] . "</p>
+                <p>" . htmlspecialchars($profile["username"]) . " <span style='font-weight: lighter; color: gray;'>($ts)</span></p>
+                <p>" . htmlspecialchars($profile["description"]) . "</p>
             </div>
         </a>";
 }
+echo json_encode(array($output, $displaying, $totalresults));

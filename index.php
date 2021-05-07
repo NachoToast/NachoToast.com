@@ -14,11 +14,11 @@
     <p style='margin: 0; color: gray;'>Now with meta!</p>
     <h2 style='margin-bottom: 5px; margin-top: 35px'>Website Roadmap:</h2>
     <p style='margin: 0; color: gray;'>From highest to lowest priority.</p>
-        <p>Make GitHub Repo</p>
-        <p>Users Page</p>
-        <p>Changelog</p>
+        <p class="complete"><a href="https://github.com/NachoToast/NachoToast.com" target="_blank">Make GitHub Repo</a></p>
+        <p class="complete"><a href="profiles.php">Users Page</a></p>
+        <p class="complete"><a href="changelog">Changelog</a></p>
         <p>About Page</p>
-        <p>Ignominy Hub</p>
+        <p style='color: rgb(255, 238, 139);'>Ignominy Hub</p>
         <p>Roadmap Page</p>
         <p>Online Users</p>
         <p>Chat Forums</p>
