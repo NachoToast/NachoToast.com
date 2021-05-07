@@ -1,0 +1,119 @@
+@import "fonts/stylesheet.css";
+
+body {
+    background-color: #272727;
+    color: white;
+    font-family: "Roboto", sans-serif, Calibri, 'Trebuchet MS';
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+body::-webkit-scrollbar {
+    background-color: #272727;
+    width: 1em;
+    border-left: solid 1px gray;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border: solid 1px gray;
+    border-right: none;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #B5B5B5;
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background-color: pink;
+}
+
+a, a:visited, a:active, a:hover {
+    color: unset;
+    text-decoration: unset;
+}
+
+input {
+    outline: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+#header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: white;
+    font-size: 22px;
+    width: 100%;
+}
+
+#header a {
+    margin: 0;
+    transition: background-color 0.1s linear;
+    transition: border 0.3s linear;
+    border: solid 1px transparent;
+    background-color: #333;
+    cursor: pointer;
+    text-align: center;
+    padding: 4px 8px;
+}
+
+@keyframes header_notif_fade {
+    from {opacity: 1}
+    to {opacity: 0; visibility: hidden;}
+}
+
+#header a:hover {
+    background-color: #272727;
+    border: solid 1px gray;
+    color: rgb(255, 238, 139);
+}
+
+#header .n {
+    cursor: default;
+    right: 0;
+    animation-name: header_notif_fade;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+    animation: header_notif_fade 1s forwards 2s;
+}
+
+#header .n.g {
+    color: lightgreen;
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown:hover {
+    color: rgb(255, 238, 139);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    flex-flow: column nowrap;
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    top: 37px;
+}

@@ -1,0 +1,106 @@
+h1 {
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+#username_search {
+    margin: 10px 0;
+    font-size: 18px;
+    outline: none;
+    padding: 3px 4px;
+}
+
+#username_search:disabled {
+    background-color: white;
+    color: black;
+    cursor: not-allowed;
+}
+
+#profiles_config {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+#profiles_config > p {
+    margin: 5px 0 0 0;
+    font-weight: lighter;
+    padding: 0;
+    color: gray;
+    font-size: 18px;
+}
+
+#profiles_config .users_per_page, #profiles_config .page_skip {
+    color: gray;
+    transition: color 0.1s linear;
+    cursor: pointer;
+}
+
+#profiles_config .users_per_page:hover, #profiles_config .page_skip:hover, #profiles_config .uppa {
+    color: aquamarine;
+}
+
+#profiles_div {
+    width: clamp(300px, 90%, 1024px);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.profile_card {
+    cursor: pointer;
+    background-color: #272727;
+    border: solid 1px gray;
+    transition: background-color 0.1s linear;
+    transition: border 0.3s linear;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 300px;
+    margin: 1px;
+}
+
+.profile_card:hover {
+    z-index: 3;
+    background-color: #333;
+    border: solid 1px aquamarine;
+}
+
+.profile_card > img {
+    width: 64px;
+    height: 64px;
+}
+
+.profile_card > div {
+    padding: 5px;
+    height: 54px;
+    overflow-y: auto;
+}
+
+.profile_card > div > p {
+    margin: 0;
+    padding: 0;
+}
+
+.profile_card > div > p:first-child {
+    font-weight: bold;
+}
+
+.profile_card > div::-webkit-scrollbar {
+    background-color: #272727;
+    width: 1em;
+    border-left: solid 1px gray;
+}
+
+.profile_card > div::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border: solid 1px gray;
+    border-right: none;
+}
+
+.profile_card > div::-webkit-scrollbar-thumb:hover {
+    background-color: #B5B5B5;
+}
+
+.profile_card > div::-webkit-scrollbar-thumb:active {
+    background-color: pink;
+}
