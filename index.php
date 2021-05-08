@@ -17,7 +17,7 @@
         <p class="complete"><a href="https://github.com/NachoToast/NachoToast.com" target="_blank">Make GitHub Repo</a></p>
         <p class="complete"><a href="profiles.php">Users Page</a></p>
         <p class="complete"><a href="changelog">Changelog</a></p>
-        <p>About Page</p>
+        <p class='complete'><a href='about'>About Page</a></p>
         <p style='color: rgb(255, 238, 139);'>Ignominy Hub</p>
         <p>Roadmap Page</p>
         <p>Online Users</p>

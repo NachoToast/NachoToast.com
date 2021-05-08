@@ -35,6 +35,7 @@
 
     <!-- changelog -->
     <a href="changelog">Changelog</a>
+    <a href="about">About</a>
 
     <!-- games -->
     <a href="g/Ignominy">Ignominy</a>
