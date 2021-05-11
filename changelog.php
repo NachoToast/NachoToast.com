@@ -12,6 +12,12 @@
         include_once 'header.php' ;
     ?>
     <div id="changelog_container">
+        <div id="17">
+            <h4>10/05/2021</h4>
+            <ul>
+                <li>Added <a href="110/utilization">utilization page</a> to 110 directory.</li>
+            </ul>
+        </div>
         <div id=16>
             <h4>8/05/2021</h4>
             <ul>
