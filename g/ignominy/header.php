@@ -8,9 +8,9 @@
         }
         if (isset($_SESSION["id"])) {
             echo "<a class='noselect' href='g/ignominy'>Index</a>";
-            if ($_SESSION["ignominy_account_type"] == "writer" || $_SESSION["ignominy_account_type"] == "mdev") echo "<a class='noselect' href='g/ignominy/w'>Writers Hub</a>";
             //echo "<a href='g/ignominy/play' class='noselect'>Play</a>";
             if (!isset($_SESSION["ignominy_id"])) include_once "../../inc/g/ignominy/signup_login.inc.php";
+            if ($_SESSION["ignominy_account_type"] == "writer" || $_SESSION["ignominy_account_type"] == "mdev") echo "<a class='noselect' href='g/ignominy/w'>Writers Hub</a>";
             //echo "<a class='noselect'>" . $_SESSION["username"] . "</a>";
         }
     ?>

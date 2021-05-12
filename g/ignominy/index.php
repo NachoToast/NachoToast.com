@@ -15,7 +15,7 @@
                     <h1 class="noselect">Welcome to the Ignominy Index!</h1>
                     <a href="../../signup.php?o=ignominy" class="noselect">Please <span>register</span> an account to continue!</a>
                     <a href="../../login.php?o=ignominy" class="noselect">Or <span>log in</span> to a preexisting one.</a>
-                    <a style='color: gray' href="g/ignominy/play" class="noselect">I'm just here to play the game.</a>
+                    <a style='color: gray' href="g/ignominy/p" class="noselect">I'm just here to play the game.</a>
                 </div>
             <?php
             exit();
@@ -37,7 +37,7 @@
             ?>
                 <div class='ii_main'>
                     <h1 class='noselect'>Ignominy Index</h1>
-                    <a id='play' href='g/ignominy/play'>Play</a>
+                    <a id='play' href='g/ignominy/p'>Play</a>
                     <p>Logged in as: <span style='color: pink'><?php echo $_SESSION["username"] ?><span></p>
                     <p>Account Type: <?php echo $acctype ?></p>
                 </div>
