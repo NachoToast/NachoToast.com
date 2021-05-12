@@ -1,13 +1,17 @@
 <?php
 if (isset($_POST["g-recaptcha-response"])) {
 
+    // redirect
+    if (isset($_GET["o"])) $redirect = "&o=" . $_GET["o"];
+    else $redirect = "";
+
     // captcha
     include_once "../phpf/captcha.php";
-    /*$result = verify_captcha($_POST["g-recaptcha-response"]);
+    $result = verify_captcha($_POST["g-recaptcha-response"]);
     if ($result !== true) {
-        header("location: ../signup.php?e=captcha$result");
+        header("location: ../signup.php?e=captcha$result$redirect");
         exit();
-    }*/
+    }
 
     // declared
     if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password_confirm"]) && isset($_POST["email"])) {
@@ -16,35 +20,35 @@ if (isset($_POST["g-recaptcha-response"])) {
         $password2 = $_POST["password_confirm"];
         $email = $_POST["email"];
     } else {
-        header("location: ../signup.php?e=empty");
+        header("location: ../signup.php?e=empty$redirect");
         exit();
     }
 
     // empty
     if (empty($username) || empty($password) || empty($email)) {
-        header("location: ../signup.php?e=empty");
+        header("location: ../signup.php?e=empty$redirect");
         exit();
     }
 
     // invalid username
     if (!preg_match("/^[a-zA-Z0-9]*$/", $username) || strlen($username) > 20 || strlen($username) < 3) {
-        header("location: ../signup.php?e=invalid");
+        header("location: ../signup.php?e=invalid$redirect");
         exit();
     }
 
     // invalid email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 128) {
-        header("location: ../signup.php?e=email");
+        header("location: ../signup.php?e=email$redirect");
         exit();
     }
 
     // invalid password
     if (strlen($password) > 255 || strlen($password) < 5) {
-        header("location: ../signup.php?e=invalid");
+        header("location: ../signup.php?e=invalid$redirect");
         exit();
     }
     if ($password !== $password2) {
-        header("location: ../signup.php?e=invalid");
+        header("location: ../signup.php?e=invalid$redirect");
         exit();
     }
 
@@ -56,8 +60,8 @@ if (isset($_POST["g-recaptcha-response"])) {
     $sql -> execute();
     $result = $sql -> get_result();
     while ($duplicate = mysqli_fetch_array($result)) {
-        if ($duplicate["username"] == $username || $duplicate["email"] == $email) {header("location: ../signup.php?e=taken"); exit();}
-        if ($duplicate["ip"] == $this_ip && $this_ip != "::1" && $this_ip != "192.168.1.254") {header("location: ../signup.php?e=ip"); exit();};
+        if ($duplicate["username"] == $username || $duplicate["email"] == $email) {header("location: ../signup.php?e=taken$redirect"); exit();}
+        if ($duplicate["ip"] == $this_ip && $this_ip != "::1" && $this_ip != "192.168.1.254") {header("location: ../signup.php?e=ip$redirect"); exit();};
     }
 
     // database write
@@ -77,6 +81,10 @@ if (isset($_POST["g-recaptcha-response"])) {
     session_start();
     $_SESSION["id"] = $result["id"];
     $_SESSION["username"] = $result["username"];
+    if (strlen($redirect) > 0) {
+        if ($redirect == "&o=ignominy") header("location: ../g/ignominy/index.php?s=signup");
+        exit();
+    }
     header("location: ../index.php?s=signup");
     exit();
 }

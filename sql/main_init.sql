@@ -1,7 +1,7 @@
 CREATE DATABASE toaster;
 
 CREATE TABLE breadcrumbs (
-    id int(11) primary key not null auto_increment,
+    id int(11) primary key not null auto_increment unique,
     username varchar(128) not null,
     email varchar(128),
     password varchar(255) not null,

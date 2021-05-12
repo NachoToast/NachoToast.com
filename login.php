@@ -1,4 +1,4 @@
-<?php include_once 'head.html' ?>
+    <?php include_once 'head.html' ?>
     <link href="css/forms.css" rel="stylesheet" type="text/css">
     <script defer src="js/login.js"></script>
     <meta property="og:title" content="NachoToast Login Page">
@@ -10,9 +10,11 @@
 <body>
     <?php
         session_start();
-        include_once 'header.php' ;
+        include_once 'header.php';
+        if (isset($_GET["o"])) $redirect = "?o=" . $_GET["o"];
+        else $redirect = "";
     ?>
-    <form action="inc/login.inc.php" method="post" class="form">
+    <form action="inc/login.inc.php<?php echo $redirect ?>" method="post" class="form">
     <input name="username" id="login_username" placeholder="Username/Email" autofocus required oninput="update_form()">
     <input type="password" name="password" id="login_password" placeholder="Password" required oninput="update_form()">
     <?php 
@@ -24,7 +26,7 @@
         }
     ?>
     <button type="submit" name="submit_login" id="login_submit" disabled>Continue</button>
-    <p class="noselect">Don't have an account? <a id="request_account" href="signup.php">Make one.</a>
+    <p class="noselect">Don't have an account? <a id="request_account" href="signup.php<?php echo $redirect ?>">Make one.</a>
 </form>
 </body>
 </html>

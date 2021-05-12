@@ -102,6 +102,10 @@ input {
     color: lightgreen;
 }
 
+#header .n.a {
+    color: aquamarine;
+}
+
 .dropdown {
     display: flex;
     align-items: center;

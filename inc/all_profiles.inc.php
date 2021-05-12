@@ -1,18 +1,18 @@
 <?php
 if (!isset($_POST["mode"])) {
-    header("location: ../profiles.php?e=wrongway");
+    header("location: ../users.php?e=wrongway");
     exit();
 }
 
 // limit
-if (!isset($_POST["users_per_page"])) {header("location: ../profiles.php?e=usersperpage"); exit();}
+if (!isset($_POST["users_per_page"])) {header("location: ../users.php?e=usersperpage"); exit();}
 if ($_POST["users_per_page"] == 10) $limit = 10;
 else if ($_POST["users_per_page"] == 20) $limit = 20;
 else if ($_POST["users_per_page"] == 50) $limit = 50;
 else $limit = 50;
 
 // offset
-if (!isset($_POST["page"])) {header("location: ../profiles.php?e=page"); exit();}
+if (!isset($_POST["page"])) {header("location: ../users.php?e=page"); exit();}
 $offset = $_POST["page"] * $limit;
 
 // init connection
@@ -22,7 +22,7 @@ include_once 'dbh.inc.php';
 if ($_POST["mode"] == "search") {
     session_start();
     if (!isset($_SESSION["id"])) {
-        header ("location: ../profiles.php?e=login");
+        header ("location: ../users.php?e=login");
         exit();
     }
     // limited relevant results
@@ -62,7 +62,7 @@ while ($profile = mysqli_fetch_array($result)) {
     if ($ts < 1) $ts = "Today";
     else if ($ts < 2) $ts = "1 day ago";
     else $ts = $ts . " days ago";
-    $output .= "<a class='profile_card' href='profiles.php?user=" . $profile["id"] . "'>
+    $output .= "<a class='profile_card' href='users.php?user=" . $profile["id"] . "'>
             <img src=" . $src .">
             <div>
                 <p>" . htmlspecialchars($profile["username"]) . " <span style='font-weight: lighter; color: gray;'>($ts)</span></p>

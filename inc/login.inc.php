@@ -1,16 +1,20 @@
 <?php
 if (isset($_POST["submit_login"])) {
 
+    // redirect
+    if (isset($_GET["o"])) $redirect = "&o=" . $_GET["o"];
+    else $redirect = "";
+
     if (isset($_POST["username"]) && isset($_POST["password"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
     } else {
-        header("location: ../login.php?e=empty");
+        header("location: ../login.php?e=empty$redirect");
         exit();
     }
 
     if (empty($username) || empty($password)) {
-        header("location: ../login.php?e=empty");
+        header("location: ../login.php?e=empty$redirect");
         exit();
     }
 
@@ -22,12 +26,12 @@ if (isset($_POST["submit_login"])) {
     $result = mysqli_fetch_assoc($sql -> get_result());
 
     if ($result === NULL) {
-        header("location: ../login.php?e=invalid");
+        header("location: ../login.php?e=invalid$redirect");
         exit();
     }
 
     if (!password_verify($password, $result["password"])) {
-        header("location: ../login.php?e=invalid");
+        header("location: ../login.php?e=invalid$redirect");
         exit();
     }
 
@@ -45,6 +49,10 @@ if (isset($_POST["submit_login"])) {
     $sql -> execute();
 
     // exit
+    if (strlen($redirect) > 0) {
+        if ($redirect == "&o=ignominy") header("location: ../g/ignominy/index.php?s=login");
+        exit();
+    }
     header("location: ../index.php?s=login");
     exit();
 }

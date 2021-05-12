@@ -1,4 +1,4 @@
-<?php include_once 'head.html' ?>
+    <?php include_once 'head.html' ?>
     <link href="css/forms.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script defer src="js/signup.js"></script>
@@ -12,9 +12,11 @@
 <body>
     <?php
         session_start();
-        include_once 'header.php' ;
+        include_once 'header.php';
+        if (isset($_GET["o"])) $redirect = "?o=" . $_GET["o"];
+        else $redirect = "";
     ?>
-    <form action="inc/signup.inc.php" method="post" class="form" id="signup_form">
+    <form action="inc/signup.inc.php<?php echo $redirect ?>" method="post" class="form" id="signup_form">
     <p class='output output2'>Username Too Short!</p>
     <input name="username" id="signup_username" placeholder="Username" autofocus required oninput="update_username(this.value)" minlength=3 maxlength=20>
     <p class='output output2'>Email Taken!</p>
@@ -36,6 +38,7 @@
         }
     ?>
     <button type="submit" id="signup_submit" disabled class="g-recaptcha" data-sitekey="6LcmnGkaAAAAAK1xje2-NrSsgCQUsd7y-woMPTgs" data-callback="onSubmit" data-action="submit">Continue</button>
+    <p class="noselect">Already have an account? <a id="request_account" href="login.php<?php echo $redirect ?>">Log in.</a>
 </form>
 </body>
 </html>

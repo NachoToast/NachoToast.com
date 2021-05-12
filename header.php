@@ -1,5 +1,5 @@
 <div id="header">
-    <a href="/">Home</a>
+    <a href="">Home</a>
 
     <!--log in-->
     <?php if(!isset($_SESSION["id"])) echo "
@@ -17,11 +17,11 @@
             <div class='dropdown'>
             <a class='noselect'>Users</a>
                 <div class='dropdown-content'>
-                    <a href='profiles.php?user=" . $_SESSION["id"] . "'>" . $_SESSION["username"] . "</a>
-                    <a href='profiles.php'>All Users</a>
+                    <a href='users.php?user=" . $_SESSION["id"] . "'>" . $_SESSION["username"] . "</a>
+                    <a href='users'>All Users</a>
                 </div>
             </div>";
-        else echo "<a href='profiles.php'>Users</a>";
+        else echo "<a href='users.php'>Users</a>";
     ?>
     
     <!-- 110 project directory -->
@@ -39,7 +39,7 @@
     <a href="about">About</a>
 
     <!-- games -->
-    <a href="g/Ignominy">Ignominy</a>
+    <a href="g/ignominy">Ignominy</a>
 
     <!--logout-->
     <?php if (isset($_SESSION["id"])) echo "<a href='inc/logout.inc'>Log Out</a>" ?>
