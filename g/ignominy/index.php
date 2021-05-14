@@ -38,12 +38,12 @@
                 <div class='ii_main'>
                     <h1 class='noselect'>Ignominy Index</h1>
                     <a id='play' href='g/ignominy/p'>Play</a>
-                    <p>Logged in as: <span style='color: pink'><?php echo $_SESSION["username"] ?><span></p>
+                    <p>Logged in as: <span style='color: pink'><?php echo $_SESSION["username"] ?></span> <a href="phpf/logout.php?o=ignominy" class="inline_logout">(logout)</a></p>
                     <p>Account Type: <?php echo $acctype ?></p>
                 </div>
                 <div id="links">
-                    <a href="https://github.com/NachoToast/Ignominy" title="GitHub Repo" target="_blank"><img src="/g/ignominy/play/img/ui/github.png">
-                    <a href="https://discord.gg/PEGUcb4" title="Discord Server" target="_blank"><img src="/g/ignominy/play/img/ui/discord.png">
+                    <a href="https://github.com/NachoToast/Ignominy" title="GitHub Repo" target="_blank"><img src="/g/ignominy/p/img/ui/github.png">
+                    <a href="https://discord.gg/PEGUcb4" title="Discord Server" target="_blank"><img src="/g/ignominy/p/img/ui/discord.png">
                 </div>
             <?php
         }

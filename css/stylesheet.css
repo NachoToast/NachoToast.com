@@ -149,3 +149,13 @@ input {
     cursor: pointer;
     text-decoration: solid 1px underline;
 }
+
+a.inline_logout {
+    color: gray;
+    transition: color 0.1s linear;
+    cursor: pointer;
+}
+
+.inline_logout:hover {
+    color: lightgray;
+}

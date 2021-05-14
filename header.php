@@ -42,7 +42,7 @@
     <a href="g/ignominy">Ignominy</a>
 
     <!--logout-->
-    <?php if (isset($_SESSION["id"])) echo "<a href='inc/logout.inc'>Log Out</a>" ?>
+    <?php if (isset($_SESSION["id"])) echo "<a href='phpf/logout'>Log Out</a>" ?>
 
     <!--notifications-->
     <?php

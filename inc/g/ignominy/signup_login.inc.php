@@ -15,7 +15,7 @@ if (isset($_SESSION["id"]) && !isset($_SESSION["ignominy_id"])) {
         $sql -> execute();
         $_SESSION["ignominy_id"] = $_SESSION["id"];
         $_SESSION["ignominy_account_type"] = "new_account";
-        echo "<a class='n a' onclick='this.style.display = `none`'>Ignominy account created!</a>";
+        $sm = "s";
     }
 
     // otherwise log in with preexisting account
@@ -23,6 +23,6 @@ if (isset($_SESSION["id"]) && !isset($_SESSION["ignominy_id"])) {
         $profile = mysqli_fetch_array($result);
         $_SESSION["ignominy_id"] = $profile["id"];
         $_SESSION["ignominy_account_type"] = $profile["account_status"];
-        echo "<a class='n a' onclick='this.style.display = `none`'>Ignominy login success!</a>";
+        $sm = "l";
     }
 }
