@@ -14,5 +14,6 @@
             else if ($sm == "s") echo "<a class='n a' onclick='this.style.display = `none`'>Ignominy account created!</a>";
         }
         else if (isset($_GET["s"]) && $_GET["s"] == "logout") echo "<a class='n g' onclick='this.style.display = `none`'>Log out successful!</a>";
+        else if (isset($_GET["e"]) && $_GET["e"] == "noaccess") echo "<a class='n r' onclick='this.style.display = `none`'>You don't have access to this resource!</a>";
     ?>
 </div>
