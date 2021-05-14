@@ -57,18 +57,30 @@
                         ?>
                     </form>
                     <form class='form' action="inc/settings.inc.php?user=<?php echo $_GET["user"] ?>" method="post" enctype="multipart/form-data">
-                            <h2>Profile Picture</h2>
-                            <input type="file" name="new_pfp" accept=".jpg, .jpeg, .png" required style='display: none' id="new_pfp" onchange="check_pfp(this.files[0])">
-                            <label for="new_pfp" class='upload_file'>Select File</label>
-                            <label for="new_pfp" class="upload_file"><img src="<?php echo $pfp ?>" class="img_preview"></label>
-                            <?php
-                                if (isset($_GET["s"]) && $_GET["s"] == "pfp") echo "<p style='color: lightgreen'>Profile Picture Updated!</p>";
-                                if (isset($_GET["e"])) {
-                                    if ($_GET["e"] == "pfp_deleteold") echo "<p class='output'>Error Deleting Old File!</p>";
-                                    else if ($_GET["e"] == "pfp_move") echo "<p class='output'>Error Uploading File!</p>"; 
-                                }
-                            ?>
-                            <button name="pfp_submit" id="pfp_submit_button" disabled>Submit</button>
+                        <h2>Profile Picture</h2>
+                        <input type="file" name="new_pfp" accept=".jpg, .jpeg, .png" required style='display: none' id="new_pfp" onchange="check_pfp(this.files[0])">
+                        <label for="new_pfp" class='upload_file'>Select File</label>
+                        <label for="new_pfp" class="upload_file"><img src="<?php echo $pfp ?>" class="img_preview"></label>
+                        <?php
+                            if (isset($_GET["s"]) && $_GET["s"] == "pfp") echo "<p style='color: lightgreen'>Profile Picture Updated!</p>";
+                            if (isset($_GET["e"])) {
+                                if ($_GET["e"] == "pfp_deleteold") echo "<p class='output'>Error Deleting Old File!</p>";
+                                else if ($_GET["e"] == "pfp_move") echo "<p class='output'>Error Uploading File!</p>"; 
+                            }
+                        ?>
+                        <button name="pfp_submit" id="pfp_submit_button" disabled>Submit</button>
+                    </form>
+                    <form class='form' action='inc/settings.inc.php?user=<?php echo $_GET["user"] ?>' method="post">
+                        <h2>Description</h2>
+                        <textarea maxlength="255" name="new_desc" rows="4" cols="50"><?php echo $desc ?></textarea>
+                        <?php
+                            if (isset($_GET["s"]) && $_GET["s"] == "desc") echo "<p style='color: lightgreen'>Description Updated!</p>";
+                            if (isset($_GET["e"])) {
+                                if ($_GET["e"] == "desc_empty") echo "<p class='output'>Empty Description!</p>";
+                                else if ($_GET["e"] == "desc_invalid") echo "<p class='output'>Invalid Description!</p>";
+                            }
+                        ?>
+                        <button type="submit" name="desc_submit">Submit</button>
                     </form>
                 </div>
             <?php

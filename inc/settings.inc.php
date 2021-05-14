@@ -62,7 +62,7 @@ if (isset($_POST["uc_submit"]) && isset($_POST["new_username"])) { // change use
     $sql -> execute();
     header("location: ../users.php?user=$redirect&s=password");
     exit();
-} else if (isset($_POST["pfp_submit"]) && isset($_POST["pfp_submit"])) { // change pfp
+} else if (isset($_POST["pfp_submit"])) { // change pfp
     $base_directory = "../uploads/profiles/";
     $file_name = $base_directory . basename($_FILES["new_pfp"]["name"]);
     $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
@@ -114,7 +114,27 @@ if (isset($_POST["uc_submit"]) && isset($_POST["new_username"])) { // change use
         header("location: ../users.php?user=$redirect&e=pfp_move");
         exit();
     }
-} else {
+} 
+// change description
+else if (isset($_POST["desc_submit"]) && isset($_POST["new_desc"])) {
+
+    $desc = trim($_POST["new_desc"]);
+
+    // empty
+    if (empty($desc)) {header("location: ../users.php?user=$redirect&e=desc_empty"); exit();}
+
+    // length
+    if (strlen($desc) > 255) {header("location: ../users.php?user=$redirect&e=desc_invalid"); exit();}
+
+    // database write
+    include_once 'dbh.inc.php';
+    $sql = $conn -> prepare("UPDATE `breadcrumbs` SET description = ? WHERE id = ?");
+    $sql -> bind_param("si", $desc, $_SESSION["id"]);
+    $sql -> execute();
+    header("location: ../users.php?user=$redirect&s=desc");
+    exit();
+}
+else {
     header("location: ../users.php?user=$redirect");
     exit();
 }
