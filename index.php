@@ -18,8 +18,8 @@
         <p class="complete"><a href="profiles.php">Users Page</a></p>
         <p class="complete"><a href="changelog">Changelog</a></p>
         <p class='complete'><a href='about'>About Page</a></p>
-        <p style='color: rgb(255, 238, 139);'>Ignominy Hub</p>
-        <p>Roadmap Page</p>
+        <p class='complete'><a href='g/ignominy/'>Ignominy Hub</a></p>
+        <p style='text-decoration:line-through'>Roadmap Page</p>
         <p>Online Users</p>
         <p>Chat Forums</p>
         <p>Email Integration</p>
