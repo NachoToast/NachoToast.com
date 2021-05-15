@@ -37,7 +37,7 @@
             ?>
                 <div class='ii_main'>
                     <h1 class='noselect'>Ignominy Index</h1>
-                    <a id='play' href='g/ignominy/p'>Play</a>
+                    <a id='play' href='g/ignominy/p/index.php'>Play</a>
                     <p>Logged in as: <span style='color: pink'><?php echo $_SESSION["username"] ?></span> <a href="phpf/logout.php?o=ignominy" class="inline_logout">(logout)</a></p>
                     <p>Account Type: <?php echo $acctype ?></p>
                 </div>
