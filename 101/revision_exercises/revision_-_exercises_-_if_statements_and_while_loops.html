@@ -1,0 +1,382 @@
+04
+<pre>
+    def get_grade(mark):
+        if mark >= 90:
+            return "A"
+        if mark >= 80:
+            return "B"
+        if mark >= 70:
+            return "C"
+        if mark >= 60:
+            return "D"
+        return "F" 
+</pre>
+<pre>
+    def add_slice(letters, how_many, from_front):
+        if from_front:
+            return letters[:how_many] + letters
+        return letters + letters[-how_many:]
+</pre>
+<pre>
+    def get_boxes(total_items, items_per_box):
+        boxes = total_items // items_per_box
+        if boxes != total_items / items_per_box:
+            boxes += 1
+        return boxes
+</pre>
+<pre>
+    def compare_nums(num1, num2):
+        if num1 > num2:
+            return "greater than"
+        if num1 < num2:
+            return "less than"
+        return "equal to"
+</pre>
+<pre>
+    def get_price(number_of_children, number_of_adults):
+        price = number_of_children * 10
+        price += number_of_adults * 25
+        if number_of_children + number_of_adults >= 14:
+            price *= 0.9
+        return price
+</pre>
+<pre>
+    def copyright_check(current_year, death_year):
+        if (current_year - death_year) >= 50:
+            print("Out of copyright")
+</pre>
+<pre>
+    def give_feedback(num1, num2):
+        difference = abs(num1 - num2)
+        if difference > 1:
+            print("Incorrect!")
+        elif difference == 1:
+            print("Out by a little bit!")
+        else:
+            print("Correct!")
+</pre>
+<pre>
+    def add_bonus(salary):
+        if salary > 150000:
+            print("Good job!")
+            return 30000 + salary
+        print("Superb performance!")
+        return 300 + salary
+</pre>
+<pre>
+    def compare_nums1(num1, num2):
+        if num1 == num2:
+            return "equal to"
+        if num1 < num2:
+            return "less than"
+        return "greater than"
+</pre>
+<pre>
+    def is_leap_year(year):
+        if year % 400 == 0 or year % 4 == 0 and year % 100 != 0:
+            return True
+        return False
+</pre>
+<pre>
+    import random
+    random.seed(30)
+    def get_dice_throws_result(number_of_throws, dice_to_check):
+        count = 0
+        while number_of_throws > 0:
+            number_of_throws -= 1
+            throw = random.randrange(1, 7)
+            if throw == dice_to_check:
+                count += 1
+        return count
+</pre>
+<pre>
+    def get_sum_of_divisors(number):
+        divisor = 1
+        div_sum = 0
+        while divisor <= number // 2:
+            if number % divisor == 0:
+                div_sum += divisor
+            
+            divisor = divisor + 1
+        return div_sum
+</pre>
+<pre>
+    def user_number_guess(computer_num):
+        guesses = 1
+        guess = int(input("Enter your guess (1 - 99): "))
+        while guess != computer_num:
+            guesses += 1
+            if guess < computer_num:
+                print("Too low")
+            else:
+                print("Too high")
+            guess = int(input("Enter your guess (1 - 99): "))
+        print("Correct! Number of guesses: ", guesses)
+</pre>
+<pre>
+    def check_perfection(number):
+        message_is = "is a perfect number."
+        message_is_not = "is NOT a perfect number."
+        if get_sum_of_divisors(number) == number:
+            print(number, message_is)
+        else:
+            print(number, message_is_not)
+</pre>
+<pre>
+    def get_number_of_occurrences(source, search):
+        occurrences = 0
+        while source.find(search) != -1:
+            occurrences += 1;
+            source = source[source.find(search) + 1:]
+        return occurrences
+</pre>
+<pre>
+    def get_unicode_code(word):
+        code = ""
+        i = 0
+        while i < 3:
+            letter = word[random.randrange(0, len(word))]
+            word = word[:word.find(letter)] + word[word.find(letter) + 1:]
+            code += letter
+            i += 1
+        return code
+</pre>
+<pre>
+    def get_legal_number(prompt):
+        i = int(input(prompt))
+        while i % 2 == 0 or i < 0:
+            i = int(input(prompt))
+        return i
+</pre>
+<pre>
+    def get_terms_total(num_terms):
+        numerator = 1
+        denominator = 3
+        sum = 0
+        while num_terms > 0:
+            sum += numerator/denominator
+            num_terms -= 1
+            numerator += 1
+            denominator += 2
+        return round(sum, 2)
+</pre>
+<pre>
+    def censor_text(text, word):
+        while text.find(word) != -1:
+            text = text[:text.find(word)] + "*" * len(word) + text[text.find(word) + len(word):]
+        return text
+</pre>
+<pre>
+    def guessing_game(goal):
+        guess = int(input("Enter your guess (1 to 50 inclusive): "))
+        attempts = 1
+        while guess != goal:
+            attempts += 1
+            if guess < goal:
+                print("Guess is too low!")
+                guess = int(input("Enter your guess (1 to 50 inclusive): "))
+            else:
+                print("Guess is too high!")
+                guess = int(input("Enter your guess (1 to 50 inclusive): "))
+        print("Well done!\nYou have taken", attempts, "guess(es)!")
+</pre>
+<pre>
+    def get_unique_code():
+        code = str(random.randrange(2, 9))
+        i = 0
+        while i < 3:
+            digit = str(random.randrange(2, 9))
+            while code.find(digit) != -1:
+                digit = str(random.randrange(2, 9))
+            code += digit
+            i += 1
+        return code
+</pre>
+<pre>
+    def eliminate_repetition(param_str):
+        i = 0
+        while i < len(param_str):
+            if param_str.rfind(param_str[i]) != i:
+                param_str = param_str[:param_str.rfind(param_str[i])] + param_str[param_str.rfind(param_str[i]) + 1:]
+            else:
+                i += 1
+        return param_str
+</pre>
+<pre>
+    def capitalize_each_word(text):
+        i = 1
+        text = text[0].upper() + text[1:]
+        while i < len(text):
+            if text[i - 1] == " ":
+                text = text[:i] + text[i].upper() + text[i+1:]
+            i += 1
+        return text
+</pre>
+<pre>
+    def print_nums():
+        i = 30
+        output = ""
+        while i >= -10:
+            output += str(i) + " "
+            i -= 5
+        print(output)
+</pre>
+<pre>
+    def get_positive_odd_number():
+        user_number = int(input("Enter a positive odd number less than 10: "))
+        while user_number % 2 == 0 or user_number >= 10 or user_number <= 0:
+            user_number = int(input("Enter a positive odd number less than 10: "))
+        return user_number
+</pre>
+<pre>
+    def capitalise_letter(word, index):
+        word = word.lower()
+        word = word[:index] + word[index].upper() + word[index + 1:]
+        return word
+</pre>
+<pre>
+    def print_number_of_guesses(secret_number):
+        guess = int(input("Enter number (1, 2, 3, 4, 5 or 6): "))
+        guesses = 1
+        while guess != secret_number:
+            guesses += 1
+            guess = int(input("Enter number (1, 2, 3, 4, 5 or 6): "))
+        print("Number of guesses:", guesses)
+</pre>
+<pre>
+    def get_non_digits(word):
+        digits = "0123456789"
+        i = 0
+        output = ""
+        while i < len(word):
+            if digits.find(word[i]) == -1:
+                output += word[i]
+            i += 1
+        return output.upper()
+</pre>
+<pre>
+    def print_factors(number):
+        i = 1
+        output = ""
+        while i <= number // 2:
+            if number % i == 0:
+                output += str(i) + ", "
+            i += 1
+        output += str(number)
+        print(output)
+</pre>
+<pre>
+    def get_digit_sum2(param_str):
+        digits = "123456789"
+        i = 0
+        sum = 0
+        while i < len(param_str):
+            if digits.find(param_str[i]) != -1:
+                sum += int(param_str[i])
+            i += 1
+        return sum
+</pre>
+<pre>
+    def get_positive_even_number():
+        num = int(input("Enter an even number greater than 0: "))
+        while num <= 0 or num % 2 != 0:
+            num = int(input("Enter an even number greater than 0: "))
+        return num
+</pre>
+<pre>
+    def print_bump(size):
+        i = 0
+        output = "*"
+        while i < size - 1:
+            i += 1
+            output += "\n" + i * " " + "*"
+        
+        while i > 0:
+            i -= 1
+            output += "\n" + i * " " + "*"
+            
+        print(output)
+</pre>
+<pre>
+    def print_hundred(numbers):
+        sum = 0
+        iteration = 0
+        while sum <= 100 and iteration < len(numbers):
+            print(numbers[iteration])
+            sum += numbers[iteration]
+            iteration += 1
+</pre>
+<pre>
+    def is_prime(n):
+        i = n // 2
+        while i > 1:
+            if n % i == 0:
+                return False
+            i -= 1
+        return True
+</pre>
+<comment>
+    We use 'n // 2' because for any number 'n' it's factors can never be greater than n / 2, and it's never good practice to loop more times than needed.
+</comment>
+<pre>
+    def is_valid_identifier(word):
+        if word[0].isalpha() == False and word[0] != "_":
+            return False
+        i = 1
+        while i < len(word):
+            if word[i].isalpha() == False and word[i].isdigit() == False and word[i] != "_":
+                return False
+            i += 1
+        return True
+</pre>
+<pre>
+    def print_first_difference(string1, string2):
+        i = 0
+        if len(string1) != len(string2):
+            return print("Strings differ at position", min(len(string1), len(string2)) + 1)
+        while i < len(string1):
+            if string1[i] != string2[i]:
+                return print("Strings differ at position", i + 1)
+            i += 1
+        return print("Strings are identical")
+</pre>
+<pre>
+    def print_square(inner_size, border_width):
+        i = 0
+        while i < border_width:
+            i += 1
+            print("o" * (2 * border_width + inner_size))
+        i = 0
+        while i < inner_size:
+            i += 1
+            print("o" * border_width, "+" * inner_size, "o" * border_width, sep = "")
+        i = 0
+        while i < border_width:
+            i += 1
+            print("o" * (2 * border_width + inner_size))
+</pre>
+<pre>
+    # Skipped
+</pre>
+<pre>
+    def print_crosswords(across, down):
+    across_location = -1
+    down_location = -1
+    i = 0
+    while i < len(across) and across_location == -1:
+        if down.find(across[i]) != -1:
+            across_location = i
+            down_location = down.find(across[i])
+        i += 1
+    
+    if across_location == -1:
+        return print("Can't cross the words!")
+    
+    i = 0
+    while i < len(down):
+        if i == down_location:
+            print(across)
+        else:
+            print(" " * across_location + down[i])
+        i += 1
+</pre>

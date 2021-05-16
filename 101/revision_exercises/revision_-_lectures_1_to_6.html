@@ -1,0 +1,129 @@
+02
+<pre>
+    string = "Videogames"
+    print("String to modify:",string)
+    prompt1 = "Enter the character in the above string you want to change: "
+    prompt2 = "Enter the character you want to use: "
+    
+    char_to_remove = input(prompt1)
+    char_to_add = input(prompt2)
+    
+    char_replace_index = string.find(char_to_remove)
+    
+    first_part = string[:char_replace_index]
+    second_part = string[char_replace_index + 1:]
+    
+    new_string = first_part + char_to_add + second_part
+    
+    print("The new string is:", new_string)
+</pre>
+<pre>
+    request = "Enter your three digit code: "
+    number = int(input(request))
+    number += 2343
+    long_code = "SPC" + str(number)
+    code = long_code[:6]
+    print("Code:", code)
+</pre>
+<pre>
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+    encrypted = input("Encrypted string: ")
+    
+    original = alphabet[alphabet.find(encrypted[0]) - 6]
+    original += alphabet[alphabet.find(encrypted[1]) - 6]
+    original += alphabet[alphabet.find(encrypted[2]) - 6]
+    
+    print("Original string:", original)
+</pre>
+<pre>
+    str = input("Please enter a string: ")
+
+    cap_index = random.randrange(len(str))
+    
+    str = str[:cap_index] + str[cap_index].upper() + str[cap_index + 1:]
+    print("Modified string:", str)
+</pre>
+<pre>
+    username = input("Enter username: ")
+    print(username[0].upper(), ".", username[1].upper(), ". - ", str(int(username[-3:])), sep = "")
+</pre>
+<pre>
+    prompt = "Enter a three word sentence: "
+    sentence = input(prompt)
+    w1 = sentence[:sentence.find(" ")]
+    w2 = sentence[sentence.find(" ") + 1:sentence.rfind(" ")]
+    w3 = sentence[sentence.rfind(" ") + 1:]
+    print("New sentence:", w3, w2, w1)
+</pre>
+<pre>
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    prompt = "Enter your name: "
+    name = input(prompt).lower()
+    rand_index = random.randrange(len(name))
+    new_name = name[:rand_index] + alphabet[alphabet.find(name[rand_index])+1] + name[rand_index + 1:]
+    print("New name:", new_name)
+</pre>
+<pre>
+    prompt = "Enter time in minutes: "
+    og_mins = int(input(prompt))
+    hours = "00" +str(og_mins // 60 % 24)
+    mins = "00" + str(og_mins % 60)
+    time = hours[-2:] + ":" + mins[-2:]
+    print(og_mins, "minutes is equivalent to", time, "(hh:mm)")
+</pre>
+<pre>
+    full_time = input("Enter time as hh:mm:ss - ")
+    total = int(full_time[:2]) * 3600
+    total += int(full_time[3:5]) * 60
+    total += int(full_time[6:])
+    print(full_time, "is", total, "seconds")
+</pre>
+<pre>
+    base_price = 2.5
+    minutes_free = 5
+    rate_per_minute = 0.23
+    minutes = int(input("Minutes: "))
+    total_price = base_price
+    total_price += max(0, minutes - 5) * rate_per_minute
+    print("$", round(total_price, 2), " (Minutes: ", minutes, ")", sep = "")
+</pre>
+<pre>
+    amount = 200
+    prompt = "Savings per week $"
+    print("The amount to be saved $", amount, sep="")
+    
+    per_week = int(input(prompt))
+    
+    weeks_needed = amount // per_week
+    weeks_decimal = amount / per_week % 1
+    weeks_decimal = round(weeks_decimal, 2)
+    weeks_decimal = str(weeks_decimal)[2:4]
+    weeks_decimal = len(weeks_decimal) - 1
+    weeks_needed += weeks_decimal
+    
+    print("The number of weeks needed is", weeks_needed)
+</pre>
+<pre>
+    import math
+    radius = int(input("Radius: "))
+    height = int(input("Height: "))
+    print("Volume:", round(math.pi * radius ** 2 * height, 2))
+</pre>
+<pre>
+    import math
+    radius = int(input("Radius: "))
+    print("The volume of the sphere is", round(4/3 * math.pi * radius ** 3, 3))
+</pre>
+<pre>
+    value = int(input("Enter an integer value x: "))
+    print("The value is", 4 * value - 2)
+</pre>
+<pre>
+    length = float(input("Enter a side length: "))
+    print("Area of square with a side length of ", length / 1, " cm is ", round(length ** 2 / 1, 2), ".", sep = "")
+</pre>
+<pre>
+    full = input("Your first and last names? ")
+    print("Name: ", full[full.find(" ") + 1:].upper(), ", ", full[0].upper(), full[1:full.find(" ")].lower(), sep = "")
+</pre>

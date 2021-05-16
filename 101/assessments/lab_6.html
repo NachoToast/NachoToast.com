@@ -1,0 +1,57 @@
+06
+<pre>
+    def get_difference_last_three(list1, list2):
+        diff1 = sum(list1[-3:])
+        diff2 = sum(list2[-3:])
+        return diff1 - diff2
+</pre>
+<pre>
+    def create_list_of_words(letters):
+        i = 0
+        output = []
+        while i < len(letters):
+            output.append(letters[:i + 1])
+            i += 1
+        return output
+</pre>
+<pre>
+    def get_longest_string_length(words_list):
+        longest_length = 0
+        for word in words_list:
+            if len(word) > longest_length:
+                longest_length = len(word)
+        return longest_length
+</pre>
+<pre>
+    def remove_long_words(words_list):
+        longest = get_longest_string_length(words_list)
+        i = 0
+        popped = 0
+        while i < len(words_list):
+            if len(words_list[i]) == longest:
+                words_list.pop(i)
+                popped += 1
+            else:
+                i += 1
+        return popped
+</pre>
+<pre>
+    def no_evens(values):
+        for num in values:
+            if num % 2 == 0:
+                return False
+        return True
+</pre>
+<pre>
+    def double_reverse(words_list):
+        words_list.reverse()
+        for i in range(len(words_list)):
+            words_list[i] = words_list[i][::-1]
+</pre>
+<pre>
+    def shift_by_k(numbers, k):
+        to_insert = numbers[-k:]
+        for i in range(len(to_insert)):
+            numbers.insert(i, to_insert[i])
+            numbers.pop()
+</pre>

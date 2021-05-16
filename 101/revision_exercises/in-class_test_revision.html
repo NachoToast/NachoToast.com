@@ -1,0 +1,111 @@
+09
+<pre>
+    def print_student_details(name, id_num, age):
+        print("Name: ", name, " (ID Number: ", id_num, ")", sep = "")
+        print("Age:", age)
+</pre>
+<pre>
+    def calculate_frustum_volume(height, radius1, radius2):
+        return round(math.pi * height / 3 * (radius1 ** 2 + radius1 * radius2 + radius2 ** 2),2)
+</pre>
+<pre>
+    def get_sum_of_first_and_last(number):
+        return int(str(number)[0]) + int(str(number)[-1])
+</pre>
+<pre>
+    def get_zero_ending_numbers_count(string_of_numbers):
+        count = 0
+        while " " in string_of_numbers:
+            ind = string_of_numbers.find(" ")
+            num = string_of_numbers[:ind]
+            if num[-1] == "0":
+                count += 1
+            string_of_numbers = string_of_numbers[ind + 1:]
+        return count
+</pre>
+<pre>
+    prompt_amount = "Enter a donation amount (up to 1000): "
+    prompt_instalments = "Enter the number of payment instalments: "
+    donation_amount = int(input(prompt_amount))
+    while donation_amount < 1 or donation_amount > 1000:
+        donation_amount = int(input(prompt_amount))
+    instalments = int(input(prompt_instalments))
+    print("You will donate", donation_amount, "dollars in", instalments, "instalments of", donation_amount // instalments, "dollars.")
+</pre>
+<pre>
+    def print_pattern(number):
+    start = number
+    while number > 0:
+        print(" " * (start - number) + str(number) * number)
+        number -= 1
+</pre>
+<pre>
+    def fiddle_string(text):
+    if len(text) % 2 != 0:
+        mi = len(text) // 2
+        return text[mi + 1:] + text[mi] + text[:mi]
+    return text[len(text) // 2:] + text[:len(text) // 2]
+</pre>
+<pre>
+    def weave_strings(string1, string2):
+        i = 0
+        output = ""
+        while i < min(len(string1), len(string2)):
+            output += string1[i]
+            output += string2[i]
+            i += 1
+        if len(string1) > len(string2):
+            output += string1[i:]
+        elif len(string1) < len(string2):
+            output += string2[i:]
+        return output
+</pre>
+<pre>
+    def is_valid_password(password_string):
+        uppercase_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        lowercase_alphabet = "abcdefghijklmnopqrstuvwxyz"
+        numbers = "0123456789"
+        symbols = "!&*$#<>?"
+        if len(password_string) < 8:
+            return False
+        if uppercase_alphabet.find(password_string[0]) == -1:
+            return False
+        i = 1
+        alphas = 0
+        digits = 0
+        symbs = 0
+        while i < len(password_string):
+            if lowercase_alphabet.find(password_string[i]) != -1:
+                alphas += 1
+            elif numbers.find(password_string[i]) != -1:
+                digits += 1
+            elif symbols.find(password_string[i]) != -1:
+                symbs += 1
+            else:
+                return False
+            i += 1
+        if alphas > 0 and digits > 0 and symbs > 0:
+            return True
+        return False
+</pre>
+<pre>
+    def word_puzzle(horizontal_str,vertical_str):
+        x = -1
+        y = -1
+        i = 0
+        while i < len(horizontal_str):
+            if vertical_str.find(horizontal_str[i]) != -1:
+                x = i
+                y = vertical_str.find(horizontal_str[i])
+                i = len(horizontal_str)
+            i += 1
+        if x == -1:
+            return print("The two strings do not intersect")
+        i = 0
+        while i < len(vertical_str):
+            if i == y:
+                print(horizontal_str)
+            else:
+                print(" " * x + vertical_str[i])
+            i += 1
+</pre>

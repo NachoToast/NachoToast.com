@@ -1,0 +1,51 @@
+20
+<pre>
+    def write_to_file(filename, list1, list2):
+        output_file = open(filename, "w")
+        for i in range(len(list1)):
+            output_file.write(str(list1[i]) + ": " + str(list2[i]) + "\n")
+        output_file.close()
+</pre>
+<pre>
+    def get_percent_vowels(filename):
+        vowels = "aeiouAEIOU"
+        vowel_count = 0
+        letter_count = 0
+        input_file = open(filename, "r")
+        contents = input_file.read()
+        for char in contents:
+            if vowels.find(char) != -1:
+                vowel_count += 1
+            if char != " ":
+                letter_count += 1
+        input_file.close()
+        return round( 100 * vowel_count / letter_count)
+</pre>
+<pre>
+    def copy_file(filename):
+        input_file = open(filename, "r")
+        contents = input_file.read()
+        first = contents[0]
+        last = contents[-1]
+        input_file.close()
+        output_file = open("ldou933.txt", "w")
+        output_file.write(contents)
+        output_file.close()
+        return first + last
+</pre>
+<pre>
+    def get_first_last_difference(filename):
+        input_file = open(filename, "r")
+        contents = input_file.read()
+        return abs(int(contents[0:contents.find(" ")]) - int(contents[contents.rfind(" ") + 1:]))
+        input_file.close()
+</pre>
+<pre>
+    def has_same_ending_text(filename, text):
+        input_file = open(filename, "r")
+        contents = input_file.read()
+        input_file.close()
+        if contents[-len(text):] == text:
+            return True
+        return False
+</pre>

@@ -1,0 +1,116 @@
+03
+<pre>
+    nz_to_aus_dollars = nz_dollars * nz_to_aus_rate
+    print("NZ $", nz_dollars, " = AUS $", nz_to_aus_dollars, sep = "") 
+</pre>
+<pre>
+    surface_area = 2 * (length * width + length * height + height * width)
+    print("A rectangular prism with:")
+    print(" length", length, "width", width, "and height", height)
+    print("has a surface area of", surface_area, "square units.")
+</pre>
+<pre>
+    import math
+
+    side1 = int(input("Enter side1 of a triangle: "))
+    side2 = int(input("Enter side2 of a triangle: "))
+    side3 = int(input("Enter side3 of a triangle: "))
+    
+    heron_s = (side1 + side2 + side3) / 2
+    
+    bracket_1 = heron_s - side1
+    bracket_2 = heron_s - side2
+    bracket_3 = heron_s - side3
+    
+    area = math.sqrt(heron_s * bracket_1 * bracket_2 * bracket_3)
+    area = round(area, 2)
+    area = str(area)
+    
+    area_fraction = area[area.find(".") + 1:]
+    
+    area = area + "0" * (2 - len(area_fraction))
+    
+    
+    print("Area of a triangle is", area)
+</pre>
+<pre>
+    area = 2 * math.pi * radius ** 2 + height * (2 * math.pi * radius)
+    print("The surface area of a cylinder with radius", radius, "and height", height, "is", math.floor(area), "square units.")
+</pre>
+<pre>
+    metres = length * width
+    labour_cost = math.ceil(metres) * cost_labour_per_square_m
+    tiles_cost = math.ceil(metres) * cost_tiles_per_square_m
+    print("Cost of tiling ", metres, " square metres is $", math.floor(labour_cost + tiles_cost), ".", sep = "")
+</pre>
+<pre>
+    buffer = (len(name) + 2 * extras) * "*"
+    print(buffer)
+    print(" " * extras, name, sep = "")
+    print(buffer)
+</pre>
+<pre>
+    phrase = phrase * (34 - len(phrase))
+    print(phrase[:length_required])
+</pre>
+<pre>
+    modified = word[0] + len(word[1:-1]) * "*" + word[-1]
+    print("word:", word, "=>", modified)
+</pre>
+<pre>
+    print(full_name[0] + ".", full_name[full_name.find(" ") + 1:])
+</pre>
+<pre>
+    percent24 = min(salary, 38500) - 14000
+    amount24 = percent24 * 0.24
+    percent34 = salary - percent24 - 14000
+    amount34 = percent34 * 0.34
+    total_tax = round(amount24 + amount34)
+    net_pay = salary - total_tax
+    print("Salary: $", salary, sep = "")
+    print("Amount to be taxed at: 24.0%: $", percent24, sep = "")
+    print("Tax at rate1: $", amount24, sep = "")
+    print("Amount to be taxed at: 34.0%: $", percent34, sep = "")
+    print("Tax at rate2: $", amount34, sep = "")
+    print("\n=====================================")
+    print("Total tax: $", total_tax, "\n", sep = "")
+    print("Net pay: $", net_pay)
+    print("=====================================")
+</pre>
+<pre>
+    enc1 = scrambled_alphabet[alphabet.find(original_word[0])]
+    enc2 = scrambled_alphabet[alphabet.find(original_word[1])]
+    enc3 = scrambled_alphabet[alphabet.find(original_word[2])]
+    enc4 = scrambled_alphabet[alphabet.find(original_word[3])]
+    enc = enc1 + enc2 + enc3 + enc4
+    print("Original word:", original_word, "Encrypted word:", enc)
+</pre>
+<pre>
+    name = input("Enter name: ")
+    rand_ind = random.randrange(len(name))
+    name = name[:rand_ind] + name[rand_ind + 1:]
+    print(name)
+</pre>
+<pre>
+    num1 = numbers_to_add[:numbers_to_add.find(" ")]
+    numbers_to_add = numbers_to_add[len(num1) + 1:].strip()
+    num2 = numbers_to_add[:numbers_to_add.find(" ")]
+    numbers_to_add = numbers_to_add[len(num2) + 1:].strip()
+    num3 = numbers_to_add
+    
+    summ = int(num1) + int(num2) + int(num3)
+    
+    print(num1, "+", num2, "+", num3, "=", summ)    
+</pre>
+<pre>
+    prompt = 'Enter sum (4 dice): '
+    guess = int(input(prompt))
+    d1 = random.randrange(1, 7)
+    d2 = random.randrange(1, 7)
+    d3 = random.randrange(1, 7)
+    d4 = random.randrange(1, 7)
+    print("The dice: (", d1, " ", d2, " ", d3, " ", d4, ")", sep = "")
+    summ = d1 + d2 + d3 + d4
+    print("Your total:", guess)
+    print("You are out by:", abs(summ - guess))
+</pre>

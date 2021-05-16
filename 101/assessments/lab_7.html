@@ -1,0 +1,58 @@
+07
+<pre>
+    def read_lines(filename):
+        input_file = open(filename, "r")
+        contents = input_file.read()
+        input_file.close()
+        return contents.split("\n")
+</pre>
+<pre>
+    def get_contacts(lines):
+        output = []
+        for info in lines:
+            name = info[:info.find(":")]
+            number = info[info.find(":") + 1:]
+            output.append((name, number))
+        return output 
+</pre>
+<pre>
+    def display_all(list_of_tuples):
+    for info in list_of_tuples:
+        print(info[0] + "'s", "phone number is", info[1])
+    if len(list_of_tuples) == 1:
+        print("There is 1 contact in the list.")
+    else:
+        print("There are", len(list_of_tuples), "contacts in the list.")
+</pre>
+<pre>
+    def add_contact(list_of_tuples, new_name, new_phone):
+        for person in list_of_tuples:
+            if person[0] == new_name:
+                return print(new_name, "already exists in the list.")
+        list_of_tuples.append((new_name, new_phone))
+</pre>
+<pre>
+    def search_contact(list_of_tuples, search_name):
+        for info in list_of_tuples:
+            if info[0] == search_name:
+                return print(search_name + "'s", "phone number is", info[1] + ".")
+        return print(search_name, "is NOT found.")
+</pre>
+<pre>
+    def update_contact(list_of_tuples, search_name, new_phone):
+        for i in range(len(list_of_tuples)):
+            if list_of_tuples[i][0] == search_name:
+                list_of_tuples.pop(i)
+                list_of_tuples.append((search_name, new_phone))
+                return print(search_name + "'s", "phone number has been updated.")
+        return print(search_name, "is NOT found.")
+</pre>
+<pre>
+    def write_to_file(list_of_tuples, by_descending):
+        output_file = open("ldou933.txt", "w")
+        list_of_tuples.sort()
+        if by_descending:
+            list_of_tuples.reverse()
+        for item in list_of_tuples:
+            output_file.write(item[0] + ":" + item[1] + "\n")
+</pre>

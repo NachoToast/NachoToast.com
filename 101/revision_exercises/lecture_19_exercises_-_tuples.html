@@ -1,0 +1,35 @@
+19
+<pre>
+    t1: (3, 5) t2: (4, 7) t3: (5, 4)
+</pre>
+<pre>
+    def get_uniques_tuple(a_tuple):
+        output = []
+        for item in a_tuple:
+            if item not in output:
+                output.append(item)
+        return tuple(output)
+</pre>
+<pre>
+    def carry_out_transactions(balance, transactions_tuple):
+        withdrawals = 0
+        deposits = 0
+        final_balance = balance + sum(transactions_tuple)
+        for trans in transactions_tuple:
+            if trans < 0:
+                withdrawals -= trans
+            else:
+                deposits += trans
+        return (final_balance, deposits, withdrawals) 
+</pre>
+<pre>
+    (2, 4, 6)
+</pre>
+<pre>
+    def create_tuples(list1, list2):
+        i = 0
+        list3 = []
+        for i in range(len(list1)):
+            list3.append((list1[i], list2[i]))
+        return list3
+</pre>

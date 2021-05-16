@@ -1,0 +1,67 @@
+04
+<pre>
+    def get_season(month):
+        if month == "September" or month == "October" or month == "November":
+            return "Spring"
+        if month == "December" or month == "January" or month == "February":
+            return "Summer"
+        if month == "March" or month == "April" or month == "May":
+            return "Autumn"
+        if month == "June" or month == "July" or month == "August":
+            return "Winter"
+        return "Undefined - invalid month"
+</pre>
+<pre>
+    def calculate_fee(is_enrolled, age):
+        if is_enrolled:
+            if age < 13:
+                return 0
+            if age < 17:
+                return 40
+            if age < 44:
+                return 60
+            if age < 64:
+                return 50
+            return 43
+        if age < 5:
+            return 30
+        if age < 13:
+            return 40
+        return 70
+</pre>
+<pre>
+    def get_odd_number_in_range(start, end):
+        prompt = "Enter an odd integer between " + str(start) + " and " + str(end) + ": " 
+        num = int(input(prompt))
+        while num % 2 == 0 or num < start or num > end:
+            print("You have entered an invalid number! Try again.")
+            num = int(input(prompt))
+        return num
+</pre>
+<pre>
+    def get_guess_from_user():
+        guess = int(input("Enter your guess (a number between 1 and 100): "))
+        return guess
+        
+    def play_guessing_game(goal):
+        guess = get_guess_from_user()
+        while guess != goal:
+            if guess > goal:
+                print("Your guess is too large!")
+            else:
+                print("Your guess is too small!")
+            guess = get_guess_from_user()
+        print("Congratulations, you have guessed right!")
+</pre>
+<pre>
+    def get_fibonacci_number(n):
+        this_term = 0
+        previous_term = 1
+        i = 0
+        while i < n:
+            temporary_this_term = this_term
+            this_term += previous_term
+            previous_term = temporary_this_term
+            i += 1
+        return this_term
+</pre>

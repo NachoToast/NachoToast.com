@@ -23,6 +23,8 @@
             </div>";
         else echo "<a href='users.php'>Users</a>";
     ?>
+    <!-- 101 project directory -->
+    <a href="101" class='noselect'>101</a>
     
     <!-- 110 project directory -->
     <div class="dropdown">

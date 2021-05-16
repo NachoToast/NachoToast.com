@@ -1,0 +1,45 @@
+01
+<pre>
+    exchange_rate
+    date_of_birth
+    weight1
+    price
+</pre>
+<pre>
+    volume = 1 / 3 * math.pi * radius ** 2 * height
+    print("A cone with radius", radius, "and height", height, "has a volume of", round(volume, 3))
+</pre>
+<pre>
+    monthly_interest_rate = annual_interest_rate / months_per_year
+    total_monthly_repayments = loan_length_years * months_per_year
+    
+    top_line = monthly_interest_rate / 100 * (1 + monthly_interest_rate / 100) ** total_monthly_repayments
+    bottom_line = (1 + monthly_interest_rate / 100) ** total_monthly_repayments - 1
+    
+    monthly_payment = loan_amount * (top_line / bottom_line)
+    
+    print("You will need to pay $", round(monthly_payment), " monthly.", sep = "")
+</pre>
+<pre>
+    inches3 = inches1 + inches2
+    feet3 = feet1 + feet2 + inches3 // 12
+    inches3 %= 12
+    print (feet1, "feet and", inches1, "inches")
+    print("   added to")
+    print(feet2, "feet and", inches2, "inches")
+    print("   is equal to")
+    print(feet3, "feet and", inches3, "inches")
+</pre>
+<pre>
+    variable_charge = math.floor(kwh_used * charge_per_kwh / 100)
+    fixed_charge = math.floor(number_of_days * charge_per_day / 100)
+    levy = math.floor(kwh_used * levy_per_kwh / 100)
+    gst = math.floor(gst_rate / 100 * (variable_charge + fixed_charge + levy))
+    total_charge = gst + variable_charge + fixed_charge + levy
+
+    print(kwh_used, " kilowatt hours: $", variable_charge, sep = "")
+    print(number_of_days, " days: $", fixed_charge, sep = "")
+    print("Levy: $", levy, sep = "")
+    print("GST: $", gst, sep = "")
+    print("\nTotal Electricity Charges: $", total_charge, sep = "")
+</pre>

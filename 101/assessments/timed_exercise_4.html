@@ -1,0 +1,25 @@
+104
+<pre>
+    def sum_all_digits(number):
+        i = 0
+        sum = 0
+        while i < len(str(number)):
+            sum += int(str(number)[i])
+            i += 1
+        return sum
+</pre>
+<pre>
+    def get_valid_word():
+        prompt = "Please enter a word with length 7, beginning with the letter 't' and ending with the letter 'g': "
+        word = input(prompt)
+        while len(word) != 7 or word[0] != "t" or word[-1] != "g":
+            print("Your word is invalid:")
+            if len(word) != 7:
+                print("   Your word has to have a length of 7")
+            if word[0] != "t":
+                print("   Your word has to begin with the letter 't'")
+            if word[-1] != "g":
+                print("   Your word has to end with the letter 'g'")
+            word = input(prompt)
+        return word
+</pre>

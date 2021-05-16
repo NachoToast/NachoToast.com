@@ -1,0 +1,33 @@
+22
+<pre>
+    def create_contacts_dictionary(list1, list2):
+        a_dict = {}
+        for i in range(len(list1)):
+            a_dict[list1[i]] = list2[i]
+        return a_dict
+</pre>
+<pre>
+    def create_numbers_dictionary(numbers):
+        numbers_dict = {1:[], 2:[], 3:[]}
+        for num in numbers:
+            numbers_dict[len(str(num))] += [num]
+        return numbers_dict
+</pre>
+<pre>
+    def english_to_italian(a_dict, english_word):
+        if english_word not in a_dict:
+            return "N/A"
+        return a_dict[english_word]
+</pre>
+<pre>
+    def update_corresponding_values(a_dict):
+        for key in a_dict:
+            a_dict[key] = sum(a_dict[key])
+</pre>
+<pre>
+    def create_username_dictionary(names_list):
+        a_dict = {}
+        for (name, username) in names_list:
+            a_dict[name] = username
+        return a_dict
+</pre>
