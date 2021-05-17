@@ -1,0 +1,73 @@
+25
+<pre>
+    root = Tk()
+    root.title("My first Window") 
+    root.geometry("250x200+10+30")
+    username = Label(root, text = 'My username is ntoa222')
+    username.pack()
+    root.mainloop()
+</pre>
+<pre>
+    root = Tk()
+    root.title("My first Window") 
+    root.geometry("250x200+10+30")
+    nums = {
+        0: [1, 2, 3],
+        1: [4, 5, 6],
+        2: [7, 8, 9]
+    }
+    for key in nums:
+        for i in range(len(nums[key])):
+            a_label = Label(root, text = str(nums[key][i]))
+            a_label.grid(row = key, column = i)
+    root.mainloop()
+</pre>
+<comment>
+    A multidimensional list would work as well here, but I found a dictionary gives more control over empty rows.
+</comment>
+<pre>
+    root = Tk()
+    a_canvas = Canvas(root, width=400, height=400)
+    a_canvas.pack(fill=BOTH,expand=True)
+    outer_vertices = [(0, 0), (0, 100), (150, 20), (150, 80)]
+    mid_vertices = [(50, 20), (50, 80), (200, 0), (200, 100)]
+    inner_vertices = [(65, 35), (135, 65)]
+
+    # mid rectangle
+    a_canvas.create_rectangle(mid_vertices[0][0], mid_vertices[0][1], outer_vertices[3][0], outer_vertices[3][1], fill='#476042')
+
+    # inner rectangle
+    a_canvas.create_rectangle(inner_vertices[0][0], inner_vertices[0][1], inner_vertices[1][0], inner_vertices[1][1], fill='yellow')
+
+    # lines
+    for i in range(len(outer_vertices)):
+        a_canvas.create_line(outer_vertices[i][0], outer_vertices[i][1], mid_vertices[i][0], mid_vertices[i][1], fill='black', width='1.0')
+
+    root.mainloop()
+</pre>
+<comment>
+    Definitely would be easier and simpler to do this without predefining coordinates in lists.
+    Lesson for next time I suppose.
+</comment>
+<pre>
+    root = Tk()
+    a_canvas = Canvas(root, width=400, height=400)
+    a_canvas.create_arc(10, 10, 300, 300, start=0, extent=150, fill='red')
+    a_canvas.create_arc(10, 10, 300, 300, start=150, extent=210, fill = 'green')
+    root.mainloop()
+</pre>
+<pre>
+    root = Tk()
+    a_canvas = Canvas(root, width=400, height=400)
+    a_canvas.pack(fill=BOTH,expand=True)
+    number = 5
+    coords = [20, 80]
+    i = 0
+    while i < number:
+        i += 1
+        a_canvas.create_rectangle(coords[0], coords[0], coords[1], coords[1])
+        coords[0] += 10
+        coords[1] += 20
+
+    root.mainloop()
+</pre>

@@ -15,7 +15,7 @@
     <h2 style='margin-bottom: 5px; margin-top: 35px'>Website Roadmap:</h2>
     <p style='margin: 0; color: gray;'>From highest to lowest priority.</p>
         <p class="complete"><a href="https://github.com/NachoToast/NachoToast.com" target="_blank">Make GitHub Repo</a></p>
-        <p class="complete"><a href="profiles.php">Users Page</a></p>
+        <p class="complete"><a href="users.php">Users Page</a></p>
         <p class="complete"><a href="changelog">Changelog</a></p>
         <p class='complete'><a href='about'>About Page</a></p>
         <p class='complete'><a href='g/ignominy/'>Ignominy Hub</a></p>

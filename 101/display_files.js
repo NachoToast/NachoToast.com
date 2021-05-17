@@ -1,418 +1,317 @@
-var revision_exercises_container = document.getElementById("revision_exercises"),
-output_container = document.getElementById("output_container"),
-revision_exercise_buttons = document.getElementsByClassName("revision_exercise_button"),
-assessments_container = document.getElementById("assessments"),
-assessments_buttons = document.getElementsByClassName("assessments_button");
-current_revision_exercises_displayed = [-1],
-current_assessments_displayed = [-1],
+const containers = [
+    ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python"],
+    ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Answer"], "Python"],
+],
+output_container = document.getElementById("output_container");
+var displayed = [],
+input_buttons = [],
 shifting = false;
+// valid languages: CSS, HTML, XML, JS, PHP, Py
 
-window.addEventListener("keydown", function(e) {
-    if (e.key == "Shift" && !shifting) shifting = true;
-})
+// Initialisation
+{
+    window.addEventListener("keydown", function(e) {
+        if (e.key == "Shift" && !shifting) shifting = true;
+    })
+    
+    window.addEventListener("keyup", function(e) {
+        if (e.key == "Shift") shifting = false;
+    })
 
-window.addEventListener("keyup", function(e) {
-    if (e.key == "Shift") shifting = false;
-})
+    if (containers.length != resources.length) console.warn(`Found ${resources.length} resource files but only have handlers for ${containers.length}`);
 
-function generate_elements() {
-    // revision exercises
-    for (let i = 0, len = revision_exercises.length; i < len; i++) {
-        let a = document.createElement("a");
-        a.classList.add("noselect", "revision_exercise_button");
-        a.innerText = `${revision_exercises[i].name}`;
-        a.onclick = function() {display_resource("revision_exercise", i)};
-        revision_exercises_container.appendChild(a);
-        // should only be done on initialisation
-        revision_exercises[i].contents.shift();
+    function generate_containers(clear_all = true) {
+        if (!clear_all) output_container.innerHTML = ""; // clear output
+        displayed = []; // clear displayed
+        input_buttons = []; // clear input buttons
 
-    }
-    // assessments
-    for (let i = 0, len = assessments.length; i < len; i++) {
-        let a = document.createElement("a");
-        a.classList.add("noselect", "assessments_button");
-        a.innerText = `${assessments[i].name}`;
-        a.onclick = function() {display_resource("assessments", i)};
-        assessments_container.appendChild(a);
-        // should only be done on initialisation
-        assessments[i].contents.shift();
+        for (let i = 0, len = Math.min(containers.length, resources.length); i < len; i++) {
+            displayed.push([]);
+            input_buttons.push([]);
+            containers[i][1].innerHTML = ""; // clear old contents
 
-    }
-    document.getElementById("revision_exercise_heading").innerHTML = `Revision Exercise Answers (${revision_exercise_buttons.length})`;
-    document.getElementById("assessments_heading").innerHTML = `Assessment Answers (${assessments_buttons.length})`;
+            // heading
+            let title = document.createElement("h2");
+            title.innerText = `${containers[i][0]} (${resources[i].length})`;
+            containers[i][1].appendChild(title);
 
-    // pesudo buttons
-        { // open all (revision exercises)
-            let f = document.createElement("a");
-            f.classList.add("noselect", "revision_exercise_button");
-            f.innerText = `(Open All)`;
-            f.id = `rvb_p1`;
-            f.onclick = function() {
-                if (current_revision_exercises_displayed.length == revision_exercises.length) {
-                    let goto = current_revision_exercises_displayed[current_revision_exercises_displayed.length -1];
-                    current_revision_exercises_displayed = [-1];
-                    display_resource("revision_exercise", goto);
-                    f.classList.remove("open");
-                }
-                else {
-                    display_resource("clear", 0, false, "revision_exercise");
-                    f.classList.add("open");
-                    for (let i = 0, len = revision_exercises.length; i < len; i++) {
-                        display_resource("revision_exercise", i, true);
-                    }
-                }
-            };
-            revision_exercises_container.appendChild(f);
-        }
-        { // open all (assessments)
-            let f = document.createElement("a");
-            f.classList.add("noselect", "assessments_button");
-            f.innerText = `(Open All)`;
-            f.id = `ab_p1`;
-            f.onclick = function() {
-                if (current_assessments_displayed.length == assessments.length) {
-                    let goto = current_assessments_displayed[current_assessments_displayed.length -1];
-                    current_assessments_displayed = [-1];
-                    display_resource("assessments", goto);
-                    f.classList.remove("open");
-                }
-                else {
-                    display_resource("assessments", 0, false, "assessments");
-                    f.classList.add("open");
-                    for (let i = 0, len = assessments.length; i < len; i++) {
-                        display_resource("assessments", i, true);
-                    }
-                }
-            };
-            assessments_container.appendChild(f);
-        }
-
-}
-
-function clear_revision_exercise_highlights() {
-    for (let i = 0, len = revision_exercise_buttons.length; i < len; i++) {
-        revision_exercise_buttons[i].classList.remove("open");
-    }
-}
-
-function clear_assessments_highlights() {
-    for (let i = 0, len = assessments_buttons.length; i < len; i++) {
-        assessments_buttons[i].classList.remove("open");
-    }
-}
-
-function display_resource(type = "clear", index = 0, additive = false, clear_type = "both") {
-    if (shifting) additive = true;
-    if (!additive) {output_container.innerHTML = ""; clear_revision_exercise_highlights(); clear_assessments_highlights();}
-
-    if (type == "clear") {
-        if (clear_type != "both" && additive) {
-            var temp_revision_exercise_displayed = [...current_revision_exercises_displayed];
-            temp_assessments_displayed = [...current_assessments_displayed];
-        }
-        current_revision_exercises_displayed = [-1];
-        output_container.innerHTML = "";
-        current_assessments_displayed = [-1];
-        //clear_revision_exercise_highlights();
-        //clear_assessments_highlights();
-        if (clear_type != "both" && additive) {
-            if (clear_type != "revision_exercise") {
-                for (let i = 0, len = temp_revision_exercise_displayed.length; i < len; i++) {
-                    display_resource("revision_exercise", temp_revision_exercise_displayed[i], true);
-                } 
+            // page selectors
+            for (let j = 0, j_len = resources[i].length; j < j_len; j++) {
+                containers[i][1].appendChild(generate_option(i, j));
             }
-            if (clear_type != "assessments") {
-                for (let i = 0, len = temp_assessments_displayed.length; i < len; i++) {
-                    display_resource("assessments", temp_assessments_displayed[i], true);
-                }
-            }
+
+            containers[i][1].appendChild(generate_pseudo_option(i));
         }
     }
-    else if (type == "revision_exercise") {
-        // removal
-        if (current_revision_exercises_displayed.indexOf(index) != -1 && additive && current_revision_exercises_displayed.length > 1) {
-            current_revision_exercises_displayed.splice(current_revision_exercises_displayed.indexOf(index), 1);
-            let temp = current_revision_exercises_displayed;
-            revision_exercise_buttons[index].classList.remove("open");
-            display_resource();
-            for (let i = 0, len = temp.length; i < len; i++) {
-                display_resource("revision_exercise", temp[i], true);
-            }
+
+    function generate_option(type, page) {
+        let option = document.createElement("a");
+        option.innerText = resources[type][page].name;
+        input_buttons[type].splice(page, 0, option);
+        option.onclick = function() {generate_page(type, page, shifting)}
+        return option
+    }
+
+    function generate_pseudo_option(type) {
+        let option = document.createElement("a");
+        option.innerText = `(Show All)`;
+        input_buttons[type].push(option);
+        option.onclick = function() {display_all_of_type(type)}
+        return option;
+
+    }
+
+    function display_all_of_type(type) {
+        if (input_buttons[type][input_buttons[type].length - 1].classList[0] == "open") {
+            generate_page();
             return;
         }
-
-        // meta
-        items = revision_exercises[index].contents;
-        title = document.createElement("h2");
-        //items.shift(); // NOPE
-        title.innerHTML = `${revision_exercises[index].name} (${items.length} Questions)`;
-        title.classList.add("noselect");
-        output_container.appendChild(title);
-
-        // option highlighting
-        if (!additive) {current_revision_exercises_displayed = [index]; current_assessments_displayed = [-1]}
-        else if (current_revision_exercises_displayed.indexOf(index) == -1) current_revision_exercises_displayed.push(index);
-        revision_exercise_buttons[index].classList.add("open");
-
-        // checks
-        if (current_revision_exercises_displayed.indexOf(-1) != -1) current_revision_exercises_displayed.splice(current_revision_exercises_displayed.indexOf(-1), 1);
-
-        // content
-        for (let i = 0, len = items.length; i < len; i++) {
-            // meta
-            let contents = items[i].split("<comment>"),
-            d = document.createElement("div"),
-            p = document.createElement("pre"),
-            h = document.createElement("h3");
-            h.classList.add("noselect");
-            p.classList.add("code");
-            h.innerText = `Question ${i + 1}`;
-            d.appendChild(h);
-
-            // code formatting
-            let output = "",
-            code = contents[0].split("\n");
-            code.shift();
-            code.pop();
-            code.pop();
-            for (let j = 0, j_len = code.length; j < j_len; j++) {
-                output += code[j].substring(4);
-            }
-            p.innerHTML = hljs.highlight(output, {language: "python"}).value;
-            //p.innerHTML = "<code class='language-python'>" + output + "</code>";
-            d.appendChild(p);
-            //hljs.highlightBlock(p);
-
-            // comments
-            if (contents.length > 1) {
-                let cd = document.createElement("div");
-                cd.classList.add("comment");
-                for (let j = 1, j_len = contents.length; j < j_len; j++) {
-                    let c = document.createElement("p"),
-                    text = contents[j].split("\n"),
-                    output = "";
-                    text.shift();
-                    text.pop();
-                    text.pop();
-                    for (let k = 0, k_len = text.length; k < k_len; k++) {
-                        output += text[k].substring(4) + "<br>";
-                    }
-                    c.innerHTML = output;
-                    cd.appendChild(c);
-                }
-                d.appendChild(cd);
-            }
-
-            // buttons
-            let b_div = document.createElement("div");
-            b_div.classList.add("links");
-            d.id = `question${i + 1}`;
-            { // question link
-                let share_hidden = document.createElement("input");
-                share_hidden.classList.add("share_hidden");
-                share_hidden.value = `https://nachotoast.com/101/?t=0&p=${index + 1}&q=${i + 1}#question${i + 1}`
-                b_div.appendChild(share_hidden);
-
-                let share_visible = document.createElement("p");
-                share_visible.classList.add('share_visible');
-                share_visible.innerText = "Copy Question Link";
-                share_visible.onclick = function() {
-                    share_hidden.classList.remove("share_hidden");
-                    share_hidden.select();
-                    share_hidden.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    share_hidden.classList.add("share_hidden");
-                    share_visible.innerText = 'Copied to Clipboard!';
-                    share_visible.classList.add('share_done');
-                    share_visible.classList.remove('share_visible');
-                }
-                b_div.appendChild(share_visible);
-            }
-            { // code
-                /*
-
-                let code_hidden = document.createElement("textarea");
-                code_hidden.classList.add("share_hidden");
-                code_hidden.value = output;
-                b_div.appendChild(code_hidden);
-                */
-
-                let code_visible = document.createElement("p");
-                code_visible.classList.add('share_visible');
-                code_visible.innerText = "Copy Code";
-                code_visible.onclick = function() {
-
-                    let ta = document.createElement("textarea");
-                    ta.value = output;
-                    p.replaceWith(ta);
-                    ta.select();
-                    ta.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    ta.replaceWith(p);
-                    code_visible.innerText = 'Copied to Clipboard!';
-                    code_visible.classList.add('share_done');
-                    code_visible.classList.remove('share_visible');
-                }
-                b_div.appendChild(code_visible);
-            }
-            { // 
-                
-            }
-            d.appendChild(b_div);
-
-            output_container.appendChild(d);
-
-            if (current_revision_exercises_displayed.length == revision_exercise_buttons.length - 1) {
-                document.getElementById('rvb_p1').classList.add("open");
-            }
+        if (!shifting) generate_page();
+        for (let i = 0, len = resources[type].length; i < len; i++) {
+            if (displayed[type].indexOf(i) != -1) continue;
+            generate_page(type, i, true);
         }
-    }
-    else if (type == "assessments") {
-        // removal
-        if (current_assessments_displayed.indexOf(index) != -1 && additive && current_assessments_displayed.length > 1) {
-            current_assessments_displayed.splice(current_assessments_displayed.indexOf(index), 1);
-            let temp = current_assessments_displayed;
-            assessments_buttons[index].classList.remove("open");
-            display_resource();
-            for (let i = 0, len = temp.length; i < len; i++) {
-                display_resource("assessments", temp[i], true);
-            }
-            return;
-        }
-
-        // meta
-        items = assessments[index].contents;
-        title = document.createElement("h2");
-        //items.shift(); // NOPE
-        title.innerHTML = `${assessments[index].name} (${items.length} Questions)`;
-        title.classList.add("noselect");
-        output_container.appendChild(title);
-
-        // option highlighting
-        if (!additive) {current_assessments_displayed = [index]; current_revision_exercises_displayed = [-1]}
-        else if (current_assessments_displayed.indexOf(index) == -1) current_assessments_displayed.push(index);
-        assessments_buttons[index].classList.add("open");
-
-        // checks
-        if (current_assessments_displayed.indexOf(-1) != -1) current_assessments_displayed.splice(current_assessments_displayed.indexOf(-1), 1);
-
-        // content
-        for (let i = 0, len = items.length; i < len; i++) {
-            // meta
-            let contents = items[i].split("<comment>"),
-            d = document.createElement("div"),
-            p = document.createElement("pre"),
-            h = document.createElement("h3");
-            h.classList.add("noselect");
-            p.classList.add("code");
-            h.innerText = `Question ${i + 1}`;
-            d.appendChild(h);
-
-            // code formatting
-            let output = "",
-            code = contents[0].split("\n");
-            code.shift();
-            code.pop();
-            code.pop();
-            for (let j = 0, j_len = code.length; j < j_len; j++) {
-                output += code[j].substring(4);
-            }
-            p.innerHTML = hljs.highlight(output, {language: "python"}).value;
-            //p.innerHTML = "<code class='language-python'>" + output + "</code>";
-            d.appendChild(p);
-            //hljs.highlightBlock(p);
-
-            // comments
-            if (contents.length > 1) {
-                let cd = document.createElement("div");
-                cd.classList.add("comment");
-                for (let j = 1, j_len = contents.length; j < j_len; j++) {
-                    let c = document.createElement("p"),
-                    text = contents[j].split("\n"),
-                    output = "";
-                    text.shift();
-                    text.pop();
-                    text.pop();
-                    for (let k = 0, k_len = text.length; k < k_len; k++) {
-                        output += text[k].substring(4) + "<br>";
-                    }
-                    c.innerHTML = output;
-                    cd.appendChild(c);
-                }
-                d.appendChild(cd);
-            }
-
-            // buttons
-            let b_div = document.createElement("div");
-            b_div.classList.add("links");
-            d.id = `question${i + 1}`;
-            { // question link
-                let share_hidden = document.createElement("input");
-                share_hidden.classList.add("share_hidden");
-                share_hidden.value = `https://nachotoast.com/101/?t=1&p=${index + 1}&q=${i + 1}#question${i + 1}`
-                b_div.appendChild(share_hidden);
-
-                let share_visible = document.createElement("p");
-                share_visible.classList.add('share_visible');
-                share_visible.innerText = "Copy Question Link";
-                share_visible.onclick = function() {
-                    share_hidden.classList.remove("share_hidden");
-                    share_hidden.select();
-                    share_hidden.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    share_hidden.classList.add("share_hidden");
-                    share_visible.innerText = 'Copied to Clipboard!';
-                    share_visible.classList.add('share_done');
-                    share_visible.classList.remove('share_visible');
-                }
-                b_div.appendChild(share_visible);
-            }
-            { // code
-                /*
-
-                let code_hidden = document.createElement("textarea");
-                code_hidden.classList.add("share_hidden");
-                code_hidden.value = output;
-                b_div.appendChild(code_hidden);
-                */
-
-                let code_visible = document.createElement("p");
-                code_visible.classList.add('share_visible');
-                code_visible.innerText = "Copy Code";
-                code_visible.onclick = function() {
-
-                    let ta = document.createElement("textarea");
-                    ta.value = output;
-                    p.replaceWith(ta);
-                    ta.select();
-                    ta.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    ta.replaceWith(p);
-                    code_visible.innerText = 'Copied to Clipboard!';
-                    code_visible.classList.add('share_done');
-                    code_visible.classList.remove('share_visible');
-                }
-                b_div.appendChild(code_visible);
-            }
-            { // 
-                
-            }
-            d.appendChild(b_div);
-
-            output_container.appendChild(d);
-
-            if (current_assessments_displayed.length == assessments_buttons.length - 1) {
-                document.getElementById('ab_p1').classList.add("open");
-            }
-        }
+        input_buttons[type][input_buttons[type].length -1].classList.add("open");
     }
 
+    function random_page() {
+        let type = Math.floor(Math.random() * resources.length),
+        page = Math.floor(Math.random() * resources[type].length);
+        generate_page(type, page);
+    }
+
+    generate_containers(true);
 }
 
-generate_elements();
-if (!from_url) display_resource("revision_exercise", Math.floor(Math.random() * revision_exercises.length));
+// State Changing
+{
+    function clear_all_pseudo_highlights() {
+        for (let i = 0, len = resources.length; i < len; i++) {
+            input_buttons[i][input_buttons[i].length -1].classList.remove("open");
+        }
+    }
+    
+    function clear_type_pseudo_highlights(type) {
+        input_buttons[type][input_buttons[type].length -1].classList.remove("open");
+    }
+    
+    function add_type_pseudo_highlights(type) {
+        input_buttons[type][input_buttons[type].length -1].classList.add("open");
+    }
+
+    function check_displayed_array() {
+        // checks number of items in displayed items array
+        var count = 0, type = undefined, page = undefined;
+        for (let i = 0, len = displayed.length; i < len; i++) {
+            count += displayed[i].length;
+            if (displayed[i].length > 0) {
+                page = displayed[i][0];
+                type = i;
+            };
+        }
+        return {count, type, page};
+    }
+    
+    function clear_displayed_array() {
+        // removes selection highlighting and splices from array for all currently displayed elements
+        for (let i = 0, len = displayed.length; i < len; i++) {
+            for (let j = 0, j_len = displayed[i].length; j < j_len; j++) {
+                input_buttons[i][displayed[i][j]].classList.remove("open");
+            }
+            displayed[i] = [];
+        }
+    }
+    
+    function remove_displayed_array(type, page) {
+        // removes selection highlighting and splices from array for specific element
+        input_buttons[type][page].classList.remove("open");
+        displayed[type].splice(displayed[type].indexOf(page), 1);
+    }
+    
+    function add_displayed_array(type, page) {
+        // adds selection highlighting and pushes into array for specific element
+        displayed[type].push(page);
+        input_buttons[type][page].classList.add("open");
+    }
+}
+
+// Generation
+{
+    function generate_page(type = -1, page, additive = false, from_error = false) {
+        if (!additive || type == -1) {
+            clear_all_pseudo_highlights();
+            output_container.innerHTML = "";
+            let self_click = check_displayed_array();
+            clear_displayed_array();
+            if (self_click.count == 1 && self_click.type == type && self_click.page == page) return;
+        }
+        if (type == -1) return;
+        if (additive && displayed[type].indexOf(page) != -1) { // shift-clicked on already-displayed node = remove it
+            clear_type_pseudo_highlights(type)
+            find_page_to_remove(type, page, from_error);
+            remove_displayed_array(type, page);
+            return;
+        }
+        add_displayed_array(type, page);
+        output_container.appendChild(display_specific_page(type, page));
+        if (displayed[type].length == resources[type].length) input_buttons[type][input_buttons[type].length - 1].classList.add("open");
+        else if (input_buttons[type][input_buttons[type].length - 1].classList[0] == "open") input_buttons[type][input_buttons[type].length - 1].classList.remove("open");
+    
+    }
+    
+    function display_specific_page(type, page) {
+        // returns div containing resource content
+        let page_element = document.createElement("div");
+        page_element.classList.add("output_resource", `resource_type_${type}`, `resource_page_${page}`);
+        let page_heading = document.createElement("h2");
+        page_heading.classList.add("noselect");
+        page_heading.innerText = `${resources[type][page].name} (${resources[type][page].contents.length} ${containers[type][2][0]})`;
+        page_element.appendChild(page_heading);
+        // element generation
+        for (let i = 0, len = resources[type][page].contents.length; i < len; i++) {
+            page_element.appendChild(display_specific_page_element(type, page, i));
+        }
+        return page_element;
+    }
+    
+    function display_specific_page_element(type, page, index) {
+        // returns a div representing each element
+    
+        let combined_element = document.createElement("div");
+        combined_element.id = `i${index + 1}`;
+    
+        // heading
+        let element_heading = document.createElement("h3");
+        element_heading.innerText = `${containers[type][2][1]} ${index + 1}`;
+        element_heading.classList.add("noselect");
+        combined_element.appendChild(element_heading);
+    
+        let contents = resources[type][page].contents[index].split("<comment>");
+    
+        // code
+        let code_element = document.createElement("pre");
+        code_element.classList.add("code");
+        code_element.innerHTML = generate_code(contents[0], containers[type][3]);
+        combined_element.appendChild(code_element);
+    
+        // comments
+        if (contents.length > 1) combined_element.appendChild(generate_comments(contents.splice(1)));
+    
+        // link widgets
+        combined_element.appendChild(generate_link_elements(type, page, index, code_element));
+    
+        return combined_element;
+    }
+    
+    function generate_code(raw_string = "No code specified", code_language) {
+        let output = "",
+        code_array = raw_string.split("\n");
+        while (code_array[code_array.length -1] == "" || code_array[code_array.length -1] == "</pre>\r" || code_array[code_array.length -1] == "</pre>") code_array.pop();
+        while (code_array[0] == "\r" || code_array[0] == "") code_array.shift();
+        for (let i = 0, len = code_array.length; i < len; i++) {
+            if (code_array[i].substring(0, 4) == "    ") output += code_array[i].substring(4);
+            else output += code_array[i];
+        }
+        return hljs.highlight(output, {language: code_language}).value;
+    }
+    
+    function generate_comments(comments_array) {
+        let comments_div = document.createElement("div");
+        comments_div.classList.add("comment");
+    
+        for (let i = 0, len = comments_array.length; i < len; i++) {
+            let this_comment = comments_array[i].split("\n"),
+            comment_element = document.createElement("p"),
+            output = "";
+            while (this_comment[this_comment.length -1] == "" || this_comment[this_comment.length -1] == "</comment>\r" || this_comment[this_comment.length -1] == "</comment>") this_comment.pop();
+            while (this_comment[0] == "\r" || this_comment[0] == "") this_comment.shift();
+            for (let j = 0, j_len = this_comment.length; j < j_len; j++) {
+                if (this_comment[j].substring(0, 4) == "    ") output += this_comment[j].substring(4);
+                else output += this_comment[j];
+                output += "<br>";
+            }
+            comment_element.innerHTML = output;
+            comments_div.appendChild(comment_element);
+        }
+        return comments_div;
+    }
+    
+    function generate_link_elements(type, page, question, node) {
+        // returns div element containing related widgets.
+    
+        const links_div = document.createElement("div");
+        links_div.classList.add("links");
+    
+        { // copy question link
+            let copy_link = document.createElement("p");
+            copy_link.classList.add("share_visible");
+            copy_link.innerText = "Copy Question Link";
+            copy_link.onclick = function() {
+                let link_to_copy = document.createElement("input");
+                link_to_copy.value = `https://nachotoast.com/101/?t=${type}&p=${page + 1}&q=${question + 1}#i${question + 1}`;
+                node.replaceWith(link_to_copy);
+                link_to_copy.select();
+                link_to_copy.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                link_to_copy.replaceWith(node);
+    
+                copy_link.innerText = "Copied to Clipboard!";
+                copy_link.classList.add("share_done");
+                copy_link.classList.remove("share_visible"); // prevent style overwrites
+            }
+            links_div.appendChild(copy_link);
+        }
+    
+        { // copy code
+            let copy_code = document.createElement("p");
+            copy_code.classList.add('share_visible');
+            copy_code.innerText = "Copy Code";
+            copy_code.onclick = function() {
+                let code_to_copy = document.createElement("textarea");
+                code_to_copy.value = node.innerText;
+                node.replaceWith(code_to_copy);
+                code_to_copy.select();
+                code_to_copy.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                code_to_copy.replaceWith(node);
+    
+                copy_code.innerText = 'Copied to Clipboard!';
+                copy_code.classList.add('share_done');
+                copy_code.classList.remove('share_visible'); // prevent style overwrites
+            }
+            links_div.appendChild(copy_code);
+        }
+    
+        return links_div;
+    }
+    
+    function find_page_to_remove(type, page, from_error) {
+        // feeds the node found from input type and page to the remove page function
+        let nodes = document.getElementsByClassName(`resource_type_${type} resource_page_${page}`);
+        if (nodes.length > 1) console.warn(`Found ${nodes.length} instances of page ${page} (type ${type}) displayed, this should never happen!`);
+        if (nodes.length < 1) {console.warn(`Failed to find node for type ${type}, page ${page}.`); return}
+        remove_specific_page(nodes[0], from_error);
+    }
+    
+    function remove_specific_page(node, from_error) {
+        try {
+            output_container.removeChild(node);
+        }
+        catch (error) {
+            if (from_error) {
+                console.error(`Error occured again in second run!`);
+                return;
+            }
+            console.warn(`Failed to delete node!`, error);
+            generate_page(-1, -1, false, true);
+        }
+    }
+}
+
+
+
+
+if (!from_url) random_page();
 else {
-    if (url_data.type == 0) var group = "revision_exercise";
-    else if (url_data.type == 1) var group = "assessments";
-    display_resource(group, url_data.page - 1);
+    generate_page(url_data.type, url_data.page - 1);
 }

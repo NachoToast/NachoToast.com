@@ -1,10 +1,9 @@
     <link rel="stylesheet" href="solarized-dark.css" type="text/css">
     <script defer src="highlight.pack.js"></script>
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
-    <script>const revision_exercises =
+    <script>const resources = [
         <?php
             session_start();
-            include_once 'private.php';
             $revision_exercise_files = array();
             $i = 0;
             foreach(glob('revision_exercises/*.html') as $filename) {
@@ -17,7 +16,9 @@
                 $contents = fread($file, $fs);
                 fclose($file);
                 $revision_exercise_files[$i]['name'] = $n;
-                $revision_exercise_files[$i]['contents'] = explode("<pre>", str_replace($upi,'ntoa222', $contents));
+                $arr = explode("<pre>", $contents);
+                array_shift($arr);
+                $revision_exercise_files[$i]['contents'] = $arr;
                 $revision_exercise_files[$i]['size'] = $fs;
                 $revision_exercise_files[$i]['order'] = floatval(substr($contents, 0, 2));
                 $i++;
@@ -29,7 +30,6 @@
             usort($revision_exercise_files, "cmp");
             echo json_encode($revision_exercise_files);
         ?>,
-        assessments =
         <?php
             $assessments_files = array();
             $i = 0;
@@ -43,7 +43,9 @@
                 $contents = fread($file, $fs);
                 fclose($file);
                 $assessments_files[$i]['name'] = $n;
-                $assessments_files[$i]['contents'] = explode("<pre>", str_replace($upi,'ntoa222', $contents));
+                $arr = explode("<pre>", $contents);
+                array_shift($arr);
+                $assessments_files[$i]['contents'] = $arr;
                 $assessments_files[$i]['size'] = $fs;
                 $assessments_files[$i]['order'] = floatval(substr($contents, 0, 2));
                 $i++;
@@ -51,7 +53,7 @@
 
             usort($assessments_files, "cmp");
             echo json_encode($assessments_files);
-        ?>
+        ?>]
     </script>
     <script defer src='display_files.js'></script>
     <?php
@@ -61,7 +63,13 @@
             ?>
                 <script>const from_url = true; url_data = {type: <?php echo $_GET["t"]?>,question:<?php echo $_GET["q"] ?>, page:<?php echo $_GET["p"] ?>} </script>
                 <meta property="og:title" content="<?php echo $files[$_GET["p"] - 1]['name'] . ', Question ' . $_GET["q"]?>">
-                <meta property="og:description" content="<?php  echo htmlentities(json_encode($files[$_GET["p"] - 1]['contents'][$_GET["q"]])) ?>">
+                <meta property="og:description" content="<?php
+                            $output = $files[$_GET["p"] - 1]['contents'][$_GET["q"]];
+                            $output = substr($output, 6, -10);
+                            $output = nl2br($output);
+                            $output = htmlentities($output);
+                            echo $output;
+                    ?>">
             <?php
         }
         else {
@@ -75,7 +83,7 @@
     ?>
     <meta property="og:site_name" content="NachoToast">
     <meta property="og:image" content="https://nachotoast.com/img/main.png">
-    <title>Home</title>
+    <title>101 Index</title>
 </head>
 <body>
     <?php
@@ -93,10 +101,10 @@
             <a class="noselect" target="_blank" href="https://www.library.auckland.ac.nz/exam-papers/subject/Computer%20Science/COMPSCI%20101">Past Papers</a>
         </div>
         <div id='revision_exercises' class='noselect special_scroll'>
-            <h2 id='revision_exercise_heading'>Revision Exercise Answers</h2>
+            <!--h2 id='revision_exercise_heading'>Revision Exercise Answers</h2-->
         </div>
         <div id='assessments' class='noselect special_scroll'>
-            <h2 id='assessments_heading'>Assessment Answers</h2>
+            <!--h2 id='assessments_heading'>Assessment Answers</h2-->
         </div>
     </div>
     <div id="output_container">
