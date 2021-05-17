@@ -1,6 +1,7 @@
 const containers = [
     ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python"],
-    ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Answer"], "Python"],
+    ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Question"], "Python"],
+    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python"]
 ],
 output_container = document.getElementById("output_container");
 var displayed = [],

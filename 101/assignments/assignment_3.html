@@ -1,0 +1,155 @@
+03
+<pre>
+    def remove_odd_multiples(numbers_list, multiple_of):
+        i = 0
+        while i < len(numbers_list):
+            if numbers_list[i] % 2 != 0 and numbers_list[i] % multiple_of == 0:
+                numbers_list.pop(i)
+            else:
+                i += 1 
+</pre>
+<pre>
+    def get_unique_words(text):
+        text = sorted(text.lower().split())
+        output = []
+        for letter in text:
+            if letter[-1].isalpha() == False:
+                letter = letter[:-1]
+            if (len(output) == 0):
+                output.append(letter)
+            elif output[-1] != letter:
+                output.append(letter)
+        return output
+</pre>
+<pre>
+    def add_adjacent_list_values(numbers_list):
+        if len(numbers_list) < 2:
+            return
+        
+        first = numbers_list[0]
+        for i in range(0, len(numbers_list)):
+            next_index = i + 1
+            if next_index >= len(numbers_list):
+                numbers_list[i] += first
+            else:
+                numbers_list[i] += numbers_list[next_index]
+</pre>
+<pre>
+    def get_fail_pass_average(number_list):
+        under_50 = []
+        over_50 = []
+        for number in number_list:
+            if number < 50:
+                under_50.append(number)
+            else:
+                over_50.append(number)
+        if len(under_50) == 0:
+            avg_fail = -1
+        else:
+            avg_fail = sum(under_50)/len(under_50)
+        if len(over_50) == 0:
+            avg_pass = -1
+        else:
+            avg_pass = sum(over_50)/len(over_50)
+        return [round(avg_fail), round(avg_pass)]
+</pre>
+<pre>
+    def calculate_average_positive_temperature(temperature_list, sentinel_value):
+        collect = []
+        i = 0
+        while i < len(temperature_list):
+            if temperature_list[i] >= 0:
+                if temperature_list[i] >= sentinel_value:
+                    i = len(temperature_list)
+                else:
+                    collect.append(temperature_list[i])
+            i += 1
+        
+        if len(collect) == 0:
+            return 0.0
+        else:
+            return sum(collect)/len(collect)
+</pre>
+<pre>
+    def get_longest_two_s_word(word_list):
+        longest = ""
+        for word in word_list:
+            if len(word) > len(longest) and len(word) >= 5 and word.lower().find("s") != word.lower().rfind("s"):
+                longest = word
+        return longest
+</pre>
+<pre>
+    def is_a_valid_date(date):
+        month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        date = date.split()
+        if len(date) != 2:
+            return False
+        if date[0] not in month_names:
+            return False
+        if date[1].isdigit() == False or int(date[1]) == 0:
+            return False
+        index = month_names.index(date[0])
+        if int(date[1]) > days_in_month[index]:
+            return False
+        return True
+</pre>
+<pre>
+    def is_a_valid_code(code):
+        code_letters = ["S", "B", "N", "T", "P"]
+        min_for_each_letter = [1, 3, 4, 0, 3] #inclusive
+        max_for_each_letter = [7, 9, 6, 7, 5] #inclusive
+        
+        code = code.strip()
+        if code[0] not in code_letters or len(code) < 2:
+            return False
+        min = min_for_each_letter[code_letters.index(code[0])]
+        max = max_for_each_letter[code_letters.index(code[0])]
+        
+        for i in range(1, len(code)):
+            if code[i] != " ":
+                if code[i].isdigit() == False:
+                    return False
+                if int(code[i]) < min or int(code[i]) > max:
+                    return False
+        
+        return True
+</pre>
+<pre>
+    def get_dice_score(dice_roll_list):
+        counts = [0, 0, 0, 0, 0, 0]
+        for num in dice_roll_list:
+            counts[num - 1] += 1
+        if counts[0] == 0:
+            return 0
+        score = 0
+        while counts[0] > 0:
+            depth = 0
+            while depth < len(counts) and counts[depth] > 0:
+                score += depth + 1
+                counts[depth] -= 1;
+                depth += 1
+        return score
+</pre>
+<pre>
+    def make_move(player, column, board):
+        if board[0][column] != "*":
+            return print("Invalid move ", player, ", column ", column, " is full!", sep = "")
+        row_index = len(board) - 1
+        i = 0
+        while i < len(board) - 1:
+            if board[i+1][column] != "*":
+                row_index = i
+                i = len(board)
+            i += 1
+            
+        board[row_index] = board[row_index][:column] + player + board[row_index][column + 1:]
+        
+
+
+    def draw_board(board):
+        for row in board:
+            for item in row:
+                print(" " + item + " ", end="")
+            print()
+</pre>

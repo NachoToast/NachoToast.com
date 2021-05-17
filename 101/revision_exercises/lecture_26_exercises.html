@@ -1,0 +1,56 @@
+26
+<pre>
+    def print_inverted_right_triangle(number_of_rows):
+        for row in range(number_of_rows):
+            for column in range(number_of_rows - row):
+                print("*", end = "")
+            print()
+</pre>
+<comment>
+    Personally hate the 'only nested for loops' restriction,
+    but it's necessary for the upcoming lecture 27 exercises, trust me.
+</comment>
+<pre>
+    def print_mirrored_right_triangle(number_of_rows):
+        for row in range(number_of_rows):
+            for column in range(number_of_rows - row - 1):
+                print(" ", end = "")
+            print("*" * (row + 1), end = "")
+            print()
+</pre>
+<pre>
+    def print_special_rectangle(number_of_rows, number_of_columns):
+        for row in range(number_of_rows):
+            if row % 2 == 0:
+                symbols = "-*"
+            else:
+                symbols = "*-"
+            for column in range(number_of_columns):
+                print(symbols[column % 2], end = "")
+            print()
+</pre>
+<pre>
+    def print_inverted_special_right_triangle(number_of_rows):
+        for row in range(number_of_rows):
+            if row % 2 == 0:
+                symbols = "*-"
+            else:
+                symbols = "-*"
+            for column in range(number_of_rows - row):
+                print(symbols[column % 2], end = "")
+            print()
+</pre>
+<pre>
+    def print_dot_columns (dot_list):
+        max_in_list = max(dot_list)
+        for current_number in range(max_in_list, 0, -1):
+            for index in range(len(dot_list)):
+                if dot_list[index] >= current_number:
+                    print(". ", end = "")
+                else:
+                    print("  ", end = "")
+            print()
+</pre>
+<comment>
+    Guess and check is always a valid method. ;)
+</comment>

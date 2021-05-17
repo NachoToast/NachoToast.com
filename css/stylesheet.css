@@ -172,8 +172,9 @@ a.inline_logout {
 }
 
 #global_notification_box > * {
+    line-height: 1.6;
     margin: 0;
-    padding: 5px;
+    padding: 4px;
     cursor: pointer;
     width: 100%;
     text-align: center;

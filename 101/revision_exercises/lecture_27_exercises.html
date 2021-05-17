@@ -1,0 +1,60 @@
+27
+<pre>
+    def draw_shapes(a_canvas, start_x, start_y, number_of_rows, number_of_columns):
+        for row in range(number_of_rows):
+            if row % 2 == 0:
+                colors = ('black', 'blue')
+            else:
+                colors = ('blue', 'black')
+            for column in range(number_of_columns):
+                a_canvas.create_rectangle(start_x + 50 * column, start_y + 50 * row, start_x + 50 * (column + 1), start_y + 50 * (row + 1), fill=colors[column % 2])
+
+
+
+    root = Tk()
+    root.title("My first Canvas")
+    a_canvas = Canvas(root, width=400, height=300)
+    a_canvas.pack(fill=BOTH, expand = True)
+</pre>
+<pre>
+    def draw_shapes(a_canvas, start_x, start_y, number_of_rows):
+        size = 50
+        y = start_y
+        for row in range(number_of_rows):
+            for column in range(row + 1):
+                a_canvas.create_rectangle(start_x + size * column, start_y + size * row, start_x + size * (column + 1), start_y + size * (row + 1), fill='black')
+
+    root = Tk()
+    root.title("My first Canvas")
+    a_canvas = Canvas(root, width=400, height=300)
+    a_canvas.pack(fill=BOTH, expand = True)
+</pre>
+<pre>
+    def draw_shapes(a_canvas, start_x, start_y, number_of_rows):
+        size = 50
+        y = start_y
+        for row in range(number_of_rows):
+            for column in range(number_of_rows - row):
+                a_canvas.create_oval(start_x + size * column, start_y + size * row, start_x + size * (column + 1), start_y + size * (row + 1), fill = 'blue')
+
+    root = Tk()
+    root.title("My first Canvas")
+    a_canvas = Canvas(root, width=600, height=400)
+    a_canvas.pack(fill=BOTH, expand = True)
+</pre>
+<pre>
+    [1, 3, 4, 9, 10]
+</pre>
+<pre>
+    [9, 10, 9] [1, 3, 4]
+</pre>
+<comment>
+    This one is quite tricky, the reason 'a_list2' stays as [1, 3, 4] is because 'list3' only exists inside the scope of the 'exercise04' function, so while in the function, 'list2' is [9, 10, 9] because it points to 'list3', as soon as it comes out of the function 'list3' no longer exists, so it goes back to its original address of [1, 3, 4].
+    (I could be wrong about this, if so please let me know.)
+</comment>
+<pre>
+    [4, 3] [1, 3, 4, 4, 4, 3, 3]
+</pre>
+<pre>
+    [4, 3] [3, 4]
+</pre>

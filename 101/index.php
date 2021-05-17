@@ -53,6 +53,30 @@
 
             usort($assessments_files, "cmp");
             echo json_encode($assessments_files);
+        ?>,
+        <?php
+            $assignments = array();
+            $i = 0;
+            foreach(glob('assignments/*.html') as $filename) {
+                $p = pathinfo($filename);
+                $n = $p['filename'];
+                $n = str_replace('_', ' ', $n);
+                $n = ucwords($n);
+                $fs = filesize($filename);
+                $file = fopen($filename, "r");
+                $contents = fread($file, $fs);
+                fclose($file);
+                $assignments[$i]['name'] = $n;
+                $arr = explode("<pre>", $contents);
+                array_shift($arr);
+                $assignments[$i]['contents'] = $arr;
+                $assignments[$i]['size'] = $fs;
+                $assignments[$i]['order'] = floatval(substr($contents, 0, 2));
+                $i++;
+            }
+
+            usort($assignments, "cmp");
+            echo json_encode($assignments);
         ?>]
     </script>
     <script defer src='display_files.js'></script>
@@ -92,8 +116,8 @@
     <h1 class='noselect'>CompSci 101 Index</h1>
     <div id='global_notification_box'>
         <?php
-            if (!isset($_COOKIE["17/05_update"])) echo "<p class='noselect' id='17/05_update'>17/05 Update: Lecture 25 exercises are now available, also big thanks to AzureSky for pointing out some bugs.</p>";
-            if (!isset($_COOKIE["site_cookie_notification"])) echo "<p class='noselect' id='site_cookie_notification'>This site now uses cookies. You can click here to remove this notification.</p>";
+            if (!isset($_COOKIE["18/05_update"])) echo "<p class='noselect' id='18/05_update'>18/05 Update: Lecture 25, 26, and 27 exercises are now available, as well as some assignments and tests.<br>Big thanks to AzureSky for pointing out some bugs.<br>P.S: You can shift+click to show multiple exercises at a time.</p>";
+            if (!isset($_COOKIE["site_cookie_notification"])) echo "<p class='noselect' id='site_cookie_notification'>This site now uses cookies. You can click here to remove this notification just like any other.</p>";
         ?>
 
     </div>
@@ -108,10 +132,10 @@
             <a class="noselect" target="_blank" href="https://www.library.auckland.ac.nz/exam-papers/subject/Computer%20Science/COMPSCI%20101">Past Papers</a>
         </div>
         <div id='revision_exercises' class='noselect special_scroll'>
-            <!--h2 id='revision_exercise_heading'>Revision Exercise Answers</h2-->
         </div>
         <div id='assessments' class='noselect special_scroll'>
-            <!--h2 id='assessments_heading'>Assessment Answers</h2-->
+        </div>
+        <div id='assignments' class='noselect special_scroll'>
         </div>
     </div>
     <div id="output_container">
