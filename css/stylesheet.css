@@ -163,3 +163,25 @@ a.inline_logout {
 .inline_logout:hover {
     color: lightgray;
 }
+
+#global_notification_box {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 5px;
+}
+
+#global_notification_box > * {
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: color 0.1s linear;
+    transition: background-color 0.1s linear;
+}
+
+#global_notification_box > p:hover {
+    color: pink;
+    background-color: #333;
+}

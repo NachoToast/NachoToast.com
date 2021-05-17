@@ -90,6 +90,13 @@
         include_once '../header.php' ;
     ?>
     <h1 class='noselect'>CompSci 101 Index</h1>
+    <div id='global_notification_box'>
+        <?php
+            if (!isset($_COOKIE["17/05_update"])) echo "<p class='noselect' id='17/05_update'>17/05 Update: Lecture 25 exercises are now available, also big thanks to AzureSky for pointing out some bugs.</p>";
+            if (!isset($_COOKIE["site_cookie_notification"])) echo "<p class='noselect' id='site_cookie_notification'>This site now uses cookies. You can click here to remove this notification.</p>";
+        ?>
+
+    </div>
     <div id='resource_container'>
         <div id='quick_links'>
             <h2 class='noselect'>Quick Links</h2>
