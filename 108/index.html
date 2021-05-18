@@ -27,16 +27,58 @@
     <div>
         <h1>Pourewa Graph Prototypes</h1>
     </div>
-    <img src="1.png">
-    <img src="2.png">
-    <img src="3.png">
-    <img src="4.png">
-    <img src="5.png">
-    <img src="6.png">
-    <img src="7.png">
-    <img src="8.png">
-    <img src="9.png">
-    <img src="10.png">
-    <img src="11.png">
+    <div class='item'>
+        <img src="1.png">
+        <p>There is a higher proportion of non-invasive (native) species in bushlands than there are in grasslands. This could be indicative of how invasive species are more suited for grassland conditions similar to their country of origin, while native species are more suited for the NZ bush and thus can thrive better than invasive species in said conditions.</p>
+        <p>A <i>t</i>-test on these data sets shows the difference is statistically significant (<i>t</i> < 0.01).</p>
+    </div>
+    <div class='item'>
+        <img src="2.png">
+        <p>Graph shows a roughly natural logarithmic relationship, with the correlation stronger at lower species richness values. Likely due to the way SWI is calculated using natural logarithms of species proportions. The values below this natural log trendline  show plots where there are multiple species but one group is much more abundant than the rest. This is looked into more later under the term 'species dominance.'</p>
+    </div>
+    <div class='item'>
+        <img src="3.png">
+        <p>While the distribution of plant diversity across all the plots (n = 363) looks approximately normal, testing under the assumption of Normality cannot be done since the diversity of each plot is not independent due to factors like elevation and plot type.</p>
+        <p>Since so many plots are 100% invasive species, comparing the distributions of plant diversity for 100% invasive species plots and non 100% invasive species plots could be an interesting comparison to see whether invasive species have an effect on the spread of diversity.</p>
+    </div>
+    <div class='item'>
+        <img src="4.png">
+        <p>Clear downwards trend in average plant diversity and plot elevation. Could possibly be an asymptotic decrease but more elevation types would need to be tested.</p>
+        <p>This is explored further below, where plots are subset by type.</p>
+    </div>
+    <div class='item'>
+        <img src="5.png">
+        <p>A large number of plots have 100% invasive species, and these plots appear to have, on average, a lower plant diversity than plots with < 100% invasive species makeup.</p>
+    </div>
+    <div class='item'>
+        <img src="6.png">
+        <p><i>Average species abundance</i> is the average amount of all the species <i>present</i>. In the graph there is a clear relationship between average species abundance and plant diversity. As plant diversity increases the average species abundance decreases since more species types are present.</p>
+        <p>There is an interesting, almost exponential curve present at y = 50, x = 0 to x = 0.75.</p>
+        <p>Note: average species abundance is not a percentage, the highest counted just happened to be 100.</p>
+    </div>
+    <div class='item'>
+        <img src="7.png">
+        <p><i>Species domination</i> is the proportion of species in the plot that are the modal species, 100% means that the modal species is the only species in the plot, and 10% means that the modal species only accounts for 10% of the species in the plot.</p>
+        <p>There is a clear y=ln(-x) relationship for lower average plant diversity values in the graph, if I can figure out what it means then we will have the best topic.</p>
+    </div>
+    <div class='item'>
+        <img src="12.png">
+        <p>Similar to the previous graph, this time we can see that the logarithmic relationship is only present in the grasslands, and that bushlands have a higher average plant diversity and lower species domination on average than grasslands. However the spread of species domination and average plant diversity for grasslands is higher than that of bushlands.</p>
+    </div>
+    <div class='item'>
+        <img src="8.png">
+    </div>
+    <div class='item'>
+        <img src="9.png">
+        <p>There is a clear decrease in the average species richness of grassland plots as elevation decreases, however bushland plots do not appear to have any significant influence from elevation to their average species richness.</p>
+    </div>
+    <div class='item'>
+        <img src="10.png">
+        <p>Bushland plots consistently have a lower proportion of invasive species than grassland plots.</p>
+    </div>
+    <div class='item'>
+        <img src="11.png">
+        <p>Plant diversity is way higher in the bushland plots, coincidentally where the proportion of invasive species is much less as well.</p>
+    </div>
 </body>
 </html>
