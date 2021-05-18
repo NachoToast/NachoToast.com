@@ -40,7 +40,7 @@ input {
     outline: none;
 }
 
-.noselect {
+.noselect, #global_notification_box > * {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */
@@ -168,7 +168,7 @@ a.inline_logout {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 5px;
+    width: 100%;
 }
 
 #global_notification_box > * {
@@ -176,10 +176,20 @@ a.inline_logout {
     margin: 0;
     padding: 4px;
     cursor: pointer;
-    width: 100%;
+    width: calc(100% - 8px);
     text-align: center;
     transition: color 0.1s linear;
     transition: background-color 0.1s linear;
+    animation-name: notif_fade;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+@keyframes notif_fade {
+    from {opacity: 1}
+    to {opacity: 0}
 }
 
 #global_notification_box > p:hover {
