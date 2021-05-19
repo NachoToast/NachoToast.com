@@ -77,6 +77,7 @@ if (isset($_POST["uc_submit"]) && isset($_POST["new_username"])) { // change use
     // size (2mb)
     if ($_FILES["new_pfp"]["size"] > 2000000) {
         header("location: ../users.php?user=$redirect&e=pfp_toobig");
+        exit();
     }
 
     // extension
