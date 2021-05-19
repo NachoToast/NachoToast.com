@@ -144,6 +144,7 @@
     <div id='global_notification_box'>
         <?php
             //if (!isset($_COOKIE["19/05"])) echo "<p class='noselect' id='19/05'>19/05 update: More useful order restructuring.</p>";
+            // todo: use data html attribute to adjust expiry date?
         ?>
     </div>
     <div id='resource_container'>

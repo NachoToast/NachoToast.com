@@ -1,7 +1,6 @@
 arc/
-uploads/profiles/*
-g/ignominy/p/*
-g/ignominy/vis/*
-g/ignominy/w/**/
+uploads/profiles
 g/ignominy/saves/*.ignosave
+g/ignominy/vis
+g/ignominy/w/**
 108/*.png
