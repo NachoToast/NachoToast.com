@@ -181,7 +181,7 @@ a.inline_logout {
     transition: color 0.1s linear;
     transition: background-color 0.1s linear;
     animation-name: notif_fade;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
     animation-play-state: paused;

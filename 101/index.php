@@ -143,8 +143,7 @@
     <h1 class='noselect'>CompSci 101 Index</h1>
     <div id='global_notification_box'>
         <?php
-            if (!isset($_COOKIE["18/05_update"])) echo "<p class='noselect' id='18/05_update'>18/05 Update: Lecture 25, 26, and 27 exercises are now available, as well as some assignments and tests.<br>Big thanks to AzureSky for pointing out some bugs.<br>P.S: You can shift+click to show multiple exercises at a time.</p>";
-            if (!isset($_COOKIE["site_cookie_notification"])) echo "<p class='noselect' id='site_cookie_notification'>This site now uses cookies. You can click here to remove this notification just like any other.</p>";
+            //if (!isset($_COOKIE["19/05"])) echo "<p class='noselect' id='19/05'>19/05 update: More useful order restructuring.</p>";
         ?>
     </div>
     <div id='resource_container'>
