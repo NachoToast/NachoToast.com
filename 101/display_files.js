@@ -1,7 +1,8 @@
 const containers = [
-    ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python"],
-    ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Question"], "Python"],
-    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python"]
+    ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python", true],
+    ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Question"], "Python", true],
+    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python", false],
+    ["Other", document.getElementById("other"), ["Parts", "Section"], "Python", false]
 ],
 output_container = document.getElementById("output_container");
 var displayed = [],
@@ -41,7 +42,8 @@ shifting = false;
                 containers[i][1].appendChild(generate_option(i, j));
             }
 
-            containers[i][1].appendChild(generate_pseudo_option(i));
+            // pesudo options
+            if (containers[i][4]) containers[i][1].appendChild(generate_pseudo_option(i));
         }
     }
 
@@ -76,9 +78,18 @@ shifting = false;
     }
 
     function random_page() {
-        let type = Math.floor(Math.random() * resources.length),
-        page = Math.floor(Math.random() * resources[type].length);
-        generate_page(type, page);
+        generate_page();
+        let valid_type_index_map = resources.filter(e => e.length > 0).map(e => resources.indexOf(e)),
+        pool = [];
+        for (let i = 0, len = valid_type_index_map.length; i < len; i++) {
+            for (let j = 0, j_len = resources[valid_type_index_map[i]].length; j < j_len; j++) {
+                pool.push({type: i, page: j});
+            }
+        }
+        let chosen = pool[Math.floor(Math.random() * pool.length)],
+        max = resources[chosen.type].length;
+        generate_page(chosen.type, chosen.page);
+        containers[chosen.type][1].scrollTop = (containers[chosen.type][1].scrollHeight - containers[chosen.type][1].clientHeight) * (chosen.page / max);
     }
 
     generate_containers(true);
@@ -88,6 +99,7 @@ shifting = false;
 {
     function clear_all_pseudo_highlights() {
         for (let i = 0, len = resources.length; i < len; i++) {
+            if (!resources[i][4]) continue;
             input_buttons[i][input_buttons[i].length -1].classList.remove("open");
         }
     }
@@ -155,8 +167,11 @@ shifting = false;
         }
         add_displayed_array(type, page);
         output_container.appendChild(display_specific_page(type, page));
-        if (displayed[type].length == resources[type].length) input_buttons[type][input_buttons[type].length - 1].classList.add("open");
-        else if (input_buttons[type][input_buttons[type].length - 1].classList[0] == "open") input_buttons[type][input_buttons[type].length - 1].classList.remove("open");
+        if (containers[type][4]) {
+            // pseudo option highlighting
+            if (displayed[type].length == resources[type].length) input_buttons[type][input_buttons[type].length - 1].classList.add("open");
+            else if (input_buttons[type][input_buttons[type].length - 1].classList[0] == "open") input_buttons[type][input_buttons[type].length - 1].classList.remove("open");
+        }
     
     }
     
@@ -308,9 +323,6 @@ shifting = false;
         }
     }
 }
-
-
-
 
 if (!from_url) random_page();
 else {
