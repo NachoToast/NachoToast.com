@@ -57,3 +57,44 @@
     border-bottom: solid 1px aquamarine;
     background-color: #333;
 }
+
+#changelog_container_2 {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+}
+
+#changelog_container_2 > div {
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+    border: solid 1px transparent;
+    transition: background-color 0.1s linear;
+    transition: border 0.3s linear;
+    width: calc(100% - 2px);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+#changelog_container_2 > div:hover {
+    background-color: #333;
+    border: solid 1px gray;
+}
+
+#changelog_container_2 > div > * {
+    width: clamp(300px, 90%, 1440px);
+    margin: 0;
+}
+
+#changelog_container_2 > div > *:first-child {
+    font-weight: lighter;
+    width: calc(98% - 20px);
+    padding: 10px;
+}
+
+#changelog_container_2 > div > *:last-child {
+    color: gray;
+    text-align: right;
+    padding: 10px;
+}

@@ -132,6 +132,7 @@
             <a class="noselect" target="_blank" href="https://canvas.auckland.ac.nz/courses/60604">Canvas</a>
             <a class="noselect" target="_blank" href="https://discord.gg/QZgUWJQhJ7">Discord</a>
             <a class="noselect" target="_blank" href="https://www.library.auckland.ac.nz/exam-papers/subject/Computer%20Science/COMPSCI%20101">Past Papers</a>
+            <a class='noselect' target='_blank' href='https://www.calendar.auckland.ac.nz/en/courses/faculty-of-science/computer-science.html?_ga=2.47717159.1698591504.1621423272-1880834076.1611556323#COMPSCI_373Computer_Graphics_and_Image_Processing'>Course Info</a>
         </div>
         <div id='revision_exercises' class='noselect special_scroll'>
         </div>

@@ -19,7 +19,7 @@ body > h1 {
     border: solid 1px gray;
     margin: 1vw;
     overflow-y: auto;
-    max-height: 250px;
+    max-height: 280px;
 }
 
 #resource_container > div > h2 {

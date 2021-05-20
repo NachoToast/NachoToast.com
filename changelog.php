@@ -1,4 +1,5 @@
-<?php include_once 'head.html' ?>
+    <?php include_once 'head.html' ?>
+    <script defer src="js/changelog.js"></script>
     <link href="css/changelog.css" rel="stylesheet" type="text/css">
     <meta property="og:title" content="NachoToast Website Changelog">
     <meta property="og:description" content="Complete changelog for the NachoToast website.">
@@ -9,8 +10,10 @@
 <body>
     <?php
         session_start();
-        include_once 'header.php' ;
+        include_once 'header.php';
     ?>
+    <h1 class='noselect'>Changelog</h1>
+    <button onclick='toggle_feed_type(this)'>Website Log</button>
     <div id="changelog_container">
         <div id="17">
             <h4>10/05/2021</h4>
@@ -179,6 +182,9 @@
                 <li>Improved link pathways for server hardware page.</li>
             <ul>
         </div>
+    </div>
+    <div id="changelog_container_2">
+
     </div>
 </body>
 </html>
