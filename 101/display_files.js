@@ -1,8 +1,7 @@
 const containers = [
     ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python", true],
     ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Question"], "Python", true],
-    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python", false],
-    ["Other", document.getElementById("other"), ["Parts", "Section"], "Python", false]
+    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python", false]
 ],
 output_container = document.getElementById("output_container");
 var displayed = [],
@@ -20,7 +19,7 @@ shifting = false;
         if (e.key == "Shift") shifting = false;
     })
 
-    if (containers.length != resources.length) console.warn(`Found ${resources.length} resource files but only have handlers for ${containers.length}`);
+    if (containers.length != resources.length) console.warn(`Found ${resources.length} resource files but have handlers for ${containers.length}`);
 
     function generate_containers(clear_all = true) {
         if (!clear_all) output_container.innerHTML = ""; // clear output

@@ -80,30 +80,6 @@
 
             usort($assignments, "cmp");
             echo json_encode($assignments);
-        ?>,
-        <?php
-            $other = array();
-            $i = 0;
-            foreach(glob('other/*.html') as $filename) {
-                $p = pathinfo($filename);
-                $n = $p['filename'];
-                $n = str_replace('_', ' ', $n);
-                $n = ucwords($n);
-                $fs = filesize($filename);
-                $file = fopen($filename, "r");
-                $contents = fread($file, $fs);
-                fclose($file);
-                $other[$i]['name'] = $n;
-                $arr = explode("<pre>", $contents);
-                array_shift($arr);
-                $other[$i]['contents'] = $arr;
-                $other[$i]['size'] = $fs;
-                $other[$i]['order'] = floatval(substr($contents, 0, 2));
-                $i++;
-            }
-
-            usort($other, "cmp_i");
-            echo json_encode($other);
         ?>]
     </script>
     <script defer src='display_files.js'></script>
