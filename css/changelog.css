@@ -62,6 +62,7 @@
     display: flex;
     flex-flow: column nowrap;
     width: 100%;
+    margin-top: 40px;
 }
 
 #changelog_container_2 > div {
@@ -97,4 +98,22 @@
     color: gray;
     text-align: right;
     padding: 10px;
+    padding-top: 0;
+}
+
+button {
+    outline: none;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #333;
+    border: solid 1px gray;
+    color: white;
+    transition: color 0.1s linear;
+    transition: background-color 0.1s linear;
+    padding: 10px;
+}
+
+button:hover {
+    color: pink;
+    background-color: #272727;
 }

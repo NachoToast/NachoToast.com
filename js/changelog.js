@@ -85,6 +85,7 @@ function create_github_log_elements() {
         d.appendChild(h);
         let ul = document.createElement("ul");
         for (let j = loaded_github_changes[i].message.length - 1, j_len = 0; j >= j_len; j--) {
+            if (j != 0 && loaded_github_changes[i].message[j] == loaded_github_changes[i].message[j - 1]) continue;
             let p = document.createElement("li");
             p.innerText = format_comment(loaded_github_changes[i].message[j]);
             ul.appendChild(p);

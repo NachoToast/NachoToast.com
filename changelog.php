@@ -13,7 +13,8 @@
         include_once 'header.php';
     ?>
     <h1 class='noselect'>Changelog</h1>
-    <button onclick='toggle_feed_type(this)'>Website Log</button>
+    <button onclick='toggle_feed_type(this)' autofocus>Website Log</button>
+    <!-- to do: add config options (page, per page, oldest) -->
     <div id="changelog_container">
         <div id="17">
             <h4>10/05/2021</h4>
