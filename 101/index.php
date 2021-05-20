@@ -139,11 +139,8 @@
         </div>
         <div id='assignments' class='noselect special_scroll'>
         </div>
-        <div id='other' class='noselect special_scroll'>
-        </div>
     </div>
     <div id="output_container">
-
     </div>
 </body>
 </html>
