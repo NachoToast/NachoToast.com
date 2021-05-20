@@ -91,7 +91,7 @@
                 <script>const from_url = true; url_data = {type: <?php echo $_GET["t"]?>,question:<?php echo $_GET["q"] ?>, page:<?php echo $_GET["p"] ?>} </script>
                 <meta property="og:title" content="<?php echo $files[$_GET["p"] - 1]['name'] . ', Question ' . $_GET["q"]?>">
                 <meta property="og:description" content="<?php
-                            $output = $files[$_GET["p"] - 1]['contents'][$_GET["q"]];
+                            $output = $files[$_GET["p"] - 1]['contents'][$_GET["q"] - 1];
                             $output = substr($output, 6, -10);
                             $output = nl2br($output);
                             $output = htmlentities($output);
