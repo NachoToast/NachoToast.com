@@ -23,6 +23,6 @@
         <p>Online Users</p>
         <p>Chat Forums</p>
         <p>Email Integration</p>
-        <p>API Stuff???</p>
+        <p class='complete'><a href='changelog'>API Stuff???</a></p>
 </body>
 </html>
