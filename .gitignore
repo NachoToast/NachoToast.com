@@ -3,5 +3,6 @@ uploads/profiles/*
 g/ignominy/saves/*.ignosave
 g/ignominy/w/**
 g/ignominy
-weeb
+weeb/database
+weeb/secret.php
 108/*.png
