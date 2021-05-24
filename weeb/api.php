@@ -35,7 +35,8 @@
 
     function submit_response(object $conn, array $response, int $start) {
         $response['tags'] = get_tags_array($conn, $response['name']);
-        $response['name'] = 'http://localhost/weeb/database/' . $response['name'];
+        $response['name'] = 'https://nachotoast.com/weeb/database/' . $response['name'];
+        //$response['name'] = 'http://localhost/weeb/database/' . $response['name'];
         $response['uploader'] = get_uploader($conn, $response['uploader']);
         $response['took'] = microtime(true) - $start;
         echo json_encode($response);
@@ -49,21 +50,28 @@
     }
 
     { // Tag Validation
-        function validate_tag(object $conn, array $tags_array, int $start, bool $from_super = false) {
-            $valid_tags = array();
+        function validate_tag(object $conn, array $input_tags_array, int $start, bool $from_super = false) {
+            // marks validity of tag, 'tag' => 'tag1', 'confidence' => 'validity', 'type' => ''
+            // Validity: Direct Tag > Direct Alias > Indirect Alias > INT (% Confidence Guess) > FAIL
+            // Type: inclusive (default - only images with this tag), exclusive (only images WITHOUT this tag)
+            $output_tags = array();
             $sql = $conn -> prepare('SELECT COUNT(*) FROM `weeb_tags` WHERE tag = ?');
-            foreach ($tags_array as $tag) {
-                if (in_array($tag, $valid_tags)) continue;
+            foreach ($input_tags_array as $tag) {
+                if (substr($tag, 0, 1) == "!") {
+                    $tag = substr($tag, 1);
+                    $type = 'exclusive';
+                }
+                else $type = 'inclusive';
                 $sql -> bind_param("s", $tag);
                 $sql -> execute();
                 $tag_count = mysqli_fetch_row($sql -> get_result())[0];
                 if ($tag_count == 0) {
                     $better_tag = find_tag_aliases($conn, $tag, $start, $from_super);
-                    if (!in_array($better_tag, $valid_tags)) array_push($valid_tags, $better_tag);
+                    array_push($output_tags, array_merge($better_tag, ['type' => $type]));
                 }
-                else array_push($valid_tags, ['tag' => $tag, 'confidence' => 'Direct Tag']);
+                else array_push($output_tags, ['tag' => $tag, 'confidence' => 'Direct Tag', 'type' => $type]);
             }
-            return $valid_tags;
+            return $output_tags;
         }
         function find_tag_aliases(object $conn, string $bad_tag, int $start, bool $from_super) {
             $sql = $conn -> prepare("SELECT tag FROM `weeb_tag_aliases` WHERE alias = ?");
@@ -105,20 +113,28 @@
         function organise_tags(array $tags, array $old_tags) {
             $i = 0;
             $tag_info = array();
-            $tag_usable = array();
-            foreach ($tags as $tag) {
-                if ($tag['tag'] === 'FAIL') array_push($tag_info, ['tag' => $old_tags[$i], 'status' => 'FAILED']);
+            $inclusive_tags = array();
+            $exclusive_tags = array();
+            foreach ($tags as $tag) { // since order is direct > alias > indirect alias, only the most confident of duplicate tags are kept
+                if (in_array($tag['tag'], $inclusive_tags) || in_array($tag['tag'], $exclusive_tags)) {
+                    array_push($tag_info, ['tag' => $tag['tag'], 'status' => 'Duplicate']);
+                    $i++;
+                    continue;
+                };
+                if ($tag['tag'] === 'FAIL') array_push($tag_info, ['tag' => $old_tags[$i], 'status' => 'Unknown']);
                 else {
-                    array_push($tag_usable, $tag);
+                    if ($tag['type'] === 'inclusive') array_push($inclusive_tags, $tag['tag']);
+                    else array_push($exclusive_tags, $tag['tag']);
                     if (gettype($tag['confidence']) === 'integer') {
                         $confidence = floor(100 * (255 - $tag['confidence']) / 255);
-                        echo $old_tags[$i] . $confidence . "%<br>";
+                        array_push($tag_info, ['tag' => $tag['tag'], 'status' => 'Guessed', 'confidence' => $confidence, 'was' => $old_tags[$i]]);
                     }
-                    if ($tag['confidence'] === "Direct Tag") array_push($tag_info, ['tag' => $old_tags[$i], 'status' => 'Direct Tag']);
-                    else if ($tag['confidence'] === 'Direct Alias') array_push($tag_info, ['tag' => $old_tags[$i], 'status' => 'Direct Alias']);
+                    else if ($tag['confidence'] === 'Indirect Alias') array_push($tag_info, ['tag' => $tag['tag'], 'status' => 'Indirect Alias', 'was' => $old_tags[$i]]);
+                    else array_push($tag_info, ['tag' => $old_tags[$i], 'status' => $tag['confidence']]);
                 }
                 $i++;
             }
+            return array($tag_info, $inclusive_tags, $exclusive_tags);
         }
     }
 
@@ -134,14 +150,15 @@
         //$sql = $conn -> prepare("SELECT * FROM `weeb_images` WHERE name = 'KonoSuba/Megumin/vuPd40td5GojfOW4Azj9k4R8ggXsV3xwZJFiCrWJ4BY.jpg'");
         $sql -> execute();
         $response = mysqli_fetch_assoc($sql -> get_result());
+        $response['pool_size'] = $pool;
         submit_response($conn, $response, $start);
     }
 
     // filtered content
     $sql = $conn -> prepare('CREATE TEMPORARY TABLE `filtered_images` SELECT * FROM `weeb_images`');
     $sql -> execute();
-    header($_SERVER['SERVER_PROTOCOL'] . " 401 Unauthorized");
-
+    //header($_SERVER['SERVER_PROTOCOL'] . " 401 Unauthorized");
+    
     { // args
         if (isset($body['args']['size'])) { // file size (KB)
             $sizes = explode("..", $body['args']['size']);
@@ -175,25 +192,32 @@
             $sql -> execute();
         }
     }
-    
+
     // tags
-    {
-        $taginfo = array();
-        if (isset($body['tags'])) {
-            $checked_tags = validate_tag($conn, $body['tags'], $start);
-            $organised_tags = organise_tags($checked_tags, $body['tags']);
-            $i = 0;
-            exit();
-            foreach ($checked_tags as $tag) {
-                echo "<br>" . $body['tags'][$i] . " turns into " . $tag['tag'] . " (" . $tag['confidence'] . ")";
-                if ($tag['tag'] === 'FAIL') array_push($taginfo, $tag['confidence']);
-                $i++;
+    if (isset($body['tags']) && count($body['tags']) > 0) {
+        $checked_tags = validate_tag($conn, $body['tags'], $start);
+        $organised_tags = organise_tags($checked_tags, $body['tags']);
+        $tag_info = $organised_tags[0];
+        $inclusive = $organised_tags[1];
+        $exclusive = $organised_tags[2];
+        if (count($inclusive) + count($exclusive) == 0) submit_failure("None of the requested tags could be found on the database.", $start);
+
+        if (count($exclusive) > 0) {
+            $sql = $conn -> prepare("DELETE FROM `filtered_images` WHERE name IN (SELECT image FROM `weeb_image_tags` WHERE image = `filtered_images`.name AND tag = ?)");
+            foreach ($exclusive as $tag) {
+                $sql -> bind_param("s", $tag);
+                $sql -> execute();
             }
-            echo "<br>";
-            var_dump($taginfo);
-            exit();
+        }
+        if (count($inclusive) > 0) {
+            $sql = $conn -> prepare("DELETE FROM `filtered_images` WHERE name NOT IN (SELECT image FROM `weeb_image_tags` WHERE image = `filtered_images`.name AND tag = ?)");
+            foreach ($inclusive as $tag) {
+                $sql -> bind_param("s", $tag);
+                $sql -> execute();
+            }
         }
     }
+
     $sql = $conn -> prepare('SELECT COUNT(*) FROM `filtered_images`');
     $sql -> execute();
     $pool = mysqli_fetch_row($sql -> get_result())[0];
@@ -202,6 +226,8 @@
     $sql = $conn -> prepare("SELECT * FROM `filtered_images` LIMIT $random,1");
     $sql -> execute();
     $response = mysqli_fetch_assoc($sql -> get_result());
+    if (isset($tag_info)) $response['tag_info'] = $tag_info;
+    $response['pool_size'] = $pool;
     submit_response($conn, $response, $start);
     /*
     name: path to image

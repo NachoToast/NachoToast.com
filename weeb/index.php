@@ -12,7 +12,8 @@
         session_start();
         include_once '../header.php';
         include_once 'secret.php';
-        $url = "http://localhost/weeb/api";
+        $url = "https://nachotoast.com/weeb/api";
+        //$url = 'http://localhost/weeb/api';
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_POST, 1);
@@ -21,18 +22,11 @@
             'toaster' => $secret,
             'args' => array(
                 'added' => '1..2',
-                'size' => '100..200'
+                'size' => '..7192'
             ),
             'tags' => array(
-                'sheld',
-                'konosuba',
-                'megumin',
-                're zero',
-                'xyuihuui',
-                'lmao',
-                'suba',
-                'knighta',
-                're_zero'
+                #'backgrounds',
+                #'!assassins_creed_origins',
             )
         )));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -60,6 +54,14 @@
                 else $pl = "s";
                 echo "<br> Uploaded: " . $upl . " day$pl ago.";
                 echo "<br> Took " . round($res['took'], 3) . " seconds.";
+                if (isset($res['tag_info'])) {
+                    echo "<br>Tag info:<br>";
+                    foreach ($res['tag_info'] as $tag) echo $tag['tag'] . ": " . $tag['status'] . " ";
+                    if (isset($tag['was'])) echo "(was: " . $tag['was'] . ") ";
+                    if (isset($tag['confidence'])) echo "- " . $tag['confidence'] . "% confidence ";
+                    echo "<br>";
+                }
+                echo "Pool: " . $res['pool_size'] . "<br>";
             }
         }
     ?>
