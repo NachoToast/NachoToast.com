@@ -80,6 +80,30 @@
 
             usort($assignments, "cmp");
             echo json_encode($assignments);
+        ?>,
+        <?php
+            $past_papers = array();
+            $i = 0;
+            foreach(glob('past_papers/*.html') as $filename) {
+                $p = pathinfo($filename);
+                $n = $p['filename'];
+                $n = str_replace('_', ' ', $n);
+                $n = ucwords($n);
+                $fs = filesize($filename);
+                $file = fopen($filename, "r");
+                $contents = fread($file, $fs);
+                fclose($file);
+                $past_papers[$i]['name'] = $n;
+                $arr = explode("<pre>", $contents);
+                array_shift($arr);
+                $past_papers[$i]['contents'] = $arr;
+                $past_papers[$i]['size'] = $fs;
+                $past_papers[$i]['order'] = floatval(substr($contents, 0, 2));
+                $i++;
+            }
+
+            usort($past_papers, "cmp");
+            echo json_encode($past_papers);
         ?>]
     </script>
     <script defer src='display_files.js'></script>
@@ -119,7 +143,7 @@
     <h1 class='noselect'>CompSci 101 Index</h1>
     <div id='global_notification_box'>
         <?php
-            //if (!isset($_COOKIE["19/05"])) echo "<p class='noselect' id='19/05'>19/05 update: More useful order restructuring.</p>";
+            if (!isset($_COOKIE["24/05"])) echo "<p class='noselect' id='24/05'>24/05 update: Lab 8 is here, more past papers will be coming soon.</p>";
             // todo: use data html attribute to adjust expiry date?
         ?>
     </div>
@@ -139,6 +163,8 @@
         <div id='assessments' class='noselect special_scroll'>
         </div>
         <div id='assignments' class='noselect special_scroll'>
+        </div>
+        <div id='past_papers' class='noselect special_scroll'>
         </div>
     </div>
     <div id="output_container">

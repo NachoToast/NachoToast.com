@@ -1,7 +1,8 @@
 const containers = [
     ["Revision Exercise Answers", document.getElementById("revision_exercises"), ["Questions", "Question"], "Python", true],
     ["Assessment Answers", document.getElementById("assessments"), ["Questions", "Question"], "Python", true],
-    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python", false]
+    ["Assignments", document.getElementById("assignments"), ["Questions", "Question"], "Python", false],
+    ["Past Papers", document.getElementById("past_papers"), ["Questions", "Question"], "Python", true]
 ],
 output_container = document.getElementById("output_container");
 var displayed = [],

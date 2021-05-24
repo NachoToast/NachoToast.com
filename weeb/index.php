@@ -18,7 +18,22 @@
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
-            'toaster' => $secret
+            'toaster' => $secret,
+            'args' => array(
+                'added' => '1..2',
+                'size' => '100..200'
+            ),
+            'tags' => array(
+                'sheld',
+                'konosuba',
+                'megumin',
+                're zero',
+                'xyuihuui',
+                'lmao',
+                'suba',
+                'knighta',
+                're_zero'
+            )
         )));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         $out = curl_exec($curl);
@@ -29,11 +44,24 @@
         }
         else {
             $res = json_decode($out, true);
-            echo "<img src='" . $res['name'] . "' style='max-width: 100vw; height: auto;'>";
-            echo $res['name'] . " (" . $res['size'] . "KB)";
-            echo "<br> Index: " . $res['index'];
+            if (isset($res['fail'])) {
+                echo $res['fail'];
+                echo "<br>Took " . $res['took'];
+            }
+            else {
+                echo "<img src='" . $res['name'] . "' style='max-width: 300px; height: auto;'>";
+                echo $res['name'] . " (" . $res['size'] . "KB)";
+                echo "<br> Tags: ";
+                foreach ($res['tags'] as $tag) echo "$tag, ";
+                echo "<br> Uploader: " . $res['uploader'];
+                echo "<br> Source: " . $res['source'];
+                $upl = round((time() - $res['added']) / 86400, 0);
+                if ($upl == 1) $pl = "";
+                else $pl = "s";
+                echo "<br> Uploaded: " . $upl . " day$pl ago.";
+                echo "<br> Took " . round($res['took'], 3) . " seconds.";
+            }
         }
     ?>
-    <h1>Making an API???</h1>
 </body>
 </html>
