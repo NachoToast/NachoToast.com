@@ -29,6 +29,8 @@
         <input id="input_string" placeholder="Input String" min="1" max="100" style="width: 200px; margin-bottom: 10px; font-size: 20px;" autofocus oninput="dothing()">
         <input type="checkbox" id="mode" oninput="encode = this.checked; dothing()">
         <label for="mode">Encode</label>
+        <input type="checkbox" id="mode2" oninput="(this.checked) ? chosen_language = 'Korean' : chosen_language = 'English'; dothing()">
+        <label for="mode2">Korean</label>
     </div>
     <div id='container'>
         <p class='output' style='display: none'></p>
