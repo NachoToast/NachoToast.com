@@ -52,11 +52,6 @@
             <i>What broke your heart and let such bitterness spill out?</i>
             <p>Chain of Gold by Cassandra Clare</p>
         </a>
-        <a>
-            <h1>Alastair Carstairs Character Review</h1>
-            <i>What broke your heart and let such bitterness spill out?</i>
-            <p>Chain of Gold by Cassandra Clare</p>
-        </a>
     </div>
 </body>
 </html>
