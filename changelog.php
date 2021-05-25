@@ -16,6 +16,18 @@
     <button onclick='toggle_feed_type(this)' autofocus>Website Log</button>
     <!-- to do: add config options (page, per page, oldest) -->
     <div id="changelog_container">
+        <div id="18">
+            <h4>25/05/2021</h4>
+            <ul>
+                <li>Added <a href="108">108</a> page, contains a few graphs and stuff.</li>
+                <li>Finished <a href="101">101</a> hub, for links, walkthroughs, and answers for past papers, assignments, assessments, and other revision exercises.</li>
+                <li>Made cookie-based notification system.</li>
+                <li>Small Ignominy updates, more coming soon.</li>
+                <li><a href="changelog">changelog</a> now has a GitHub changelog through (client-side) API calls.</li>
+                <li>Made an <a href="weeb">API</a> for use with <a href="https://github.com/NachoToast/NachoBot">NachoBot</a>.</li>
+                <li>Added <a href="110/links">links</a> page to 110 directory, good template for forum message boards in future maybe.</li>
+            </ul>
+        </div>
         <div id="17">
             <h4>10/05/2021</h4>
             <ul>
