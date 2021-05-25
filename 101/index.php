@@ -148,7 +148,7 @@
         ?>
     </div>
     <div id='resource_container'>
-        <div id='quick_links'>
+        <div class='special_scroll'>
             <h2 class='noselect'>Quick Links</h2>
             <a class="noselect" target="_blank" href="https://uoa.tukib.org/">Bryn's Dashboard</a>
             <a class="noselect" target="_blank" href="https://notes.joewuthrich.com/compsci101">Joe's Notes</a>
@@ -165,6 +165,10 @@
         <div id='assignments' class='noselect special_scroll'>
         </div>
         <div id='past_papers' class='noselect special_scroll'>
+        </div>
+        <div class='special_scroll'>
+            <h2 class='noselect'>Walkthroughs</h2>
+            <a class='noselect' href='101/walkthroughs/lab_9_question_6'>Lab 9: Question 6</a>
         </div>
     </div>
     <div id="output_container">

@@ -19,7 +19,13 @@ body > h1 {
     border: solid 1px gray;
     margin: 1vw;
     overflow-y: auto;
-    max-height: 280px;
+    max-height: 200px;
+}
+
+@media screen and (min-width: 1024px) {
+    #resource_container > div {
+        max-height: 280px;
+    }
 }
 
 #resource_container > div > h2 {

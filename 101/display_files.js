@@ -324,7 +324,4 @@ shifting = false;
     }
 }
 
-if (!from_url) random_page();
-else {
-    generate_page(url_data.type, url_data.page - 1);
-}
+if (from_url) generate_page(url_data.type, url_data.page - 1);
