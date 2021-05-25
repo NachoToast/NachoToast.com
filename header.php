@@ -43,6 +43,9 @@
     <!-- games -->
     <a href="g/ignominy">Ignominy</a>
 
+    <!-- book reviews -->
+    <a href="kbr">Reviews</a>
+
     <!--logout-->
     <?php if (isset($_SESSION["id"])) echo "<a href='phpf/logout'>Log Out</a>" ?>
 

@@ -5,4 +5,7 @@ g/ignominy/w/**
 g/ignominy
 weeb/database
 weeb/secret.php
+kbr/*.php
+!kbr/index.php
+!kbr/config.php
 108/*.png
