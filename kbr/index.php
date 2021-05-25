@@ -15,7 +15,7 @@
             border: solid 1px darkslategray;
             transition: border 0.3s linear;
             transition: background-color 0.1s linear;
-            width: 100%;
+            width: calc(100% - 2px);
             display: flex;
             flex-flow: column nowrap;
             align-items: flex-start;
