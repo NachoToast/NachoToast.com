@@ -48,6 +48,9 @@
     <!-- book reviews -->
     <a href="kbr">Reviews</a>
 
+    <!-- temp -->
+    <a href="s/colours">Colour</a>
+
     <!--logout-->
     <?php if (isset($_SESSION["id"])) echo "<a href='phpf/logout'>Log Out</a>" ?>
 
