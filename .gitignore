@@ -8,4 +8,6 @@ weeb/secret.php
 kbr/*.php
 !kbr/index.php
 !kbr/config.php
+101/encoder.php
+101/image.js
 108/*.png
