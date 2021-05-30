@@ -143,7 +143,7 @@
     <h1 class='noselect'>CompSci 101 Index</h1>
     <div id='global_notification_box'>
         <?php
-            if (!isset($_COOKIE["25/05"])) echo "<p class='noselect' id='25/05'>25/05 update: Timed Exercise 8, Lab 8, Lab 9: Question 6 added.</p>";
+            if (!isset($_COOKIE["28/05"])) echo "<p class='noselect' id='28/05'>28/05 update: Assignment 4, lecture 29 exercises added.</p>";
             // todo: use data html attribute to adjust expiry date?
         ?>
     </div>

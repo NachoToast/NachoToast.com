@@ -1,4 +1,56 @@
 04
 <pre>
-    # really?
+    def get_lines_from_file(filename):
+        input_file = open(filename, "r")
+        contents = input_file.read().split()
+        input_file.close()
+        return contents
+</pre>
+<pre>
+    def create_contacts(lines):
+        a_dict = {}
+        for string in lines:
+            info = string.split(",")
+            a_dict[info[0]] = [info[1], info[2]]
+        return a_dict   
+</pre>
+<pre>
+    def print_contact(name, details):
+        print(name, "'s contact:", details[0], ", email:", details[1], sep = "")
+</pre>
+<pre>
+    def display_all(contacts_dictionary):
+        for key in sorted(contacts_dictionary):
+            print_contact(key, contacts_dictionary[key])
+        
+        if len(contacts_dictionary) == 1:
+            pl = "contact"
+            pre = "is"
+        else:
+            pl = "contacts"
+            pre = "are"
+        print("There", pre, len(contacts_dictionary), pl, "in the dictionary.")
+</pre>
+<comment>
+    Yes I realize I could've just use the if/else statement instead of introducing a new variable.
+</comment>
+<pre>
+    def display_contact_details(contacts_dictionary, search_name):
+        if search_name in contacts_dictionary:
+            return print_contact(search_name, contacts_dictionary[search_name])
+        print(search_name, "is NOT found.")
+</pre>
+<pre>
+    def update_contact(contacts_dictionary, name, new_phone, new_email):
+        if name not in contacts_dictionary:
+            return print(name + " is NOT found.")
+        print(name + "'s contact has been updated.")
+        contacts_dictionary[name] = [new_phone, new_email]
+</pre>
+<pre>
+    def write_to_file(contacts_dictionary):
+        output_file = open("ldou933.txt", "w")
+        for key in sorted(contacts_dictionary):
+            output_file.write(key + "," + contacts_dictionary[key][0] + "," + contacts_dictionary[key][1] + "\n")
+        output_file.close()
 </pre>

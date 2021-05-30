@@ -22,7 +22,7 @@ if (!is_null($profile)) {
     $seen = date("jS F Y", $profile["lastonline"]);
     if (substr($seen, -4) == date("Y")) $seen = substr($seen, 0, -4);
 
-    if ($profile["cpfp"]) $pfp = "uploads/profiles/" . $_GET["user"] . "." . $profile["extension"];
+    if ($profile["cpfp"]) $pfp = htmlspecialchars("uploads/profiles/" . $_GET["user"] . "." . $profile["extension"]);
     else $pfp = "img/pfp_default.png";
 
     if ($profile["usernamechanged"] == $profile["registered"]) {$usc = "No username changes found."; $usc2 = "Never";}

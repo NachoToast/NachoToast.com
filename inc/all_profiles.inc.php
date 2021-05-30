@@ -57,7 +57,7 @@ $result = $sql -> get_result();
 $displaying = mysqli_num_rows($result);
 while ($profile = mysqli_fetch_array($result)) {
     if ($profile["cpfp"] == 0) $src = "img/pfp_default.png";
-    else $src = "uploads/profiles/" . $profile["id"] . "." . $profile["extension"];
+    else $src = htmlspecialchars("uploads/profiles/" . $profile["id"] . "." . $profile["extension"]);
     $ts = floor(($now - $profile["lastonline"]) / 86400);
     if ($ts < 1) $ts = "Today";
     else if ($ts < 2) $ts = "1 day ago";
