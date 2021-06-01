@@ -1,0 +1,59 @@
+17
+<pre>
+    def print_pattern(size, character):
+        for row in range(size):
+            if row % 2 == 0:
+                symbols = character + '0'
+            else:
+                symbols = '0' + character
+            for column in range(size):
+                print(symbols[column % 2], end = "")
+            print()
+</pre>
+<pre>
+    def print_mirrored_right_angle_pattern(number_of_rows):
+        for row in range(number_of_rows):
+            for column in range(number_of_rows - row - 1):
+                print(" ", end = "")
+            print((row + 1) * str(row + 1))
+</pre>
+<pre>
+    def print_right_angle_pattern(number_of_rows):
+        for row in range(number_of_rows):
+            for column in range(row + 1):
+                print(row + 1, end = "")
+            print()
+</pre>
+<pre>
+    def print_pyramid(number_of_rows):
+        for row in range(number_of_rows):
+            spaces = number_of_rows - row - 1
+            for left_space in range(spaces):
+                print(" ", end = "")
+            for pyramid in range(2 * row + 1):
+                print(str(row + 1), end = "")
+            for right_space in range(spaces):
+                print(" ", end = "")
+            print()
+</pre>
+<pre>
+    def print_facing_triangles(number_of_rows):
+        for row in range(number_of_rows):
+            triangle = row + 1
+            print(triangle * "*", end = "")
+            print(((number_of_rows - row) * 2 - 2) * " ", end = "")
+            print(triangle * "*")
+</pre>
+<pre>
+    def draw_shapes(a_canvas, start_x, start_y, number_of_rows):
+        size = 50
+        y = start_y
+        x = start_x
+        for row in range(number_of_rows):
+            x = start_x + (number_of_rows - row - 1) * size
+            bricks = 2 * row + 1
+            for circle in range(2 * row + 1):
+                a_canvas.create_oval(x, y, x + size, y + size, fill='blue')
+                x += size
+            y += size
+</pre>

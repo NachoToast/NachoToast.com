@@ -1,0 +1,13 @@
+18
+<pre>
+    def print_right_angle_pattern(number_of_rows, word):
+        for row in range(number_of_rows):
+            print(word[row] * (row + 1))
+</pre>
+<pre>
+    def print_mirrored_right_angle_reverse_pattern(number_of_rows):
+        iter = "1"
+        for row in range(number_of_rows):
+            print(" " * (number_of_rows - row - 1) + iter)
+            iter = str(row + 2) + iter
+</pre>
