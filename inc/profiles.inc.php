@@ -7,7 +7,8 @@ include_once 'dbh.inc.php';
 if (isset($_SESSION["id"]) && $_GET["user"] == $_SESSION["id"]) {$stmt = "SELECT username, email, password, registered, lastonline, extension, cpfp, description, usernamechanged FROM `breadcrumbs` WHERE id = ?"; $own = true;}
 else {$stmt = "SELECT username, registered, lastonline, extension, cpfp, description, usernamechanged FROM `breadcrumbs` WHERE id = ?"; $own = false;}
 $sql = $conn -> prepare($stmt);
-$sql -> bind_param("i", $_GET["user"]);
+$user_number = intval($_GET["user"]);
+$sql -> bind_param("i", $user_number);
 $sql -> execute();
 $profile = mysqli_fetch_array($sql -> get_result());
 
@@ -22,7 +23,7 @@ if (!is_null($profile)) {
     $seen = date("jS F Y", $profile["lastonline"]);
     if (substr($seen, -4) == date("Y")) $seen = substr($seen, 0, -4);
 
-    if ($profile["cpfp"]) $pfp = htmlspecialchars("uploads/profiles/" . $_GET["user"] . "." . $profile["extension"]);
+    if ($profile["cpfp"]) $pfp = htmlspecialchars("uploads/profiles/" . $user_number . "." . $profile["extension"]);
     else $pfp = "img/pfp_default.png";
 
     if ($profile["usernamechanged"] == $profile["registered"]) {$usc = "No username changes found."; $usc2 = "Never";}
