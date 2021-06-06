@@ -8,17 +8,25 @@ const ctx = canvas.getContext('2d');
 const palette_options = document.getElementById('palette_options');
 const palette_input = document.getElementById('palette_input');
 const palette_output = document.getElementById('palette_output');
+const canvas2 = document.getElementById('palette_export');
+const ctx2 = canvas2.getContext('2d');
+const export_options = document.getElementById('export_options');
 const palette = document.getElementById('palette');
 const heading = document.getElementById('heading');
+const export_dim_inputs = document.getElementsByClassName('stop_ar');
 
-var dimensions = {}
+var dimensions = {};
 var colour_info = {};
 var total_pixels = 0;
 var sort_state = 'default';
-var presorts = {}
+var presorts = {};
 
 var initial_upload = true;
 var initial_palette = true;
+
+var stored_palette = [];
+var export_width = 1;
+var export_height = 1;
 
 var page = 0;
 var per_page = 20;
@@ -58,6 +66,8 @@ function upload_image(image) {
         initial_palette = true;
         making_palette = false;
         palette_output.style.display = 'none';
+        canvas2.style.display = 'none';
+        export_options.style.display = 'none';
     }
     let reader = new FileReader();
     reader.onload = function(e) {
@@ -128,7 +138,15 @@ function change_per_page(type = "+") {
 }
 window.addEventListener('keydown', function(e) {
     if (initial_upload) return;
-    if (e.key == 'ArrowLeft') {
+    if (document.activeElement.className == 'stop_ar') {
+        if (e.key == 'Enter') {
+            if (document.activeElement.id != 'palette_input') export_palette_to_png();
+            else generate_palette();
+            e.preventDefault();
+        }  
+        return;
+    }
+    else if (e.key == 'ArrowLeft') {
         change_page("-");
         e.preventDefault();
     }
@@ -231,9 +249,14 @@ async function generate_palette() {
         return;
     }
     if (palette_colours > 1000 && !window.confirm(`Generating such a large palette can cause lag!`)) return;
+
     if (initial_palette) {
         palette.style.display = 'flex';
         window.scrollTo(0, window.innerHeight);
+        canvas2.style.display = 'block';
+        export_options.style.display = 'block';
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        stored_palette = [];
     }
     making_palette = true;
     let start = new Date().getTime();
@@ -255,7 +278,16 @@ async function generate_palette() {
     await display_palette(new_palette);
     clearInterval(b);
     palette_output.innerHTML = `Loading Palette: <span style='color:lightgreen'>Done!</span> (${Math.round((new Date().getTime() - start) / 1000)}s)<br>Current Palette is ${new_palette.length} colours sorted by ${sort_dict[sort_state].toLowerCase()}.`;
+    stored_palette = new_palette;
     making_palette = false;
+
+    let max_dim = Math.floor(Math.sqrt(palette_colours));
+    export_height = max_dim;
+    export_width = max_dim;
+    export_dim_inputs[1].value = export_width;
+    export_dim_inputs[2].value = export_height;
+
+    preview_png();
 }
 function actually_generate_palette(num, arr, type) {
     return new Promise (resolve => {
@@ -284,4 +316,51 @@ function display_palette(new_palette) {
         }
         resolve();
     })
+}
+
+// Palette Exporting
+function change_export_dimensions(me, type = 0) {
+    if (me.value === "") return;
+    let dim = Number(me.value);
+    if (!Number.isInteger(dim) || dim < 1 || type == 0 && dim * export_height > stored_palette.length || type == 1 && dim * export_width > stored_palette.length) {
+        if (type == 0) me.value = export_width;
+        else me.value = export_height;
+        return;
+    }
+    if (type == 0) export_width = dim;
+    else export_height = dim;
+    me.style.width = `${Math.max(me.value.toString().length, 1) * 12 + 31}px`;
+    preview_png();
+}
+function preview_png() {
+    canvas2.style.width = export_width * 50 + 'px';
+    canvas2.style.height = export_height * 50 + 'px';
+    canvas2.width = export_width * 50;
+    canvas2.height = export_height * 50;
+    draw_canvas2();
+}
+function draw_canvas2() {
+    for (let i = 0, n = 0; i < export_height; i++) { // per row
+        for (let j = 0; j < export_width; j++, n++) { // per column
+            let x = j * 50,
+                y = i * 50;
+            ctx2.beginPath();
+            ctx2.rect(x, y, 50, 50);
+            ctx2.fillStyle = stored_palette[n];
+            ctx2.fill();
+        }
+    }
+}
+async function export_palette_to_png() {
+    // stored_palette: array of hex colour values
+    // export_width: px width
+    // export_height: px height
+    console.log('Exporting!');
+
+    let a = document.createElement("a");
+    a.href = canvas2.toDataURL();
+    a.download = 'palette.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }

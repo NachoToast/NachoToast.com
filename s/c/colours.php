@@ -1,12 +1,18 @@
     <script defer src="colours.js"></script>
-    <?php include_once '../head.html' ?>
+    <?php
+        include_once '../../head.html';
+        $files = 0;
+        $max = count(glob('cool/*.png'));
+        $chosen = rand(1, $max);
+        $cf = "ntgc.ddns.net/s/c/cool/$chosen.png";
+    ?>
     <meta property="og:title" content="Image Colour Tools">
     <meta property="og:description" content="Upload an image to get information about its colours, and generate a colour palette of variable size. Mobile friendly.">
     <meta property="og:site_name" content="NachoToast">
-    <meta property="og:image" content="https://nachotoast.com/img/main.png">
+    <meta property="og:image" content="<?php echo $cf ?>">
     <title>Colour Tools</title>
     <style>
-        canvas {
+        #canvas {
             max-width: 90vw;
             max-height: 600px;
             margin-top: 10px;
@@ -27,9 +33,7 @@
         label > h1 {
             text-align: center;
             cursor: pointer;
-            transition: color 0.1s linear;
-            transition: background-color 0.1s linear;
-            transition: border 0.3s linear;
+            transition: color 0.1s linear,background-color 0.1s linear, border 0.3s linear;
             border-top: solid 1px transparent;
             border-bottom: solid 1px transparent;
             margin: 0;
@@ -93,6 +97,7 @@
             color: pink;
         }
         #extra_info {
+            margin-top: 1px;
             position: absolute;
             align-self: flex-end;
             font-size: 16px;
@@ -103,8 +108,7 @@
         #palette_options {
             border-top: solid 1px transparent;
             border-bottom: solid 1px transparent;
-            transition: border 0.3s linear;
-            transition: background-color 0.1s linear;
+            transition: border 0.3s linear, background-color 0.1s linear;
             width: 100%;
             display: none;
             flex-flow: row nowrap;
@@ -125,8 +129,7 @@
             font-size: 18px;
             width: 80px;
             color: white;
-            transition: background-color 0.1s linear;
-            transition: border 0.3s linear;
+            transition: background-color 0.1s linear, border 0.3s linear;
         }
         #palette_options input:hover, #palette_options input:focus {
             background-color: #333;
@@ -143,8 +146,7 @@
         #palette_output {
             border-top: solid 1px transparent;
             border-bottom: solid 1px transparent;
-            transition: border 0.3s linear;
-            transition: background-color 0.1s linear;
+            transition: border 0.3s linear, background-color 0.1s linear;
             width: 100%;
             text-align: center;
             padding: 10px 0;
@@ -160,8 +162,7 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: center;
-            margin-bottom: 40px;
-            margin-top: 10px;
+            margin: 10px 0;
         }
         .p_colour {
             display: flex;
@@ -193,10 +194,53 @@
         .p_colour:hover > p {
             display: flex;
         }
+        #export_options {
+            margin: 0;
+            font-size: 20px;
+            padding: 10px 0;
+            border-top: solid 1px transparent;
+            border-bottom: solid 1px transparent;
+            transition: background-color 0.1s linear, border 0.3s linear;
+            width: 100%;
+            text-align: center;
+            display: none;
+        }
+        #export_options:hover {
+            border-top: solid 1px gray;
+            border-bottom: solid 1px gray;
+            background-color: #333;
+        }
+        #export_options > input {
+            background-color: unset;
+            border: none;
+            color: pink;
+            font-size: 20px;
+            width: 43px;
+        }
+        #export_options > span {
+            transition: color 0.1s linear;
+            cursor: pointer;
+        }
+        #export_options:hover > span {
+            color: pink;
+        }
+        #export_options > span:hover {
+            color: lightgreen;
+        }
+        #palette_export {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            width: 90vw;
+            margin: 20px 0 40px 0;
+            image-rendering: pixelated;
+            display: none;
+            max-width: calc(100% - 2px);
+        }
     </style>
 </head>
 <body>
-    <?php include_once '../header.php' ?>
+    <?php include_once '../../header.php' ?>
     <input type='file' onchange='upload_image(this.files[0])' accept='.jpg, .jpeg, .png' id='input_image' style='display: none'>
     <label for='input_image' class='noselect'>
         <h1 id='heading'>Upload File</h1>
@@ -211,10 +255,12 @@
     <p id='info' style='display: none' class='noselect'>Page 0 of 0 | Displaying 20 colours per page | Sorting by Default</p>
     <div id="output"></div>
     <div id='palette_options'>
-        <p class='noselect'>Generate palette with <input type='number' min="3" oninput='palette_colours = parseInt(this.value)' id='palette_input'> colours sorted by <span class='noselect' id='output_sort_type' onclick='change_sort_type()'>Default</span>. <span id='go' onclick='generate_palette()'>Go</span></p>
+        <p class='noselect'>Generate palette with <input type='number' min="3" oninput='palette_colours = parseInt(this.value)' id='palette_input' class='stop_ar'> colours sorted by <span class='noselect' id='output_sort_type' onclick='change_sort_type()'>Default</span>. <span id='go' onclick='generate_palette()'>Go</span></p>
     </div>
     <p id='palette_output'>Loading Palette: Initializing Load (0s)</p>
     <div id='palette'>
     </div>
+    <p id='export_options' class='noselect'>Export as <input type='number' value='1' oninput="change_export_dimensions(this)" class='stop_ar'> x <input type='number' value='1' oninput="change_export_dimensions(this, 1)" class='stop_ar'> png: <span onclick='export_palette_to_png()'>Go</span></p>
+    <canvas id='palette_export' width="50" height="50"></canvas>
 </body>
 </html>
