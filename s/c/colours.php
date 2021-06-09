@@ -4,7 +4,7 @@
         $files = 0;
         $max = count(glob('cool/*.png'));
         $chosen = rand(1, $max);
-        $cf = "nachotoast.com/s/c/cool/$chosen.png";
+        $cf = "https://ntgc.ddns.net/s/c/cool/$chosen.png";
     ?>
     <meta property="og:title" content="Image Colour Tools">
     <meta property="og:description" content="Upload an image to get information about its colours, and generate a colour palette of variable size. Mobile friendly.">

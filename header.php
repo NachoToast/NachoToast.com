@@ -50,6 +50,7 @@
 
     <!-- temp -->
     <a href="s/c/colours">Colour</a>
+    <a href="s/da">Dijkstra</a>
 
     <!--logout-->
     <?php if (isset($_SESSION["id"])) echo "<a href='phpf/logout'>Log Out</a>" ?>
