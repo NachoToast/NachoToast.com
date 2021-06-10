@@ -169,6 +169,9 @@
         <div class='special_scroll'>
             <h2 class='noselect'>Walkthroughs</h2>
             <a class='noselect' href='101/walkthroughs/lab_9_question_6'>Lab 9: Question 6</a>
+            <a class='noselect' href='101/walkthroughs/tictactoe'>Tic Tac Toe</a>
+            <a class='noselect' href='101/walkthroughs/sudoku'>Sudoku</a>
+            <a class='noselect' href='101/walkthroughs/minimock'>Mini-Mock Exam</a>
         </div>
     </div>
     <div id="output_container">
