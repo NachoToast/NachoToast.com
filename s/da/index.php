@@ -47,6 +47,7 @@
         if (isset($_GET["m"])) {
             echo "<script> const doNext = " . json_encode(htmlspecialchars($_GET["m"])) . "</script>";
         }
+        else echo "<script>const doNext = false</script>";
     ?>
 </body>
 </html>
