@@ -1,18 +1,18 @@
 <?php
-    /*
+    
     if (!isset($_SERVER['CONTENT_TYPE']) || $_SERVER["CONTENT_TYPE"] !== "application/json") {
         header($_SERVER['SERVER_PROTOCOL'] . " 400 Bad Request");
         exit();
     }
     include_once 'secret.php';
-    */
+    
     $body = json_decode(file_get_contents('php://input'), true);
-    /*
+    
     if (!isset($body['toaster']) || $body['toaster'] !== $secret) {
         header($_SERVER['SERVER_PROTOCOL'] . " 401 Unauthorized");
         exit();
     }
-    */
+    
     header($_SERVER['SERVER_PROTOCOL'] . " 200 POG");
     $start = microtime(true);
 
