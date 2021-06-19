@@ -51,11 +51,8 @@ for ($i = 0, $len = count($_FILES['monkeyFiles']['name']); $i < $len; $i++) {
     array_push($invalidMonkeys, 'Invalid Image Type: ' . $_FILES['monkeyFiles']['name'][$i]);
     continue;
   }
-  
-  // name validation
-  $name = htmlspecialchars(str_replace(" ", "_", $_FILES['monkeyFiles']['name'][$i]));
 
-  array_push($validMonkeys, ['name' => $name, 'type' =>  $type, 'temp' =>  $_FILES['monkeyFiles']['tmp_name'][$i], 'size' =>  $_FILES['monkeyFiles']['size'][$i]]);
+  array_push($validMonkeys, ['name' => $_FILES['monkeyFiles']['name'][$i], 'type' =>  $type, 'temp' =>  $_FILES['monkeyFiles']['tmp_name'][$i], 'size' =>  $_FILES['monkeyFiles']['size'][$i]]);
 
 }
 
@@ -66,7 +63,7 @@ if (count($validMonkeys) < 1) {
 
 // duplicate checking
 include_once '../inc/dbh.inc.php';
-$sql = $conn -> prepare('SELECT COUNT(*) FROM `monkey_images` WHERE name = ?');
+/* $sql = $conn -> prepare('SELECT COUNT(*) FROM `monkey_images` WHERE name = ?');
 
 foreach ($validMonkeys as $image) {
   $sql -> bind_param('s', $image['name']);
@@ -76,7 +73,7 @@ foreach ($validMonkeys as $image) {
     array_push($invalidMonkeys, 'Duplicate: ' . $image['name']);
     array_splice($validMonkeys, array_search($image, $validMonkeys), 1);
   }
-}
+} */
 
 if (count($validMonkeys) < 1) {
   echo json_encode([$validMonkeys, $invalidMonkeys]);
@@ -111,16 +108,25 @@ else {
   $verifiedBy = NULL;
 }
 
+// get current size of database (relevant for file naming)
+$sql = $conn -> prepare('SELECT COUNT(*) FROM `monkey_images`');
+$sql -> execute();
+$fileNameCount = mysqli_fetch_row($sql -> get_result())[0];
+
 // move files to permanent location and update database
 $now = time();
 
 $sql = $conn -> prepare('INSERT INTO `monkey_images` (name, added, uploader, size, verified, verified_by) VALUES (?, ?, ?, ?, ?, ?)');
 
 foreach ($validMonkeys as $image) {
-  if (move_uploaded_file($image['temp'], 'database/' . $image['name'])) {
-    $size = ceil(filesize('database/' . $image['name']) / 1024);
-    $sql -> bind_param('siiiii', $image['name'], $now, $_SESSION['id'], $size, $verified, $verifiedBy);
+  $newName = "$fileNameCount." . $image['type'];
+
+  if (move_uploaded_file($image['temp'], "database/$newName")) {
+    $size = ceil(filesize("database/$newName") / 1024);
+    $sql -> bind_param('siiiii', $newName, $now, $_SESSION['id'], $size, $verified, $verifiedBy);
     $sql -> execute();
+
+    $fileNameCount++;
   }
   else {
     array_push($invalidMonkeys, 'File Move Error: ' . $image['name']);
