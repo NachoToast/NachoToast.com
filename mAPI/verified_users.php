@@ -1,0 +1,3 @@
+<?php
+
+$verifiedUsers = [1];

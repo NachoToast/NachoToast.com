@@ -46,7 +46,7 @@
     <a href="g/ignominy">Ignominy</a>
 
     <!-- book reviews -->
-    <a href="kbr">Reviews</a>
+    <!--a href="kbr">Reviews</a-->
 
     <!-- temp -->
     <a href="s/c/colours">Colour</a>

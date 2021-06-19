@@ -4,6 +4,7 @@ g/ignominy/saves/*.ignosave
 g/ignominy/w/**
 g/ignominy
 weeb/database
+**/database/**
 weeb/secret.php
 kbr/*.php
 !kbr/index.php
