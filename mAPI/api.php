@@ -1,5 +1,6 @@
 <?php
 
+// TODO: Make cool stylised API documentation
 $start = microtime(true);
 header('Content-Type: application/json');
 
