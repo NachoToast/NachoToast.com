@@ -59,7 +59,7 @@
         <p>Chat Forums</p>
         <p>Email Integration</p>
         <p class='complete' title='Landing page will be implemented with tag system below.'>wAPI</a></p>
-        <p>Monkey API</p>
+        <p class='complete'><a href='mAPI'>Monkey API</a></p>
         <p>wAPI Tag System</p>
         <p>Improve NachoBot</p>
         <p>Ignominy 0.1.20</p>
