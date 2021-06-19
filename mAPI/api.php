@@ -1,7 +1,7 @@
 <?php
 
 $start = microtime(true);
-
+header('Content-Type: application/json');
 
 // check if need to get verified or unverified
 if (isset($_GET['unverified'])) {
@@ -61,6 +61,6 @@ else {
   $response['verifier'] = 'None';
 }
 
-// done
+// TODO: use hrtime() instead of microtime() here?
 $response['took'] = microtime(true) - $start;
 echo json_encode($response);
