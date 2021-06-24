@@ -6,7 +6,7 @@ RewriteCond %{HTTP_HOST} ^(?!localhost)
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # main redirects
-Redirect /mc https://discord.gg/Ds4bfVac6J
+# Redirect /mc https://discord.gg/Ds4bfVac6J
 Redirect /Ignominy /g/ignominy
 Redirect /turbine /users.php?user=32
 Redirect /color /s/c/colours

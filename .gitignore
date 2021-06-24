@@ -5,7 +5,7 @@ g/ignominy/w/**
 g/ignominy
 weeb/database
 **/database/**
-weeb/secret.php
+**/secret.php
 kbr/*.php
 !kbr/index.php
 !kbr/config.php
