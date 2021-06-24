@@ -1,52 +1,52 @@
 class UploadHandler {
-  #label; // label for form, to show feedback messages and detect file drops
-  #input; // file input, to submit files with form
-  #form; // form, to create form data (post body) from
-  #feedback; // to contain table of results (which uploads were successful and not successful)
+  label; // label for form, to show feedback messages and detect file drops
+  input; // file input, to submit files with form
+  form; // form, to create form data (post body) from
+  feedback; // to contain table of results (which uploads were successful and not successful)
 
   constructor(labelElement, inputElement, formElement, feedbackElement) {
-    this.#label = labelElement;
-    this.#input = inputElement;
-    this.#form = formElement;
-    this.#feedback = feedbackElement;
+    this.label = labelElement;
+    this.input = inputElement;
+    this.form = formElement;
+    this.feedback = feedbackElement;
 
     window.ondragover = (e) => {
       e.preventDefault();
-      this.#label.classList.add('active');
+      this.label.classList.add('active');
       return false;
     };
 
-    window.ondragleave = () => this.#label.classList.remove('active');
-    window.ondragend = () => this.#label.classList.remove('active');
+    window.ondragleave = () => this.label.classList.remove('active');
+    window.ondragend = () => this.label.classList.remove('active');
 
-    this.#label.ondrop = (e) => {
+    this.label.ondrop = (e) => {
       e.preventDefault();
-      this.#input.files = e.dataTransfer.files;
-      this.#sendMonkeys();
+      this.input.files = e.dataTransfer.files;
+      this.sendMonkeys();
       return false;
     };
 
-    this.#input.onchange = () => this.#sendMonkeys();
+    this.input.onchange = () => this.sendMonkeys();
   }
 
-  #sendMonkeys() {
+  sendMonkeys() {
     // length check
-    if (this.#input.files.length > 50) {
+    if (this.input.files.length > 50) {
       console.log('Stopped attempt to send > 50 files.');
-      this.#feedback.style.display = 'block';
-      this.#feedback.innerHTML = 'Please limit yourself to 50 monkeys.';
+      this.feedback.style.display = 'block';
+      this.feedback.innerHTML = 'Please limit yourself to 50 monkeys.';
       return;
     }
 
-    console.log(`Sending ${this.#input.files.length} monkey(s)!`);
+    console.log(`Sending ${this.input.files.length} monkey(s)!`);
 
     // xml http request construction
     const request = new XMLHttpRequest();
-    const formData = new FormData(this.#form);
+    const formData = new FormData(this.form);
 
     request.onreadystatechange = (e) => {
       if (request.readyState === 4) {
-        this.#monkeyFeedback(e.target.status, e.target?.response);
+        this.monkeyFeedback(e.target.status, e.target?.response);
       }
     };
 
@@ -54,14 +54,14 @@ class UploadHandler {
     request.send(formData);
   }
 
-  #monkeyFeedback(responseCode = 404, response = undefined) {
+  monkeyFeedback(responseCode = 404, response = undefined) {
     // unknown error handling
     if (
       responseCode !== 200 ||
       response === undefined ||
       typeof response !== 'string'
     ) {
-      this.#label.innerText = `Error ${responseCode}`;
+      this.label.innerText = `Error ${responseCode}`;
       if (response !== undefined) {
         console.log(response);
       }
@@ -75,9 +75,9 @@ class UploadHandler {
       if (response[0] == '<') {
         // '<' indicates start of html element, commonly used in php error messages
         console.log(response);
-        this.#label.innerText = `PHP error occured, check console.`;
+        this.label.innerText = `PHP error occured, check console.`;
       } else {
-        this.#label.innerText = response;
+        this.label.innerText = response;
       }
       return;
     }
@@ -87,27 +87,27 @@ class UploadHandler {
     const validMonkeys = feedback[0] ?? '';
     const invalidMonkeys = feedback[1] ?? '';
 
-    this.#feedback.innerHTML = '';
-    this.#feedback.style.display = 'block';
+    this.feedback.innerHTML = '';
+    this.feedback.style.display = 'block';
 
     let tipFeedback = document.createElement('p');
     tipFeedback.innerText = `${validMonkeys.length} of ${
       validMonkeys.length + invalidMonkeys.length
     } monkeys were successfully uploaded.`;
-    this.#feedback.appendChild(tipFeedback);
+    this.feedback.appendChild(tipFeedback);
 
     // make more detailed output
     if (validMonkeys.length > 0) {
-      this.#feedback.appendChild(
-        UploadHandler.#monkeyFeedbackTable(
+      this.feedback.appendChild(
+        UploadHandler.monkeyFeedbackTable(
           'Successes',
           validMonkeys.map((e) => e.name)
         )
       );
     }
     if (invalidMonkeys.length > 0) {
-      this.#feedback.appendChild(
-        UploadHandler.#monkeyFeedbackTable('Failures', invalidMonkeys)
+      this.feedback.appendChild(
+        UploadHandler.monkeyFeedbackTable('Failures', invalidMonkeys)
       );
     }
 
@@ -115,7 +115,7 @@ class UploadHandler {
   }
 
   // makes "table" out of monkey result array
-  static #monkeyFeedbackTable(titleText = 'Default', monkeyArray = []) {
+  static monkeyFeedbackTable(titleText = 'Default', monkeyArray = []) {
     let feedbackDiv = document.createElement('div');
 
     let h = document.createElement('h1');
@@ -133,11 +133,11 @@ class UploadHandler {
 }
 
 class MonkeyManager {
-  #imageElement;
-  #metaElement;
-  #verifyElement;
+  imageElement;
+  metaElement;
+  verifyElement;
 
-  #initialEnable = false;
+  initialEnable = false;
 
   constructor(
     imageElement, // display monkey image
@@ -145,24 +145,24 @@ class MonkeyManager {
     verifyElement = null, // checkbox input to toggle verification mode
     verifyElementDiv = null // container for above checkbox
   ) {
-    this.#imageElement = imageElement;
-    this.#metaElement = metaElement;
-    this.#verifyElement = verifyElement;
+    this.imageElement = imageElement;
+    this.metaElement = metaElement;
+    this.verifyElement = verifyElement;
 
     this.getMonkey();
 
-    this.#imageElement.onclick = () => this.getMonkey();
+    this.imageElement.onclick = () => this.getMonkey();
 
     if (verifyPossible) {
       verifyElementDiv.style.display = 'block';
-      this.#verifyElement.onchange = () => this.getMonkey();
+      this.verifyElement.onchange = () => this.getMonkey();
     }
   }
 
   getMonkey() {
     const request = new XMLHttpRequest();
     let url;
-    if (this.#verifyElement.checked) {
+    if (this.verifyElement.checked) {
       url = 'mAPI/api?unverified';
     } else {
       url = 'mAPI/api';
@@ -170,7 +170,7 @@ class MonkeyManager {
 
     request.onreadystatechange = (e) => {
       if (request.readyState === 4) {
-        this.#displayMonkey(e.target.status, e.target?.response);
+        this.displayMonkey(e.target.status, e.target?.response);
       }
     };
 
@@ -178,9 +178,9 @@ class MonkeyManager {
     request.send();
   }
 
-  #displayMonkey(responseCode = 404, response = undefined) {
-    this.#imageElement.src = '';
-    this.#metaElement.innerHTML = '';
+  displayMonkey(responseCode = 404, response = undefined) {
+    this.imageElement.src = '';
+    this.metaElement.innerHTML = '';
 
     // unknown error handling
     if (
@@ -188,7 +188,7 @@ class MonkeyManager {
       response === undefined ||
       typeof response !== 'string'
     ) {
-      this.#metaElement.innerHTML = `Error ${responseCode}`;
+      this.metaElement.innerHTML = `Error ${responseCode}`;
       if (response !== undefined) {
         console.log(response);
       }
@@ -202,20 +202,20 @@ class MonkeyManager {
       if (response[0] == '<') {
         // '<' indicates start of html element, commonly used in php error messages
         console.log(response);
-        this.#metaElement.innerHTML = `PHP error occured, check console.`;
+        this.metaElement.innerHTML = `PHP error occured, check console.`;
       } else {
-        this.#metaElement.innerHTML = response;
+        this.metaElement.innerHTML = response;
       }
       return;
     }
 
     // valid response processing
     const feedback = JSON.parse(response);
-    this.#imageElement.src = feedback.image;
-    this.#metaElement.appendChild(MonkeyManager.#makeMeta(feedback));
+    this.imageElement.src = feedback.image;
+    this.metaElement.appendChild(MonkeyManager.makeMeta(feedback));
   }
 
-  static #makeMeta(data) {
+  static makeMeta(data) {
     const metaData = document.createElement('p');
 
     // upload info
@@ -242,12 +242,12 @@ class MonkeyManager {
 
   toggleVerify() {
     // invert state, get new monkey
-    this.#verifyElement.checked = !this.#verifyElement.checked;
+    this.verifyElement.checked = !this.verifyElement.checked;
     this.getMonkey();
 
     // first toggle check
-    if (this.#verifyElement.checked && !this.#initialEnable) {
-      this.#initialEnable = true;
+    if (this.verifyElement.checked && !this.initialEnable) {
+      this.initialEnable = true;
       console.log(
         '%cVerification Help:\n%cNumpad 1 - Verify\n%cNumpad 2 - Skip\n%cNumpad 3 - Reject',
         'font-size: 20px',
@@ -259,10 +259,10 @@ class MonkeyManager {
   }
 
   sendVerify(mode = 'Skip') {
-    if (!this.#verifyElement.checked) return;
+    if (!this.verifyElement.checked) return;
 
-    const currentMonkey = this.#imageElement.src.slice(
-      this.#imageElement.src.indexOf('database/') + 9
+    const currentMonkey = this.imageElement.src.slice(
+      this.imageElement.src.indexOf('database/') + 9
     );
     console.log(`%c${mode} ${currentMonkey}`, 'color: gray');
 
@@ -281,15 +281,15 @@ class MonkeyManager {
           e.target?.response === undefined ||
           typeof e.target.response !== 'string'
         ) {
-          this.#metaElement.innerHTML = `Error ${e.target.status}`;
+          this.metaElement.innerHTML = `Error ${e.target.status}`;
           if (e.target?.response !== undefined) {
             console.log(e.target.response);
           }
         } else {
           // known error handling
           if (!e.target.response.startsWith(mode)) {
-            this.#metaElement.innerHTML = e.target.response;
-            this.#imageElement.src = '';
+            this.metaElement.innerHTML = e.target.response;
+            this.imageElement.src = '';
           } else {
             // show feedback
             console.log(e.target.response);
