@@ -1,9 +1,3 @@
-  <?php
-    if (!isset($_GET['success'])) {
-      echo '<script src=\'whitelist.js\'></script>';
-      echo '<script defer src=\'https://www.google.com/recaptcha/api.js\'></script>';
-    }
-  ?>
   <link href='whitelist.css' rel='stylesheet' type='text/css'>
   <?php include_once '../head.html' ?>
   <meta property="og:title" content="MC Whitelist Form">
@@ -135,5 +129,11 @@
       <button type="submit" id="submitForm" disabled class="g-recaptcha" data-sitekey="6LcmnGkaAAAAAK1xje2-NrSsgCQUsd7y-woMPTgs" data-callback="doSubmit" data-action="submit" style='display: none'>Submit</button>
     </div>
   </form>
+  <?php
+    if (!isset($_GET['success'])) {
+      echo '<script src=\'mc/whitelist.js\'></script>';
+      echo '<script defer src=\'https://www.google.com/recaptcha/api.js\'></script>';
+    }
+  ?>
 </body>
 </html>
