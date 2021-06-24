@@ -5,7 +5,7 @@ function verify_captcha($token) {
     // Default is 0.5, although the majority of users will get 0.9
     $sites = ["localhost", "nachotoast.com", "ntgc.ddns.net"]; // Site names string, e.g. sub.domain.com:8080
 
-    $secret = "6LcmnGkaAAAAANXFkfkYgJV2tWhPfJ2y1EVbMsmq";
+    include_once 'secret.php'; // reCAPTCHA secret
     $url = "https://www.google.com/recaptcha/api/siteverify";
     $data = array("secret" => $secret, "response" => $token);
     $options = array(
