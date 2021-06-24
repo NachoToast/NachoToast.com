@@ -209,6 +209,4 @@ function doSubmit() {
   Application.submit();
 }
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') Application.submit();
-});
+window.doSubmit = () => Application.submit();

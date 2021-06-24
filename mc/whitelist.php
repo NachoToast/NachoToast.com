@@ -1,6 +1,6 @@
   <?php
     if (!isset($_GET['success'])) {
-      echo '<script defer src=\'whitelist.js\'></script>';
+      echo '<script src=\'whitelist.js\'></script>';
       echo '<script defer src=\'https://www.google.com/recaptcha/api.js\'></script>';
     }
   ?>
