@@ -32,12 +32,6 @@ if (!isset($_POST['mcUsername']) || empty($_POST['mcUsername']) || strlen($_POST
   exit();
 }
 
-// email
-if (!isset($_POST['email']) || empty($_POST['email']) || strlen($_POST['email']) > 128 || strlen($_POST['email']) < 5 || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-  echo 'Invalid email.';
-  exit();
-}
-
 // text responses
 if (strlen($_POST['opinionPrevBad']) > 255 || strlen($_POST['opinionPrevGood']) > 255 || strlen($_POST['other']) > 255) {
   echo 'One or more text responses are more than 255 characters long.';
@@ -77,24 +71,13 @@ include_once '../dbh.inc.php';
   }
 }
 
-// email
-{
-  $sql = $conn -> prepare("SELECT COUNT(*) FROM `mc_players` WHERE email = ? LIMIT 1");
-  $sql -> bind_param("s", $_POST['email']);
-  $sql -> execute();
-  if (mysqli_fetch_row($sql -> get_result())[0] > 0) {
-    echo 'Minecraft username taken.';
-    exit();
-  }
-}
-
 /// database insertion
 
 // player DB
 isset($_POST['mcVersion']) ? $version = 1 : $version = 0;
 $now = time();
-$sql = $conn -> prepare("INSERT INTO `mc_players` (discord, minecraft, email, java, applied) VALUES (?, ?, ?, ?, ?)");
-$sql -> bind_param('sssii', $_POST['discordID'], $_POST['mcUsername'], $_POST['email'], $version, $now);
+$sql = $conn -> prepare("INSERT INTO `mc_players` (discord, minecraft, java, applied) VALUES (?, ?, ?, ?)");
+$sql -> bind_param('ssii', $_POST['discordID'], $_POST['mcUsername'], $version, $now);
 if (!($sql -> execute())) {
   echo 'Error inserting into player database.';
   exit();

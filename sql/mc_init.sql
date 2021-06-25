@@ -1,7 +1,6 @@
 CREATE TABLE mc_players (
   discord varchar(18) primary key,
   minecraft varchar(16) not null unique,
-  email varchar(128) not null,
   java bit(1) not null default 1,
   applied int(11) not null,
   accepted int(11),
@@ -25,3 +24,5 @@ CREATE TABLE mc_polls (
   other varchar(255),
   foreign key (username) references mc_players(minecraft)
 );
+
+alter table `mc_players` drop COLUMN email;

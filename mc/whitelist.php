@@ -39,12 +39,6 @@
       </div>
       <label for='mcUsername' id='mcUsernameL'>Minecraft Username</label>
     </div>
-    <div class='short'>
-      <div>
-        <input name='email' required id='email' maxlength="128" minlength="5" placeholder='e.g. nacho@toast.com'>
-      </div>
-      <label for='email' id='emailL'>Email</label>
-    </div>
     <div class='medium'>
       <input type='checkbox' id='mcVersion' name='mcVersion' value='true' checked>
       <label for='mcVersion' class='noselect'>I Have Java Edition</label>

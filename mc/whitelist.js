@@ -2,15 +2,12 @@ class ApplicationManager {
   form;
   idE; // html input elements
   nameE;
-  emailE;
   idL; // html label elements
   nameL;
-  emailL;
   schedule; // simple rate limiting
   checked = {
     id: null,
     name: null,
-    email: null,
   };
   submittable = false;
   submitButton;
@@ -19,24 +16,19 @@ class ApplicationManager {
     formElement,
     idElement,
     nameElement,
-    emailElement,
     idLabel,
     nameLabel,
-    emailLabel,
     submitButton
   ) {
     this.form = formElement;
     this.idE = idElement;
     this.nameE = nameElement;
-    this.emailE = emailElement;
     this.idL = idLabel;
     this.nameL = nameLabel;
-    this.emailL = emailLabel;
     this.submitButton = submitButton;
 
     idElement.oninput = () => this.processInputs();
     nameElement.oninput = () => this.processInputs();
-    emailElement.oninput = () => this.processInputs();
 
     this.processInputs();
   }
@@ -47,23 +39,21 @@ class ApplicationManager {
     clearTimeout(this.schedule);
     const validID = await this.handleDiscordID();
     const validName = await this.handleName();
-    const validEmail = await this.handleEmail();
 
-    if (!validID && !validName && !validEmail) {
+    if (!validID && !validName) {
       return;
     }
 
     this.schedule = setTimeout(() => {
-      this.checkDB(validID, validName, validEmail);
+      this.checkDB(validID, validName);
     }, 1000);
 
     // update recorded checks
     this.checked.id = this.idE.value;
     this.checked.name = this.nameE.value;
-    this.checked.email = this.emailE.value;
   }
 
-  async checkDB(localID, localName, localEmail) {
+  async checkDB(localID, localName) {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = (e) => {
       if (xhr.readyState === 4) {
@@ -86,24 +76,8 @@ class ApplicationManager {
           this.nameL.innerHTML = `<span style='color: lightcoral'>❌ Taken!</span>`;
         }
 
-        // update email
-        if (localEmail && res.email) {
-          // valid both server and client side
-          this.emailL.innerHTML = `<span style='color: lightgreen'>✅ Email</span>`;
-        } else if (localEmail && !res.email) {
-          // not valid server side
-          this.emailL.innerHTML = `<span style='color: lightcoral'>❌ Taken!</span>`;
-        }
-
         // final checks
-        if (
-          localID &&
-          localName &&
-          localEmail &&
-          res.discordID &&
-          res.mcUsername &&
-          res.email
-        ) {
+        if (localID && localName && res.discordID && res.mcUsername) {
           this.submittable = true;
           this.submitButton.style.display = 'block';
         }
@@ -157,23 +131,6 @@ class ApplicationManager {
     });
   }
 
-  handleEmail(email = this.emailE.value) {
-    return new Promise((resolve) => {
-      //this.emailL.innerHTML = `Email`;
-      if (email.length < 1) {
-        resolve(false);
-      } else if (email.length > 128 || !email.match(/\S+@\S+\.\S+/)) {
-        this.emailL.innerHTML = `<span style='color: lightcoral'>❌ Invalid Email</span>`;
-        resolve(false);
-      } else {
-        if (this.checked.email !== email) {
-          this.emailL.innerHTML = `<span style='color: rgb(255, 238, 139)'>⌛ Checking Email</span>`;
-        }
-        resolve(true);
-      }
-    });
-  }
-
   submit() {
     if (this.submittable) {
       this.submitButton.innerHTML = `Submitting...`;
@@ -198,10 +155,8 @@ const Application = new ApplicationManager(
   document.getElementById('mainForm'),
   document.getElementById('discordID'),
   document.getElementById('mcUsername'),
-  document.getElementById('email'),
   document.getElementById('discordIDL'),
   document.getElementById('mcUsernameL'),
-  document.getElementById('emailL'),
   document.getElementById('submitForm')
 );
 

@@ -1,4 +1,5 @@
 <?php
+// this endpoint provides dynamic updates to server-side validity of discord ID and MC username via XHR requests
 
 /// validation
 
@@ -20,7 +21,7 @@ if (substr($_SERVER['CONTENT_TYPE'], 0, 19) !== 'multipart/form-data') {
   exit();
 }
 
-if (!isset($_POST['discordID']) || !isset($_POST['mcUsername']) || !isset($_POST['email'])) {
+if (!isset($_POST['discordID']) || !isset($_POST['mcUsername'])) {
     echo 'Missing POST fields, need: discordID, mcUsername, and email.';
     exit();
 }
@@ -41,11 +42,5 @@ $sql = $conn -> prepare("SELECT COUNT(*) FROM `mc_players` WHERE minecraft = ? L
 $sql -> bind_param("s", $_POST['mcUsername']);
 $sql -> execute();
 $response['mcUsername'] = mysqli_fetch_row($sql -> get_result())[0] == 0;
-
-// checking email
-$sql = $conn -> prepare("SELECT COUNT(*) FROM `mc_players` WHERE email = ? LIMIT 1");
-$sql -> bind_param("s", $_POST['email']);
-$sql -> execute();
-$response['email'] = mysqli_fetch_row($sql -> get_result())[0] == 0;
 
 echo json_encode($response);
