@@ -1,0 +1,169 @@
+body > h1 {
+  font-weight: lighter;
+  margin: 0;
+  padding: 10px 0;
+}
+
+#serverMeta {
+  display: flex;
+  flex-flow: column nowrap;
+  border: solid 1px gray;
+  align-items: center;
+}
+
+#serverMeta > * {
+  margin: 0;
+  padding: 5px;
+  width: calc(100% - 10px);
+  text-align: center;
+  transition: background-color 0.1s linear;
+}
+
+#serverMeta > ul {
+  max-height: 80px;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  list-style: none;
+  border-top: solid 1px gray;
+  padding: 0;
+  width: 100%;
+}
+
+#serverMeta > ul > li {
+  padding: 3px 0;
+  width: 100%;
+  transition: background-color 0.1s linear;
+}
+
+#serverMeta > p:hover, #serverMeta li:hover {
+  background-color: #333;
+}
+
+select {
+  outline: none;
+  background-color: #272727;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: -3px;
+}
+
+#whitelistTable {
+  border: solid 1px gray;
+  margin: 5px 0 0 0; 
+  border-collapse: collapse;
+}
+
+#whitelistTable > tr > * {
+  border-left: solid 1px gray;
+  border-right: solid 1px gray;
+  padding: 5px;
+  transition: color 0.1s linear;
+}
+
+#whitelistTable > tr:nth-child(even) {
+  background-color: #333;
+}
+
+#whitelistTable > tr:hover > td {
+  color: pink;
+}
+
+#whitelistTable > tr .button {
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+
+#whitelistTable > tr .button.accept:hover {
+  background-color: lightgreen;
+}
+
+#whitelistTable > tr .button.reject:hover {
+  background-color: lightcoral;
+}
+
+input[type=number] {
+  background-color: #272727;
+  color: white;
+  font-size: 16px;
+  width: 60px;
+  border: none;
+}
+
+#queue {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#queueHeader {
+  font-weight: lighter;
+  margin: 15px 0 0 0;
+  padding-bottom: 5px;
+  border-bottom: solid 1px gray;
+  width: 100%;
+  text-align: center;
+}
+
+#queueList {
+
+  border-left: solid 1px gray;
+  border-right: solid 1px gray;
+}
+
+#queueList > p {
+  border-bottom: solid 1px gray;
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s linear, color 0.1s linear;
+}
+
+#queueList > p:hover {
+  color: lightcoral;
+  background-color: #333;
+}
+
+button {
+  margin: 20px 0 0 0;
+  background-color: #272727;
+  border: solid 1px gray;
+  color: white;
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.1s linear, color 0.1s linear;
+}
+
+button:disabled {
+  color: gray;
+  border: solid 1px #333;
+}
+
+button:hover {
+  background-color: #333;
+  color: rgb(255, 238, 139);
+}
+
+button:disabled:hover {
+  color: lightcoral;
+  cursor: not-allowed;
+  background-color: #272727;
+}
+
+button.processing {
+  cursor: wait;
+  color: rgb(255, 238, 139);
+}
+
+button.processing:hover {
+  background-color: unset;
+  color: unset;
+}
+
+button.processing.done {
+  color: lightgreen;
+}
