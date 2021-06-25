@@ -36,6 +36,7 @@
     if ($rcon -> connect()) {
       $tps = str_replace(['§a', '§6'], '', $rcon -> sendCommand('tps'));
     }
+    // TODO: finish server metadata displays
   }  
   ?>
   <div>
