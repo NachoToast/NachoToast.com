@@ -13,8 +13,11 @@
         include_once 'header.php';
         if (isset($_GET["o"])) $redirect = "?o=" . $_GET["o"];
         else $redirect = "";
+        if (isset($redirect)) {
+            $redirect = htmlspecialchars($redirect);
+        }
     ?>
-    <form action="inc/login.inc.php<?php echo htmlspecialchars($redirect) ?>" method="post" class="form">
+    <form action="inc/login.inc.php<?php echo $redirect ?>" method="post" class="form">
     <input name="username" id="login_username" placeholder="Username/Email" autofocus required oninput="update_form()">
     <input type="password" name="password" id="login_password" placeholder="Password" required oninput="update_form()">
     <?php 

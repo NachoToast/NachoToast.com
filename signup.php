@@ -15,8 +15,11 @@
         include_once 'header.php';
         if (isset($_GET["o"])) $redirect = "?o=" . $_GET["o"];
         else $redirect = "";
+        if (isset($redirect)) {
+            $redirect = htmlspecialchars($redirect);
+        }
     ?>
-    <form action="inc/signup.inc.php<?php echo htmlspecialchars($redirect) ?>" method="post" class="form" id="signup_form">
+    <form action="inc/signup.inc.php<?php echo $redirect ?>" method="post" class="form" id="signup_form">
     <p class='output output2'>Username Too Short!</p>
     <input name="username" id="signup_username" placeholder="Username" autofocus required oninput="update_username(this.value)" minlength=3 maxlength=20>
     <p class='output output2'>Email Taken!</p>
