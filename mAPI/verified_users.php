@@ -1,3 +1,0 @@
-<?php
-
-$verifiedUsers = [1];

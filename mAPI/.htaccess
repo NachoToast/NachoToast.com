@@ -1,5 +1,0 @@
-php_value max_file_uploads 50
-
-<FilesMatch "\.(jpg|jpeg|png)$">
-FileETag MTime Size
-</FilesMatch>
