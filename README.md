@@ -15,11 +15,11 @@ The [server](server) is the [API](https://www.mulesoft.com/resources/api/what-is
 
 ## Building
 
-If you want to set up your own version of this website, you can follow the instructions in the [building](BUILDING.md) file.
+~~If you want to set up your own version of this website, you can follow the instructions in the [building](BUILDING.md) file.~~
 
 ## Contributing
 
-Feel free to contribute to any part of the codebase. There is no set format for pull requests or issue reports. For help on setting up a local build see the [building](BUILDING.md) file.
+Feel free to contribute to any part of the codebase. There is no set format for pull requests or issue reports. ~~For help on setting up a local build see the [building](BUILDING.md) file.~~
 
 ## License
 
