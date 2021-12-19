@@ -1,4 +1,13 @@
-import { Alert, Container, Fade, Grid, Snackbar, Typography } from '@mui/material';
+import {
+    Alert,
+    Container,
+    Fade,
+    Grid,
+    Snackbar,
+    Typography,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import { useState } from 'react';
 import projectCards from './cards';
 import ProjectCard from './ProjectCard/ProjectCard';
@@ -17,6 +26,9 @@ const Home = () => {
         setLottaClicksModalOpen(false);
     };
 
+    const theme = useTheme();
+    const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
+
     return (
         <Container
             style={{
@@ -33,6 +45,7 @@ const Home = () => {
                     style={{
                         cursor: 'default',
                         color: colorRotation[currentColorIndex % colorRotation.length],
+                        paddingTop: notSmall ? '' : '0.5rem',
                     }}
                     onClick={() => {
                         setCurrentColorIndex(currentColorIndex + 1);

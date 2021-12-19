@@ -6,6 +6,8 @@ import {
     Fade,
     Grid,
     Typography,
+    useMediaQuery,
+    useTheme,
 } from '@mui/material';
 import { useState } from 'react';
 import { ProjectCard as ProjectCardType } from '../cards';
@@ -20,6 +22,9 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
             ? card.imageSource()
             : card.imageSource,
     );
+
+    const theme = useTheme();
+    const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -37,6 +42,7 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
                                 card?.imageAlt ||
                                 `The default photo, NachoToast's github profile picture.`
                             }
+                            style={{ display: notSmall ? 'unset' : 'none' }}
                         />
                         <CardContent>
                             <Typography align="center" variant="h4">
