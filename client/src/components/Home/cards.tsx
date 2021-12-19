@@ -1,9 +1,8 @@
 import projectsPicture from '../../assets/projectCardImages/projectsPicture.png';
-import { LobbyImages } from '../../assets/minecraft';
+import minecraftLobbyPicture from '../../assets/projectCardImages/minecraftPicture.png';
 
 export interface ProjectCard {
     name: string;
-    description: string;
     imageSource?: any;
     imageAlt?: string;
 }
@@ -14,36 +13,27 @@ export interface ProjectCard {
 const projectCards: ProjectCard[] = [
     {
         name: 'Minecraft',
-        description: 'An overview of the NachoToast Minecraft server.',
-        imageSource: () => LobbyImages[Math.floor(Math.random() * LobbyImages.length)],
-        imageAlt: 'A Minecraft screenshot of an old server lobby, showcasing the builds within.',
+        imageSource: minecraftLobbyPicture,
+        imageAlt:
+            'A Minecraft screenshot of an old server lobby, showcasing a close-up of 3 trees under the sun.',
     },
     {
         name: 'All Projects',
-        description: 'See all my past, current, and future projects!',
         imageSource: projectsPicture,
         imageAlt:
             'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
     },
     {
-        name: 'Dijkstra',
-        description: 'Pathfinding algorithm.',
-    },
-    {
-        name: 'Colour Tools',
-        description: 'Colour palette generation tool.',
+        name: 'Miscellaneous',
     },
     {
         name: 'Games',
-        description: "Games I've made.",
     },
     {
         name: 'Discord Bots',
-        description: 'All my Discord bots.',
     },
     {
         name: 'Links',
-        description: 'Links to a bunch of stuff.',
     },
 ];
 

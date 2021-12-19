@@ -11,7 +11,7 @@ const Home = () => {
 
     const [lottaClicksModalOpen, setLottaClicksModalOpen] = useState(false);
 
-    const handleClose = (event?: any, reason?: string) => {
+    const handleClose = (_?: any, reason?: string) => {
         if (reason === 'clickaway') return;
 
         setLottaClicksModalOpen(false);
@@ -47,7 +47,7 @@ const Home = () => {
             </Fade>
             <Grid container spacing={3} columns={12}>
                 {projectCards.map((card, index) => (
-                    <ProjectCard card={card} index={index} />
+                    <ProjectCard card={card} index={index} key={index} />
                 ))}
             </Grid>
             <Snackbar open={lottaClicksModalOpen} autoHideDuration={6000} onClose={handleClose}>
