@@ -12,8 +12,10 @@ import {
 import { useState } from 'react';
 import { ProjectCard as ProjectCardType } from '../cards';
 import githubProfile from '../../../assets/projectCardImages/githubProfile.png';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) => {
+    const navigate = useNavigate();
     // for cards with image functions (for purposes like randomly selecting an image), don't call the function again on remount
     const [imgSrc] = useState(
         !card?.imageSource
@@ -26,6 +28,14 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
+    function handleClick(event: React.MouseEvent) {
+        // blah blah blah
+        event.preventDefault();
+        if (card?.destination) {
+            navigate(card.destination);
+        }
+    }
+
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <Fade
@@ -33,7 +43,7 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
                 timeout={{ enter: 1000, exit: 1000 }}
                 style={{ transitionDelay: `${400 * Math.random() + index ** 2 * 10}ms` }}
             >
-                <Card className="projectCard" style={{ height: '100%' }}>
+                <Card className="projectCard" style={{ height: '100%' }} onClick={handleClick}>
                     <CardActionArea>
                         <CardMedia
                             component="img"

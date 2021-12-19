@@ -8,6 +8,7 @@ export interface ProjectCard {
     name: string;
     imageSource?: any;
     imageAlt?: string;
+    destination?: string;
 }
 
 // TODO: people can leave ratings on cards, highest rating/most viewed (maybe select which one) are displayed first
@@ -31,6 +32,7 @@ const projectCards: ProjectCard[] = [
         imageSource: resourcesPicture,
         imageAlt:
             'A picture containing screenshots and other snippets from various code walkthroughs on the website.',
+        destination: '/Resources',
     },
     {
         name: 'Games',
