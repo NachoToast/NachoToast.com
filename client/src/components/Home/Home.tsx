@@ -65,7 +65,7 @@ const Home = () => {
             </Grid>
             <Snackbar open={lottaClicksModalOpen} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
-                    Chill
+                    Chill 🍦🥶
                 </Alert>
             </Snackbar>
         </Container>
