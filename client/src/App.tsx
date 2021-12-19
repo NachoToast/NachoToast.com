@@ -12,7 +12,6 @@ function App() {
             <div
                 style={{
                     width: '100%',
-                    height: '3000vh',
                     backgroundImage: `url(${backgrounds[randomIndex]})`,
                     backgroundColor: '#121212',
                     backgroundRepeat: 'repeat-y',
