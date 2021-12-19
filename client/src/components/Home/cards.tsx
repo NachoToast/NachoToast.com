@@ -1,5 +1,8 @@
 import projectsPicture from '../../assets/projectCardImages/projectsPicture.png';
 import minecraftLobbyPicture from '../../assets/projectCardImages/minecraftPicture.png';
+import resourcesPicture from '../../assets/projectCardImages/resourcesPicture.png';
+import gamesPicture from '../../assets/projectCardImages/gamesPicture.png';
+import discordBotsPicture from '../../assets/projectCardImages/discordBotsPicture.png';
 
 export interface ProjectCard {
     name: string;
@@ -24,16 +27,25 @@ const projectCards: ProjectCard[] = [
             'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
     },
     {
-        name: 'Miscellaneous',
+        name: 'Resources',
+        imageSource: resourcesPicture,
+        imageAlt:
+            'A picture containing screenshots and other snippets from various code walkthroughs on the website.',
     },
     {
         name: 'Games',
+        imageSource: gamesPicture,
+        imageAlt:
+            "A collation of various image assets from my game Ignominy, such as a sword, a map of the kingdom 'Ignoma', and pixel art of a beer jug.",
     },
     {
         name: 'Discord Bots',
+        imageSource: discordBotsPicture,
+        imageAlt:
+            'Various profile pictures of my Discord bots: CovidBot, NachoBot, MC Server Bot, and Jukebot.',
     },
     {
-        name: 'Links',
+        name: 'Other',
     },
 ];
 
