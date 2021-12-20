@@ -16,14 +16,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) => {
     const navigate = useNavigate();
-    // for cards with image functions (for purposes like randomly selecting an image), don't call the function again on remount
-    const [imgSrc] = useState(
-        !card?.imageSource
-            ? githubProfile
-            : typeof card.imageSource === 'function'
-            ? card.imageSource()
-            : card.imageSource,
-    );
 
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
@@ -47,7 +39,7 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            image={imgSrc}
+                            image={card?.imageSource || githubProfile}
                             alt={
                                 card?.imageAlt ||
                                 `The default photo, NachoToast's github profile picture.`

@@ -6,7 +6,7 @@ import discordBotsPicture from '../../assets/projectCardImages/discordBotsPictur
 
 export interface ProjectCard {
     name: string;
-    imageSource?: any;
+    imageSource?: string;
     imageAlt?: string;
     destination?: string;
 }
