@@ -9,29 +9,37 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import { useState } from 'react';
-import { ProjectCard as ProjectCardType } from '../cards';
-import githubProfile from '../../../assets/projectCardImages/githubProfile.png';
+import githubProfile from '../../../assets/images/projectCardImages/githubProfile.png';
+import { Tile } from '../../../types/tile';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSelectedTileIndex, setSelectedTileIndex } from '../../../redux/slices/tiles.slice';
 import { useNavigate } from 'react-router-dom';
 
-const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) => {
+const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const selectedTileIndex = useSelector(getSelectedTileIndex);
+
+    const shouldFadeOut = selectedTileIndex !== -1 && selectedTileIndex !== index;
 
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     function handleClick(event: React.MouseEvent) {
+        dispatch(setSelectedTileIndex(index));
         // blah blah blah
         event.preventDefault();
-        if (card?.destination) {
-            navigate(card.destination);
+        if (tile?.destination) {
+            // setTimeout(() => {
+            // }, 1000);
+            navigate(tile.destination!);
         }
     }
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <Fade
-                in
+                in={!shouldFadeOut}
                 timeout={{ enter: 1000, exit: 1000 }}
                 style={{ transitionDelay: `${400 * Math.random() + index ** 2 * 10}ms` }}
             >
@@ -39,16 +47,16 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            image={card?.imageSource || githubProfile}
+                            image={tile?.imageSource || githubProfile}
                             alt={
-                                card?.imageAlt ||
+                                tile?.imageAlt ||
                                 `The default photo, NachoToast's github profile picture.`
                             }
                             style={{ display: notSmall ? 'unset' : 'none' }}
                         />
                         <CardContent>
                             <Typography align="center" variant="h4">
-                                {card.name}
+                                {tile.name}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
@@ -58,4 +66,4 @@ const ProjectCard = ({ card, index }: { card: ProjectCardType; index: number }) 
     );
 };
 
-export default ProjectCard;
+export default TileElement;

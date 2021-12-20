@@ -1,8 +1,7 @@
 import { Container } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
-import { randomBackground } from './assets/backgrounds';
-import Resources from './components/Resources/Resources';
+import { randomBackground } from './assets/images/backgrounds';
 
 function App() {
     return (
@@ -18,8 +17,14 @@ function App() {
             <BrowserRouter>
                 <Container maxWidth="xl">
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/resources" element={<Resources />} />
+                        <Route
+                            path="/"
+                            element={<Home tileList="mainTiles" newTitle="NachoToast.com" />}
+                        />
+                        <Route
+                            path="/resources"
+                            element={<Home tileList={'resourcesTiles'} newTitle="Resources" />}
+                        />
                     </Routes>
                 </Container>
             </BrowserRouter>

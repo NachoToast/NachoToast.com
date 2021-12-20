@@ -1,33 +1,30 @@
+import { Container } from '@mui/material';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { transitionTitle } from '../../redux/slices/main.slice';
 import {
-    Alert,
-    Container,
-    Fade,
-    Grid,
-    Snackbar,
-    Typography,
-    useMediaQuery,
-    useTheme,
-} from '@mui/material';
-import { useState } from 'react';
-import projectCards from './cards';
-import ProjectCard from './ProjectCard/ProjectCard';
-import './Home.css';
+    getCurrentTiles,
+    SelectedTileList,
+    setSelectedTileIndex,
+    setSelectedTileList,
+} from '../../redux/slices/tiles.slice';
+import TileContainer from '../TileContainer/TileContainer';
+import Title from '../Title/Title';
 
-const colorRotation: string[] = ['white', 'pink', 'aquamarine', 'gold'];
+const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle: string }) => {
+    const dispatch = useDispatch();
+    const tiles = useSelector(getCurrentTiles);
 
-const Home = () => {
-    const [currentColorIndex, setCurrentColorIndex] = useState(0);
-
-    const [lottaClicksModalOpen, setLottaClicksModalOpen] = useState(false);
-
-    const handleClose = (_?: any, reason?: string) => {
-        if (reason === 'clickaway') return;
-
-        setLottaClicksModalOpen(false);
-    };
-
-    const theme = useTheme();
-    const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
+    useEffect(() => {
+        if (tileList) {
+            dispatch(setSelectedTileIndex(-1));
+            dispatch(setSelectedTileList(tileList));
+        }
+        if (newTitle) {
+            dispatch(transitionTitle(newTitle));
+        }
+        return () => {};
+    }, [tileList, newTitle, dispatch]);
 
     return (
         <Container
@@ -37,37 +34,8 @@ const Home = () => {
                 justifyContent: 'center',
             }}
         >
-            <Fade in timeout={2000}>
-                <Typography
-                    variant="h1"
-                    align="center"
-                    gutterBottom
-                    style={{
-                        cursor: 'default',
-                        color: colorRotation[currentColorIndex % colorRotation.length],
-                        paddingTop: notSmall ? '' : '0.5rem',
-                    }}
-                    onClick={() => {
-                        setCurrentColorIndex(currentColorIndex + 1);
-                        if (currentColorIndex === 20) {
-                            setLottaClicksModalOpen(true);
-                        }
-                    }}
-                    className="noselect"
-                >
-                    NachoToast.com
-                </Typography>
-            </Fade>
-            <Grid container spacing={3} columns={12}>
-                {projectCards.map((card, index) => (
-                    <ProjectCard card={card} index={index} key={index} />
-                ))}
-            </Grid>
-            <Snackbar open={lottaClicksModalOpen} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
-                    Chill 🍦🥶
-                </Alert>
-            </Snackbar>
+            <Title />
+            <TileContainer tiles={tiles} />
         </Container>
     );
 };
