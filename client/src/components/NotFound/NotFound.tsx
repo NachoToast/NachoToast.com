@@ -1,14 +1,16 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Fade, Typography } from '@mui/material';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { interpolateTitle } from '../../redux/slices/main.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getInTransition, interpolateTitle } from '../../redux/slices/main.slice';
 import './NotFound.css';
 
 const NotFound = () => {
     const dispatch = useDispatch();
 
+    const inTransition = useSelector(getInTransition);
+
     useEffect(() => {
-        dispatch(interpolateTitle(`Page Not Found`));
+        dispatch(interpolateTitle(`Not Found`));
     }, [dispatch]);
 
     return (
@@ -20,9 +22,11 @@ const NotFound = () => {
                 overflowY: 'hidden',
             }}
         >
-            <Typography align="center" variant="subtitle1">
-                The page you are looking for doesn't exist.
-            </Typography>
+            <Fade in={!inTransition}>
+                <Typography align="center" variant="subtitle1">
+                    The page you are looking for doesn't exist.
+                </Typography>
+            </Fade>
         </Container>
     );
 };
