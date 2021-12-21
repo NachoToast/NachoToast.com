@@ -91,6 +91,8 @@ export const interpolateTitle = createAsyncThunk(
         }
 
         await resolveAfterSomeTime();
+        const isOverridden = getLatestOverride(getState() as StoreState);
+        if (isOverridden > thisOverride) return;
         dispatch(setInTransition(false));
         dispatch(setLatestOverride(0));
     },
