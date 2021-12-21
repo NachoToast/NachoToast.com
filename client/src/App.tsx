@@ -16,8 +16,8 @@ function App() {
                 backgroundSize: '100%, auto',
             }}
         >
-            <Title />
             <BrowserRouter>
+                <Title />
                 <Container maxWidth="xl">
                     <Routes>
                         <Route
