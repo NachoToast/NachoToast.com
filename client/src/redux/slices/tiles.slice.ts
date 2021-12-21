@@ -11,7 +11,7 @@ export interface State {
     selectedTileIndex: number;
 }
 
-export type SelectedTileList = keyof State['tileLists'];
+export type SelectedTileList = keyof State['tileLists'] | -1;
 
 export const initialState: State = {
     tileLists: {
@@ -29,8 +29,9 @@ const tilesSlice = createSlice({
         setSelectedTileIndex(state, action: { type: string; payload: number }) {
             state.selectedTileIndex = action.payload;
         },
-        setSelectedTileList(state, action: { type: string; payload: keyof State['tileLists'] }) {
+        setSelectedTileList(state, action: { type: string; payload: SelectedTileList }) {
             state.selectedTileList = action.payload;
+            state.selectedTileIndex = -1;
         },
     },
 });
@@ -39,8 +40,10 @@ export const { setSelectedTileIndex, setSelectedTileList } = tilesSlice.actions;
 
 export default tilesSlice.reducer;
 
-export const getCurrentTiles = (state: StoreState): Tile[] =>
-    state.tiles.tileLists[state.tiles.selectedTileList];
+export const getCurrentTiles = (state: StoreState): Tile[] => {
+    if (state.tiles.selectedTileList === -1) return [];
+    return state.tiles.tileLists[state.tiles.selectedTileList];
+};
 
 export const getSelectedTileIndex = (state: StoreState): number => state.tiles.selectedTileIndex;
 
