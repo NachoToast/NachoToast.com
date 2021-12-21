@@ -9,9 +9,8 @@ import {
     setSelectedTileList,
 } from '../../redux/slices/tiles.slice';
 import TileContainer from '../TileContainer/TileContainer';
-import Title from '../Title/Title';
 
-const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle: string }) => {
+const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle?: string }) => {
     const dispatch = useDispatch();
     const tiles = useSelector(getCurrentTiles);
 
@@ -34,8 +33,7 @@ const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle: s
                 justifyContent: 'center',
             }}
         >
-            <Title />
-            <TileContainer tiles={tiles} />
+            {tiles.length && <TileContainer tiles={tiles} />}
         </Container>
     );
 };
