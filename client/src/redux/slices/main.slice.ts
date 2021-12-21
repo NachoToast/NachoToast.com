@@ -4,11 +4,13 @@ import StoreState from '../state';
 export interface State {
     titleText: string;
     inTransition: boolean;
+    latestOverride: number;
 }
 
 export const initialState: State = {
-    titleText: 'Nach',
+    titleText: '     ',
     inTransition: false,
+    latestOverride: 0,
 };
 
 const mainSlice = createSlice({
@@ -21,10 +23,13 @@ const mainSlice = createSlice({
         setInTransition(state, action: { type: string; payload: boolean }) {
             state.inTransition = action.payload;
         },
+        setLatestOverride(state, action: { type: string; payload: number }) {
+            state.latestOverride = action.payload;
+        },
     },
 });
 
-export const { setTitle, setInTransition } = mainSlice.actions;
+export const { setTitle, setInTransition, setLatestOverride } = mainSlice.actions;
 
 export default mainSlice.reducer;
 
@@ -32,43 +37,61 @@ export const getTitle = (state: StoreState): string => state.main.titleText;
 
 export const getInTransition = (state: StoreState): boolean => state.main.inTransition;
 
+export const getLatestOverride = (state: StoreState): number => state.main.latestOverride;
+
 async function resolveAfterSomeTime(x: number = 100) {
     // this is an alternative to
     // const wait = promisify(useTimeout)
     // which doesn't seem to work client-side :(
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
         setTimeout(() => {
             resolve();
         }, x);
     });
 }
 
-export const transitionTitle = createAsyncThunk(
-    `main/transitionTitle`,
+export const interpolateTitle = createAsyncThunk(
+    `main/interpolateTitle`,
     async (newTitle: string, { getState, dispatch }) => {
         const state = getState() as StoreState;
         const inTransition = getInTransition(state);
-        const oldTitle = getTitle(state);
+        const currentTitle = getTitle(state);
+        const thisOverride = Date.now();
 
-        if (oldTitle === newTitle) return;
         if (inTransition) {
-            await resolveAfterSomeTime(100);
-            dispatch(transitionTitle(newTitle));
-            return;
+            dispatch(setLatestOverride(thisOverride));
+        } else {
+            dispatch(setInTransition(true));
         }
-        dispatch(setInTransition(true));
 
-        for (let i = oldTitle.length - 1; i >= 0; i--) {
-            dispatch(setTitle(oldTitle.slice(0, i) + '_'));
+        // trim the current title until it matches the new one
+        let index = currentTitle.length;
+        let currentSubstring = currentTitle.slice(0, index);
+        let newSubstring = newTitle.slice(0, index);
+        while (currentSubstring !== newSubstring && index) {
+            index--;
+            currentSubstring = currentTitle.slice(0, index);
+            // console.log(currentSubstring);
+            newSubstring = newTitle.slice(0, index);
+            dispatch(setTitle(currentSubstring));
             await resolveAfterSomeTime();
+            const isOverridden = getLatestOverride(getState() as StoreState);
+            if (isOverridden > thisOverride) return;
         }
 
-        for (let i = 1, len = newTitle.length; i < len; i++) {
-            dispatch(setTitle(newTitle.slice(0, i) + '_'));
+        // append the current title with characters from the new one
+        index++;
+        while (index <= newTitle.length) {
+            // console.log(newTitle.slice(0, index));
+            dispatch(setTitle(newTitle.slice(0, index)));
             await resolveAfterSomeTime();
+            const isOverridden = getLatestOverride(getState() as StoreState);
+            if (isOverridden > thisOverride) return;
+            index++;
         }
 
-        dispatch(setTitle(newTitle));
+        await resolveAfterSomeTime();
         dispatch(setInTransition(false));
+        dispatch(setLatestOverride(0));
     },
 );
