@@ -42,6 +42,7 @@ const Title = () => {
                     className="noselect"
                 >
                     {title}
+                    <span className="blinking_cursor">|</span>
                 </Typography>
             </Fade>
             <Snackbar open={modalOpen} autoHideDuration={6000} onClose={handleClose}>
