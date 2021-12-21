@@ -2,6 +2,8 @@ import { Container } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import { randomBackground } from './assets/images/backgrounds';
+import NotFound from './components/NotFound/NotFound';
+import Title from './components/Title/Title';
 
 function App() {
     return (
@@ -14,6 +16,7 @@ function App() {
                 backgroundSize: '100%, auto',
             }}
         >
+            <Title />
             <BrowserRouter>
                 <Container maxWidth="xl">
                     <Routes>
@@ -25,6 +28,7 @@ function App() {
                             path="/resources"
                             element={<Home tileList={'resourcesTiles'} newTitle="Resources" />}
                         />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Container>
             </BrowserRouter>

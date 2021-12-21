@@ -43,4 +43,5 @@ export const discordBotsTile: Tile = {
 
 export const otherTile: Tile = {
     name: 'Other',
+    destination: '/Pog',
 };
