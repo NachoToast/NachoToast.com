@@ -1,8 +1,9 @@
 import { Alert, Fade, Snackbar, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getTitle } from '../../redux/slices/main.slice';
 import './Tile.css';
+import QuickNavBar from '../QuickNavBar/QuickNavBar';
 
 const colorRotation: string[] = ['white', 'pink', 'aquamarine', 'gold'];
 
@@ -17,12 +18,12 @@ const Title = () => {
         if (reason === 'clickaway') return;
         setModalOpen(false);
     }
-
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     return (
         <>
+            <QuickNavBar />
             <Fade in timeout={2000}>
                 <Typography
                     variant="h1"
