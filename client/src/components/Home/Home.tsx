@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { transitionTitle } from '../../redux/slices/main.slice';
+import { interpolateTitle } from '../../redux/slices/main.slice';
 import {
     getCurrentTiles,
     SelectedTileList,
@@ -21,7 +21,7 @@ const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle: s
             dispatch(setSelectedTileList(tileList));
         }
         if (newTitle) {
-            dispatch(transitionTitle(newTitle));
+            dispatch(interpolateTitle(newTitle));
         }
         return () => {};
     }, [tileList, newTitle, dispatch]);
