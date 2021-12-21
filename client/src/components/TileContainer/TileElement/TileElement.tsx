@@ -27,12 +27,9 @@ const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
 
     function handleClick(event: React.MouseEvent) {
         dispatch(setSelectedTileIndex(index));
-        // blah blah blah
         event.preventDefault();
         if (tile?.destination) {
-            // setTimeout(() => {
-            // }, 1000);
-            navigate(tile.destination!);
+            navigate(tile.destination);
         }
     }
 
