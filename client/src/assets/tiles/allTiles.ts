@@ -24,7 +24,7 @@ export const resourcesTile: Tile = {
     imageSource: resourcesPicture,
     imageAlt:
         'A picture containing screenshots and other snippets from various code walkthroughs on the website.',
-    destination: '/Resources',
+    destination: '/resources',
 };
 
 export const gamesTile: Tile = {
@@ -43,5 +43,5 @@ export const discordBotsTile: Tile = {
 
 export const otherTile: Tile = {
     name: 'Other',
-    destination: '/Pog',
+    destination: '/pog',
 };
