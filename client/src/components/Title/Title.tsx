@@ -34,6 +34,7 @@ const Title = () => {
                         color: colorRotation[currentColorIndex % colorRotation.length],
                         paddingTop: notSmall ? '' : '0.5rem',
                     }}
+                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                     onClick={() => {
                         setCurrentColorIndex(currentColorIndex + 1);
                         if (currentColorIndex === 20) {
