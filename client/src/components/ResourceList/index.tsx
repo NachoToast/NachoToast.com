@@ -39,7 +39,7 @@ const ResourceList = ({
 
     const splitParent = parentResourceName.split('/').slice(1);
 
-    function handleExpansion(key: string, isExpanded: boolean, titleAppend: string) {
+    function handleExpansion(key: string, isExpanded: boolean, titleAppend?: string) {
         if (isExpanded) {
             setExpanded(key);
             navigate(`#${key}`);
@@ -89,7 +89,7 @@ const ResourceList = ({
                             key={key}
                             expanded={expanded === key}
                             onChange={(_, expanded) => {
-                                handleExpansion(key, expanded, titleAppend || '');
+                                handleExpansion(key, expanded, titleAppend);
                             }}
                         >
                             <AccordionSummary
@@ -136,13 +136,8 @@ const ResourceList = ({
                                 <AccordionDetails>
                                     {!!navigatesTo && (
                                         <MenuItem component={Link} to={navigatesTo}>
-                                            <Stack
-                                                direction="row"
-                                                // sx={{ width: '100%' }}
-                                                spacing={1}
-                                            >
+                                            <Stack direction="row" spacing={1}>
                                                 <ArticleIcon
-                                                    // sx={{ mr: 2 }}
                                                     onClick={(e) => {
                                                         setExpanded(name);
                                                         e.preventDefault();
