@@ -1,18 +1,15 @@
 import { Container, Fade } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { interpolateTitle } from '../../redux/slices/main.slice';
 import ResourceList from '../ResourceList';
-import Block from './CompSci110/Tools/Block/Block';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import SchoolIcon from '@mui/icons-material/School';
 import LinkIcon from '@mui/icons-material/Link';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import MemoryIcon from '@mui/icons-material/Memory';
+import { interpolateTitle } from '../../redux/slices/main.slice';
 
 const Resources = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -68,7 +65,8 @@ const Resources = () => {
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                         },
                                     ]}
-                                    parentResourceName="Resources/110"
+                                    parentResourceName="Resources/CompSci110"
+                                    parentResourceTitle="Resources/110"
                                 />
                             ),
                         },
@@ -86,6 +84,7 @@ const Resources = () => {
                                         },
                                         {
                                             name: 'Revision Exercise Answers',
+                                            titleAppend: 'Answers',
                                         },
                                         {
                                             name: 'Assessment Answers',
@@ -102,7 +101,8 @@ const Resources = () => {
                                             name: 'Walkthroughs',
                                         },
                                     ]}
-                                    parentResourceName="Resources/101"
+                                    parentResourceName="Resources/CompSci101"
+                                    parentResourceTitle="Resources/101"
                                 />
                             ),
                         },
@@ -116,6 +116,7 @@ const Resources = () => {
                         },
                     ]}
                     parentResourceName="Resources"
+                    parentResourceTitle="Resources"
                 />
                 {/* <Accordion
                     expanded={expanded === '110'}

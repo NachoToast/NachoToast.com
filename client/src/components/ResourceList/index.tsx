@@ -10,7 +10,7 @@ import {
     Stack,
     MenuItem,
 } from '@mui/material';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import AccordionItem from '../../types/AccordionItem';
@@ -21,9 +21,11 @@ import { Link, useNavigate } from 'react-router-dom';
 const ResourceList = ({
     resources,
     parentResourceName,
+    parentResourceTitle,
     enableGutters,
 }: {
     resources: AccordionItem[];
+    parentResourceTitle: string;
     parentResourceName: string;
     enableGutters?: boolean;
 }) => {
@@ -35,77 +37,59 @@ const ResourceList = ({
 
     const [expanded, setExpanded] = useState<string | false>(false);
 
-    function pog() {
-        const pog = window.location.hash
-            .slice(1)
-            .split('/')
-            .filter((e) => !!e);
-        return pog;
-    }
+    const splitParent = parentResourceName.split('/').slice(1);
 
-    const [locationHashes, setLocationHashes] = useState<string[]>(pog());
-
-    function handleExpansion(
-        key: string,
-        _: SyntheticEvent,
-        isExpanded: boolean,
-        titleAppend: string,
-        navigatesTo?: string,
-    ) {
+    function handleExpansion(key: string, isExpanded: boolean, titleAppend: string) {
         if (isExpanded) {
             setExpanded(key);
             navigate(`#${key}`);
             if (titleAppend) {
-                dispatch(interpolateTitle(`${parentResourceName}/${titleAppend}`));
-            }
-            if (navigatesTo) {
-                // window.open(`${window.location}/${navigatesTo}`, '_blank');
-                // setExpanded(false);
+                dispatch(interpolateTitle(`${parentResourceTitle}/${titleAppend}`));
             }
         } else {
-            navigate('');
             setExpanded(false);
-            dispatch(interpolateTitle(parentResourceName));
+            dispatch(interpolateTitle(parentResourceTitle));
         }
     }
 
-    function shouldBeExpanded(key: string, name: string, titleAppend?: string): boolean {
-        return expanded === key;
-    }
+    useEffect(() => {
+        const locationHashes = window.location.hash
+            .slice(1)
+            .split('/')
+            .filter((e) => !!e);
+
+        if (!locationHashes.length) return;
+
+        for (const { name, titleAppend } of resources) {
+            const focusArray = [...splitParent, encodeURIComponent(name)];
+            if (!focusArray.length) continue;
+            const resourceKey = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
+
+            if (focusArray.every((e, i) => locationHashes[i] === e)) {
+                setExpanded(resourceKey);
+                if (titleAppend) {
+                    // do stuff
+                }
+                break;
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
             {resources.map(
-                (
-                    { name, titleAppend, description, element, navigatesTo, nameIconPrefix },
-                    index,
-                ) => {
-                    //
-                    const key = `${parentResourceName}/${name}`;
+                ({ name, titleAppend, description, element, navigatesTo, nameIconPrefix }) => {
+                    const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
 
                     return (
                         <Accordion
-                            onClick={() =>
-                                console.log(
-                                    `"${name}"`,
-                                    parentResourceName,
-                                    name,
-                                    `\n`,
-                                    locationHashes,
-                                )
-                            }
                             id={key}
                             disableGutters={!enableGutters}
                             key={key}
-                            expanded={shouldBeExpanded(key, name, titleAppend)}
-                            onChange={(event, expanded) => {
-                                handleExpansion(
-                                    key,
-                                    event,
-                                    expanded,
-                                    titleAppend || '',
-                                    navigatesTo,
-                                );
+                            expanded={expanded === key}
+                            onChange={(_, expanded) => {
+                                handleExpansion(key, expanded, titleAppend || '');
                             }}
                         >
                             <AccordionSummary
@@ -120,7 +104,7 @@ const ResourceList = ({
                                             <Tooltip
                                                 placement="right"
                                                 onClick={() => {
-                                                    setExpanded(name);
+                                                    setExpanded(key);
                                                 }}
                                                 title={
                                                     <Typography variant="body2">
