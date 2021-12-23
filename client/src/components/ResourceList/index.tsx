@@ -98,13 +98,13 @@ const ResourceList = ({
                             >
                                 {!!nameIconPrefix && nameIconPrefix}
                                 <Typography>{name}</Typography>
-                                {!!navigatesTo && (
+                                {!!navigatesTo && !!element && (
                                     <Fade in={expanded === key}>
                                         <Link to={navigatesTo}>
                                             <Tooltip
                                                 placement="right"
-                                                onClick={() => {
-                                                    setExpanded(key);
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
                                                 }}
                                                 title={
                                                     <Typography variant="body2">
@@ -134,7 +134,7 @@ const ResourceList = ({
                             </AccordionSummary>
                             {
                                 <AccordionDetails>
-                                    {!!navigatesTo && (
+                                    {!!navigatesTo && !element && (
                                         <MenuItem component={Link} to={navigatesTo}>
                                             <Stack direction="row" spacing={1}>
                                                 <ArticleIcon />

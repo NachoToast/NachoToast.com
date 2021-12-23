@@ -8,6 +8,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import MemoryIcon from '@mui/icons-material/Memory';
 import { interpolateTitle } from '../../redux/slices/main.slice';
+import Block from './CompSci110/Tools/Block/Block';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const Resources = () => {
                                             name: 'Block',
                                             titleAppend: 'Block',
                                             description: 'Decode/Encode Block Ciphers',
-                                            // element: <Block dontChangeTitle />,
+                                            element: <Block dontChangeTitle />,
                                             navigatesTo: `110/Block`,
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                         },
