@@ -137,12 +137,7 @@ const ResourceList = ({
                                     {!!navigatesTo && (
                                         <MenuItem component={Link} to={navigatesTo}>
                                             <Stack direction="row" spacing={1}>
-                                                <ArticleIcon
-                                                    onClick={(e) => {
-                                                        setExpanded(name);
-                                                        e.preventDefault();
-                                                    }}
-                                                />
+                                                <ArticleIcon />
                                                 <Typography
                                                     textAlign="right"
                                                     sx={{ color: 'text.secondary' }}
