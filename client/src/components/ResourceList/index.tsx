@@ -48,6 +48,7 @@ const ResourceList = ({
             }
         } else {
             setExpanded(false);
+            navigate('');
             dispatch(interpolateTitle(parentResourceTitle));
         }
     }
