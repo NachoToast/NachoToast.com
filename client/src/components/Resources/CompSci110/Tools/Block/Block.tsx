@@ -17,12 +17,14 @@ const alphabetLower = rawAlphabet.split('');
 
 const stringValidationRegex = new RegExp(/^[a-zA-Z]+$/);
 
-const Block = () => {
+const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(interpolateTitle(`Block Cipher Decoder`));
-    }, [dispatch]);
+        if (!dontChangeTitle) {
+            dispatch(interpolateTitle(`Block Cipher Decoder`));
+        }
+    }, [dispatch, dontChangeTitle]);
 
     /// state management
 
@@ -117,6 +119,14 @@ const Block = () => {
                 const decodedString = decodeString(wrappedString, basedIndex);
                 setDecodedString(decodedString);
             }
+        } else {
+            setEncodedString([]);
+        }
+
+        if (!stringValid || !matrixValid) {
+            setDiffusedString([]);
+            setWrappedString([]);
+            setDecodedString('');
         }
 
         return () => {
@@ -285,8 +295,7 @@ const Block = () => {
                     <Fade in={!!encodedString.length}>
                         <div>
                             <Typography variant="body1" align="center" gutterBottom>
-                                {conversionMode === 0 ? 'Encoded' : 'Decoded'} String:{' '}
-                                {encodedString.join(', ')}
+                                Numerical String: {encodedString.join(', ')}
                             </Typography>
                         </div>
                     </Fade>
