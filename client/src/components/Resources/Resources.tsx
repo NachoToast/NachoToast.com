@@ -54,6 +54,7 @@ const Resources = () => {
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                             navigatesTo: `110/caesar`,
                                             element: <Caesar dontChangeTitle />,
+                                            ancient: true,
                                         },
                                         {
                                             name: 'Block',
@@ -62,6 +63,7 @@ const Resources = () => {
                                             element: <Block dontChangeTitle />,
                                             navigatesTo: `110/block`,
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
+                                            ancient: true,
                                         },
                                     ]}
                                     parentResourceName="Resources/CompSci110"
