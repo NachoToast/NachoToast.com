@@ -22,7 +22,6 @@ const ResourceSummary = ({
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
-    const showOpenInNewPageIcon = !!navigatesTo && !!element;
     const showDescription = notSmall && !!description;
 
     const [actionArray, setActionArray] = useState<JSX.Element[]>([]);
