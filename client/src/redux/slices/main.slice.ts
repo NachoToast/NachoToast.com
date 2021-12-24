@@ -5,12 +5,14 @@ export interface State {
     titleText: string;
     inTransition: boolean;
     latestOverride: number;
+    hideTitle: boolean;
 }
 
 export const initialState: State = {
     titleText: '     ',
     inTransition: false,
     latestOverride: 0,
+    hideTitle: false,
 };
 
 const mainSlice = createSlice({
@@ -26,10 +28,13 @@ const mainSlice = createSlice({
         setLatestOverride(state, action: { type: string; payload: number }) {
             state.latestOverride = action.payload;
         },
+        setHideTitle(state, action: { type: string; payload: boolean }) {
+            state.hideTitle = action.payload;
+        },
     },
 });
 
-export const { setTitle, setInTransition, setLatestOverride } = mainSlice.actions;
+export const { setTitle, setInTransition, setLatestOverride, setHideTitle } = mainSlice.actions;
 
 export default mainSlice.reducer;
 
@@ -38,6 +43,8 @@ export const getTitle = (state: StoreState): string => state.main.titleText;
 export const getInTransition = (state: StoreState): boolean => state.main.inTransition;
 
 export const getLatestOverride = (state: StoreState): number => state.main.latestOverride;
+
+export const getHideTitle = (state: StoreState): boolean => state.main.hideTitle;
 
 async function resolveAfterSomeTime(x: number = 100) {
     // this is an alternative to

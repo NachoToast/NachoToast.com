@@ -7,8 +7,12 @@ import Title from './components/Title/Title';
 import Resources from './components/Resources/Resources';
 import Block from './components/Resources/CompSci110/Tools/Block/Block';
 import Caesar from './components/Resources/CompSci110/Tools/Caesar/Caesar';
+import { useSelector } from 'react-redux';
+import { getHideTitle } from './redux/slices/main.slice';
 
 function App() {
+    const showTitle = !useSelector(getHideTitle);
+
     return (
         <div
             style={{
@@ -21,7 +25,7 @@ function App() {
             }}
         >
             <BrowserRouter>
-                <Title />
+                {showTitle && <Title />}
                 <Container maxWidth="xl">
                     <Routes>
                         <Route
