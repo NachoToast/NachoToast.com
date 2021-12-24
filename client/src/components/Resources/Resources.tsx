@@ -76,6 +76,7 @@ const Resources = () => {
                                         {
                                             name: 'Quick Links',
                                             nameIconPrefix: <LinkIcon sx={{ mr: 1 }} />,
+                                            titleAppend: 'Links',
                                         },
                                         {
                                             name: 'Revision Exercise Answers',
@@ -91,9 +92,11 @@ const Resources = () => {
                                         },
                                         {
                                             name: 'Past Papers',
+                                            titleAppend: 'Papers',
                                         },
                                         {
                                             name: 'Walkthroughs',
+                                            titleAppend: 'Guides',
                                         },
                                     ]}
                                     parentResourceName="Resources/CompSci101"

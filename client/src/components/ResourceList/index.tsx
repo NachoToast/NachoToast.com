@@ -68,7 +68,6 @@ const ResourceList = ({
                     element,
                     navigatesTo,
                     showNavigationRegardlessOfElement,
-                    unlinkable,
                 } = resource;
 
                 const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
