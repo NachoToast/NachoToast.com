@@ -10,8 +10,11 @@ export default interface AccordionItem {
     /** The inline element to show when this item is expanded. */
     element?: JSX.Element;
 
-    /** TODO: this */
+    /** TODO: The standalone page this item references. */
     navigatesTo?: string;
+
+    /** Whether to show the "Click to open in new page" button regardless of if an element is present. */
+    showNavigationRegardlessOfElement?: boolean;
 
     /** Icon that shows before the name. */
     nameIconPrefix?: JSX.Element;

@@ -7,8 +7,6 @@ import {
     useTheme,
     Fade,
     Tooltip,
-    Stack,
-    MenuItem,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -17,6 +15,7 @@ import AccordionItem from '../../types/AccordionItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArticleIcon from '@mui/icons-material/ArticleOutlined';
 import { Link, useNavigate } from 'react-router-dom';
+import OpenInNewPage from '../OpenInNewPage';
 
 const ResourceList = ({
     resources,
@@ -80,7 +79,15 @@ const ResourceList = ({
     return (
         <>
             {resources.map(
-                ({ name, titleAppend, description, element, navigatesTo, nameIconPrefix }) => {
+                ({
+                    name,
+                    titleAppend,
+                    description,
+                    element,
+                    navigatesTo,
+                    nameIconPrefix,
+                    showNavigationRegardlessOfElement,
+                }) => {
                     const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
 
                     return (
@@ -135,18 +142,12 @@ const ResourceList = ({
                             </AccordionSummary>
                             {
                                 <AccordionDetails>
-                                    {!!navigatesTo && !element && (
-                                        <MenuItem component={Link} to={navigatesTo}>
-                                            <Stack direction="row" spacing={1}>
-                                                <ArticleIcon />
-                                                <Typography
-                                                    textAlign="right"
-                                                    sx={{ color: 'text.secondary' }}
-                                                >
-                                                    Click to open in a new page
-                                                </Typography>
-                                            </Stack>
-                                        </MenuItem>
+                                    {!!navigatesTo &&
+                                        (!element || showNavigationRegardlessOfElement) && (
+                                            <OpenInNewPage to={navigatesTo} />
+                                        )}
+                                    {showNavigationRegardlessOfElement && !!element && (
+                                        <div style={{ height: 10 }}></div>
                                     )}
                                     {!!element && element}
                                 </AccordionDetails>
