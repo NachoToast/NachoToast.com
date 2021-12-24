@@ -9,6 +9,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import MemoryIcon from '@mui/icons-material/Memory';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import Block from './CompSci110/Tools/Block/Block';
+import Caesar from './CompSci110/Tools/Caesar/Caesar';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Resources = () => {
                                             description: 'Decode/Encode Caesar Ciphers',
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                             navigatesTo: `110/caesar`,
-                                            ancient: true,
+                                            element: <Caesar dontChangeTitle />,
                                         },
                                         {
                                             name: 'Block',
