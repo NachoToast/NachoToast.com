@@ -1,21 +1,11 @@
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Typography,
-    useMediaQuery,
-    useTheme,
-    Fade,
-    Tooltip,
-} from '@mui/material';
+import { Accordion, AccordionDetails } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import AccordionItem from '../../types/AccordionItem';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ArticleIcon from '@mui/icons-material/ArticleOutlined';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import OpenInNewPage from '../OpenInNewPage';
+import ResourceSummary from './ResourceSummary';
 
 const ResourceList = ({
     resources,
@@ -30,9 +20,6 @@ const ResourceList = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const theme = useTheme();
-    const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -78,84 +65,43 @@ const ResourceList = ({
 
     return (
         <>
-            {resources.map(
-                ({
+            {resources.map((resource) => {
+                const {
                     name,
                     titleAppend,
-                    description,
                     element,
                     navigatesTo,
-                    nameIconPrefix,
                     showNavigationRegardlessOfElement,
-                }) => {
-                    const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
+                } = resource;
 
-                    return (
-                        <Accordion
-                            id={key}
-                            disableGutters={!enableGutters}
-                            key={key}
-                            expanded={expanded === key}
-                            onChange={(_, expanded) => {
-                                handleExpansion(key, expanded, titleAppend);
-                            }}
-                        >
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                style={{ overflow: 'hidden', justifyContent: 'flex-start' }}
-                            >
-                                {!!nameIconPrefix && nameIconPrefix}
-                                <Typography>{name}</Typography>
-                                {!!navigatesTo && !!element && (
-                                    <Fade in={expanded === key}>
-                                        <Link to={navigatesTo}>
-                                            <Tooltip
-                                                placement="right"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                }}
-                                                title={
-                                                    <Typography variant="body2">
-                                                        Open in new page
-                                                    </Typography>
-                                                }
-                                                sx={{ ml: 1 }}
-                                            >
-                                                <ArticleIcon color="primary" />
-                                            </Tooltip>
-                                        </Link>
-                                    </Fade>
-                                )}
-                                {notSmall && description && (
-                                    <Typography
-                                        noWrap
-                                        textAlign="right"
-                                        sx={{
-                                            color: 'text.secondary',
-                                            mr: 4,
-                                            flexGrow: 1,
-                                        }}
-                                    >
-                                        {description}
-                                    </Typography>
-                                )}
-                            </AccordionSummary>
-                            {
-                                <AccordionDetails>
-                                    {!!navigatesTo &&
-                                        (!element || showNavigationRegardlessOfElement) && (
-                                            <OpenInNewPage to={navigatesTo} />
-                                        )}
-                                    {showNavigationRegardlessOfElement && !!element && (
-                                        <div style={{ height: 10 }}></div>
+                const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
+
+                return (
+                    <Accordion
+                        id={key}
+                        disableGutters={!enableGutters}
+                        key={key}
+                        expanded={expanded === key}
+                        onChange={(_, expanded) => {
+                            handleExpansion(key, expanded, titleAppend);
+                        }}
+                    >
+                        <ResourceSummary resource={resource} expanded={expanded === key} />
+                        {
+                            <AccordionDetails>
+                                {!!navigatesTo &&
+                                    (!element || showNavigationRegardlessOfElement) && (
+                                        <OpenInNewPage to={navigatesTo} />
                                     )}
-                                    {!!element && element}
-                                </AccordionDetails>
-                            }
-                        </Accordion>
-                    );
-                },
-            )}
+                                {showNavigationRegardlessOfElement && !!element && (
+                                    <div style={{ height: 10 }}></div>
+                                )}
+                                {!!element && element}
+                            </AccordionDetails>
+                        }
+                    </Accordion>
+                );
+            })}
         </>
     );
 };
