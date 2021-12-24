@@ -28,6 +28,7 @@ const Resources = () => {
                             titleAppend: '110',
                             description: 'Introduction to Computer Systems',
                             nameIconPrefix: <SchoolIcon sx={{ mr: 1 }} />,
+                            unlinkable: true,
                             element: (
                                 <ResourceList
                                     resources={[
@@ -68,6 +69,7 @@ const Resources = () => {
                             titleAppend: '101',
                             description: 'Principles of Programming',
                             nameIconPrefix: <SchoolIcon sx={{ mr: 1 }} />,
+                            unlinkable: true,
                             element: (
                                 <ResourceList
                                     resources={[

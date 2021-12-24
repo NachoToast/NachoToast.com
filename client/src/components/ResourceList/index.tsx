@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import AccordionItem from '../../types/AccordionItem';
-import { useNavigate } from 'react-router-dom';
 import OpenInNewPage from '../OpenInNewPage';
 import ResourceSummary from './ResourceSummary';
 
@@ -19,7 +18,6 @@ const ResourceList = ({
     enableGutters?: boolean;
 }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -28,13 +26,11 @@ const ResourceList = ({
     function handleExpansion(key: string, isExpanded: boolean, titleAppend?: string) {
         if (isExpanded) {
             setExpanded(key);
-            navigate(`#${key}`);
             if (titleAppend) {
                 dispatch(interpolateTitle(`${parentResourceTitle}/${titleAppend}`));
             }
         } else {
             setExpanded(false);
-            navigate('');
             dispatch(interpolateTitle(parentResourceTitle));
         }
     }
@@ -72,6 +68,7 @@ const ResourceList = ({
                     element,
                     navigatesTo,
                     showNavigationRegardlessOfElement,
+                    unlinkable,
                 } = resource;
 
                 const key = `${splitParent.length ? `${splitParent.join('/')}/` : ''}${name}`;
@@ -86,7 +83,11 @@ const ResourceList = ({
                             handleExpansion(key, expanded, titleAppend);
                         }}
                     >
-                        <ResourceSummary resource={resource} expanded={expanded === key} />
+                        <ResourceSummary
+                            resource={resource}
+                            navLink={key}
+                            expanded={expanded === key}
+                        />
                         {
                             <AccordionDetails>
                                 {!!navigatesTo &&

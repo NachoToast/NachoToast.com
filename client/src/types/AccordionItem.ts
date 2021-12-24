@@ -18,4 +18,7 @@ export default interface AccordionItem {
 
     /** Icon that shows before the name. */
     nameIconPrefix?: JSX.Element;
+
+    /** Whether to not display the "Copy link to this item" button when expanded. */
+    unlinkable?: boolean;
 }
