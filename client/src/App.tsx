@@ -6,6 +6,7 @@ import NotFound from './components/NotFound/NotFound';
 import Title from './components/Title/Title';
 import Resources from './components/Resources/Resources';
 import Block from './components/Resources/CompSci110/Tools/Block/Block';
+import Caesar from './components/Resources/CompSci110/Tools/Caesar/Caesar';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                             <Route index element={<Resources />} />
                             <Route path="110">
                                 <Route path="block" element={<Block />} />
+                                <Route path="caesar" element={<Caesar />} />
                             </Route>
                         </Route>
                         <Route path="*" element={<NotFound />} />

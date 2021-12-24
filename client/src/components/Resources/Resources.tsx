@@ -51,6 +51,7 @@ const Resources = () => {
                                             titleAppend: 'Caesar',
                                             description: 'Decode/Encode Caesar Ciphers',
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
+                                            navigatesTo: `110/caesar`,
                                             ancient: true,
                                         },
                                         {
@@ -58,7 +59,7 @@ const Resources = () => {
                                             titleAppend: 'Block',
                                             description: 'Decode/Encode Block Ciphers',
                                             element: <Block dontChangeTitle />,
-                                            navigatesTo: `110/Block`,
+                                            navigatesTo: `110/block`,
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                         },
                                     ]}
