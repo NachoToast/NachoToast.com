@@ -6,7 +6,7 @@ const NewPage = ({ navigatesTo }: { navigatesTo: string }) => {
     return (
         <Link to={navigatesTo}>
             <Tooltip
-                placement="bottom"
+                placement="top"
                 onClick={(e) => e.stopPropagation()}
                 title={<Typography variant="body2">Open in new page</Typography>}
             >

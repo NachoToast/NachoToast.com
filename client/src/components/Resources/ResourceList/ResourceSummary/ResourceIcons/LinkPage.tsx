@@ -10,7 +10,7 @@ const LinkPage = ({ linkToMake }: { linkToMake: string }) => {
 
     return (
         <Tooltip
-            placement="bottom"
+            placement="top"
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

@@ -5,7 +5,7 @@ import { Tooltip, Typography } from '@mui/material';
 const OldPage = () => {
     return (
         <Tooltip
-            placement="bottom"
+            placement="top"
             title={<Typography variant="body2">From an older version of the website</Typography>}
             onClick={(e) => {
                 e.preventDefault();
