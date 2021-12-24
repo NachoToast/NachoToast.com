@@ -30,22 +30,22 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
     /// state management
 
     // matrix
-    const [inputMatrix, setInputMatrix]: [string, any] = useState('');
+    const [inputMatrix, setInputMatrix] = useState('');
     const [isMatrixValid, setIsMatrixValid] = useState(false);
-    const [invertedMatrix, setInvertedMatrix]: [number[], any] = useState([]);
-    const [wrappedInvertedMatrix, setWrappedInvertedMatrix]: [number[], any] = useState([]);
+    const [invertedMatrix, setInvertedMatrix] = useState<number[]>([]);
+    const [wrappedInvertedMatrix, setWrappedInvertedMatrix] = useState<number[]>([]);
 
     // string
-    const [inputString, setInputString]: [string, any] = useState('');
+    const [inputString, setInputString] = useState('');
     const [isStringValid, setIsStringValid] = useState(false);
-    const [encodedString, setEncodedString]: [number[], any] = useState([]);
-    const [diffusedString, setDiffusedString]: [number[], any] = useState([]);
-    const [wrappedString, setWrappedString]: [number[], any] = useState([]);
-    const [decodedString, setDecodedString]: [string, any] = useState('');
+    const [encodedString, setEncodedString] = useState<number[]>([]);
+    const [diffusedString, setDiffusedString] = useState<number[]>([]);
+    const [wrappedString, setWrappedString] = useState<number[]>([]);
+    const [decodedString, setDecodedString] = useState('');
 
     // other
     const [basedIndex, setBasedIndex] = useState(0);
-    const [conversionMode, setConversionMode]: [number, any] = useState(0); // 0 = decode, 1 = encode
+    const [conversionMode, setConversionMode] = useState(0); // 0 = decode, 1 = encode
     const [allUppercase, setAllUppercase] = useState(false);
 
     /// input handling
