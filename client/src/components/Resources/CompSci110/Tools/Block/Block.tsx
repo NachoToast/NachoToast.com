@@ -6,6 +6,7 @@ import {
     Stack,
     Switch,
     TextField,
+    Tooltip,
     Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -99,8 +100,8 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
             finalInvertedMatrix = invertedMatrix.map((e) => (e < 0 ? e + 26 : e));
             setWrappedInvertedMatrix(finalInvertedMatrix);
         } else {
-            setInvertedMatrix([]);
-            setWrappedInvertedMatrix([]);
+            // setInvertedMatrix([]);
+            // setWrappedInvertedMatrix([]);
         }
 
         if (stringValid) {
@@ -120,13 +121,13 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                 setDecodedString(decodedString);
             }
         } else {
-            setEncodedString([]);
+            // setEncodedString([]);
         }
 
         if (!stringValid || !matrixValid) {
-            setDiffusedString([]);
-            setWrappedString([]);
-            setDecodedString('');
+            // setDiffusedString([]);
+            // setWrappedString([]);
+            // setDecodedString('');
         }
 
         return () => {
@@ -271,18 +272,27 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                                 }
                                 label="Encode"
                             />
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={!basedIndex}
-                                        onChange={handleBasedIndexSwitch}
-                                    />
+                            <Tooltip
+                                title={
+                                    <Typography>
+                                        {!basedIndex ? `a=0, b=1, c=2` : `a=1, b=2, c=3`}
+                                    </Typography>
                                 }
-                                label="Zero Index"
-                            />
+                                placement="top"
+                            >
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            checked={!basedIndex}
+                                            onChange={handleBasedIndexSwitch}
+                                        />
+                                    }
+                                    label="Zero Index"
+                                />
+                            </Tooltip>
                         </Stack>
                     </>
-                    <Fade in={!!invertedMatrix.length}>
+                    <Fade in={isMatrixValid}>
                         <div>
                             <Typography variant="body1" align="center" gutterBottom>
                                 Inverted Matrix: {invertedMatrix.join(', ')}
@@ -292,14 +302,14 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                             </Typography>
                         </div>
                     </Fade>
-                    <Fade in={!!encodedString.length}>
+                    <Fade in={isStringValid}>
                         <div>
                             <Typography variant="body1" align="center" gutterBottom>
                                 Numerical String: {encodedString.join(', ')}
                             </Typography>
                         </div>
                     </Fade>
-                    <Fade in={!!diffusedString.length}>
+                    <Fade in={isMatrixValid && isStringValid}>
                         <div>
                             <Typography variant="body1" align="center" gutterBottom>
                                 Diffused String: {diffusedString.join(', ')}
@@ -309,7 +319,7 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                             </Typography>
                         </div>
                     </Fade>
-                    <Fade in={!!decodedString.length}>
+                    <Fade in={isMatrixValid && isStringValid}>
                         <div>
                             <Typography variant="h5" align="center" gutterBottom>
                                 {conversionMode === 0 ? 'Decoded' : 'Encoded'} String:{' '}
