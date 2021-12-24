@@ -9,7 +9,7 @@ import {
     Tooltip,
     Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
 
@@ -50,13 +50,13 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
 
     /// input handling
 
-    function handleMatrixInput(e: React.FormEvent) {
+    function handleMatrixInput(e: FormEvent) {
         e.preventDefault();
         const { value } = e.target as HTMLTextAreaElement;
         setInputMatrix(value);
     }
 
-    function handleStringInput(e: React.FormEvent) {
+    function handleStringInput(e: FormEvent) {
         e.preventDefault();
         const { value } = e.target as HTMLTextAreaElement;
         setInputString(value);
@@ -67,13 +67,11 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
         }
     }
 
-    function handleBasedIndexSwitch({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) {
+    function handleBasedIndexSwitch({ target: { checked } }: ChangeEvent<HTMLInputElement>) {
         setBasedIndex(Number(!checked));
     }
 
-    function handleConversionModeSwitch({
-        target: { checked },
-    }: React.ChangeEvent<HTMLInputElement>) {
+    function handleConversionModeSwitch({ target: { checked } }: ChangeEvent<HTMLInputElement>) {
         setConversionMode(Number(checked));
     }
 

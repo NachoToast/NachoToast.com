@@ -14,6 +14,7 @@ import { Tile } from '../../../types/tile';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSelectedTileIndex, setSelectedTileIndex } from '../../../redux/slices/tiles.slice';
 import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
 const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
-    function handleClick(event: React.MouseEvent) {
+    function handleClick(event: MouseEvent) {
         dispatch(setSelectedTileIndex(index));
         event.preventDefault();
         if (tile?.destination) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {
@@ -40,13 +40,13 @@ const store = configureStore({
 });
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <App />
             </ThemeProvider>
         </Provider>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root'),
 );

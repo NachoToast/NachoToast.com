@@ -1,5 +1,5 @@
 import { SpeedDialIcon, SpeedDialAction, SpeedDial, OpenReason, CloseReason } from '@mui/material';
-import React, { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,12 @@ const QuickNavBar = () => {
 
     const [clickedOn, setClickedOn] = useState(false);
 
-    function handleOpen(e: React.SyntheticEvent<any>, reason: OpenReason) {
+    function handleOpen(e: SyntheticEvent<any>, reason: OpenReason) {
         e.preventDefault();
         setOpen(true);
     }
 
-    function handleClose(e: React.SyntheticEvent<any>, reason: CloseReason) {
+    function handleClose(e: SyntheticEvent<any>, reason: CloseReason) {
         e.preventDefault();
         setOpen(false);
     }
