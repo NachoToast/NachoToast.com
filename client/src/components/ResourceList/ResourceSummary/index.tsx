@@ -5,6 +5,7 @@ import NewPage from './ResourceIcons/NewPage';
 import { useTheme } from '@mui/system';
 import LinkPage from './ResourceIcons/LinkPage';
 import { useEffect, useState } from 'react';
+import OldPage from './ResourceIcons/OldPage';
 
 const ResourceSummary = ({
     resource,
@@ -15,7 +16,8 @@ const ResourceSummary = ({
     expanded: boolean;
     navLink: string;
 }) => {
-    const { name, nameIconPrefix, navigatesTo, element, description, unlinkable } = resource;
+    const { name, nameIconPrefix, navigatesTo, element, description, unlinkable, ancient } =
+        resource;
 
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
@@ -39,9 +41,13 @@ const ResourceSummary = ({
             newActionArray.push(<LinkPage linkToMake={navLink} />);
         }
 
+        if (ancient) {
+            newActionArray.push(<OldPage />);
+        }
+
         setActionArray(newActionArray);
         setFadeIndex(-1);
-    }, [element, navLink, navigatesTo, unlinkable]);
+    }, [ancient, element, navLink, navigatesTo, unlinkable]);
 
     useEffect(() => {
         if (!expanded) {

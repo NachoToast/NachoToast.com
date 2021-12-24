@@ -37,18 +37,21 @@ const Resources = () => {
                                             titleAppend: 'Float',
                                             description: 'Floating Point Calculator',
                                             nameIconPrefix: <CalculateIcon sx={{ mr: 1 }} />,
+                                            ancient: true,
                                         },
                                         {
                                             name: 'Utilization',
                                             titleAppend: 'Util',
                                             description: 'Processor Utilization Calculator',
                                             nameIconPrefix: <MemoryIcon sx={{ mr: 1 }} />,
+                                            ancient: true,
                                         },
                                         {
                                             name: 'Caesar',
                                             titleAppend: 'Caesar',
                                             description: 'Decode/Encode Caesar Ciphers',
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
+                                            ancient: true,
                                         },
                                         {
                                             name: 'Block',
@@ -70,6 +73,7 @@ const Resources = () => {
                             description: 'Principles of Programming',
                             nameIconPrefix: <SchoolIcon sx={{ mr: 1 }} />,
                             unlinkable: true,
+                            ancient: true,
                             element: (
                                 <ResourceList
                                     resources={[
@@ -107,10 +111,12 @@ const Resources = () => {
                         {
                             name: 'Colour Palette',
                             titleAppend: 'Colour',
+                            ancient: true,
                         },
                         {
                             name: 'Dijkstra',
                             titleAppend: 'Dijkstra',
+                            ancient: true,
                         },
                     ]}
                     parentResourceName="Resources"

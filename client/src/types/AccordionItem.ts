@@ -21,4 +21,7 @@ export default interface AccordionItem {
 
     /** Whether to not display the "Copy link to this item" button when expanded. */
     unlinkable?: boolean;
+
+    /** Whether this resource is from the older version(s) of the website. */
+    ancient?: boolean;
 }
