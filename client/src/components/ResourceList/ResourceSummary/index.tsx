@@ -4,6 +4,7 @@ import { AccordionSummary, Fade, Stack, Typography, useMediaQuery } from '@mui/m
 import NewPage from './ResourceIcons/NewPage';
 import { useTheme } from '@mui/system';
 import LinkPage from './ResourceIcons/LinkPage';
+import { useEffect, useState } from 'react';
 
 const ResourceSummary = ({
     resource,
@@ -22,6 +23,43 @@ const ResourceSummary = ({
     const showOpenInNewPageIcon = !!navigatesTo && !!element;
     const showDescription = notSmall && !!description;
 
+    const [actionArray, setActionArray] = useState<JSX.Element[]>([]);
+    const [fadeIndex, setFadeIndex] = useState<number>(0);
+
+    useEffect(() => {
+        const newActionArray: JSX.Element[] = [];
+
+        // open in new page button
+        if (!!navigatesTo && !!element) {
+            newActionArray.push(<NewPage navigatesTo={navigatesTo} />);
+        }
+
+        // make link to page button
+        if (!unlinkable) {
+            newActionArray.push(<LinkPage linkToMake={navLink} />);
+        }
+
+        setActionArray(newActionArray);
+        setFadeIndex(-1);
+    }, [element, navLink, navigatesTo, unlinkable]);
+
+    useEffect(() => {
+        if (!expanded) {
+            setFadeIndex(0);
+            return;
+        }
+        if (actionArray.length < 2 || !expanded) return;
+        let myInterval: NodeJS.Timeout;
+        if (fadeIndex < actionArray.length) {
+            myInterval = setInterval(() => {
+                setFadeIndex(fadeIndex + 1);
+            }, 100);
+        }
+        return () => {
+            clearInterval(myInterval);
+        };
+    }, [actionArray.length, expanded, fadeIndex, name]);
+
     return (
         <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -32,8 +70,11 @@ const ResourceSummary = ({
                 <Typography>{name}</Typography>
                 <Fade in={expanded}>
                     <Stack direction="row" spacing={1}>
-                        {showOpenInNewPageIcon && <NewPage navigatesTo={navigatesTo} />}
-                        {!unlinkable && <LinkPage linkToMake={navLink} />}
+                        {actionArray.map((e, i) => (
+                            <Fade in={fadeIndex >= i && expanded} key={i}>
+                                <span>{e}</span>
+                            </Fade>
+                        ))}
                     </Stack>
                 </Fade>
                 {showDescription && (
