@@ -13,8 +13,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
 
-const rawAlphabet = 'abcdefghijklmnopqrstuvwxyz';
-const alphabetLower = rawAlphabet.split('');
+const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 const stringValidationRegex = new RegExp(/^[a-zA-Z]+$/);
 
@@ -167,7 +166,7 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
         const encodedString = new Array(inputString.length);
 
         for (let i = 0, len = inputString.length; i < len; i++) {
-            encodedString[i] = alphabetLower.indexOf(inputString[i]) + index;
+            encodedString[i] = alphabet.indexOf(inputString[i]) + index;
         }
 
         return encodedString;
@@ -181,7 +180,7 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
         let decodedString = '';
 
         for (const num of inputArray) {
-            const letterAtIndex = alphabetLower[num - index];
+            const letterAtIndex = alphabet[num - index];
             decodedString += letterAtIndex;
         }
 
