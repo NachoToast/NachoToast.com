@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import AccordionItem from '../../types/AccordionItem';
 import OpenInNewPage from '../OpenInNewPage';
-import ResourceSummary from './ResourceSummary';
+import ResourceSummary from './ResourceSummary/ResourceSummary';
 
 const ResourceList = ({
     resources,
