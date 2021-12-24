@@ -19,15 +19,7 @@ const Resources = () => {
 
     return (
         <Fade in>
-            <Container
-            // maxWidth="md"
-            // style={{
-            //     // alignItems: 'center',
-            //     justifyContent: 'space-evenly',
-            //     display: 'flex',
-            //     flexFlow: 'row wrap',
-            // }}
-            >
+            <Container>
                 <ResourceList
                     enableGutters
                     resources={[
