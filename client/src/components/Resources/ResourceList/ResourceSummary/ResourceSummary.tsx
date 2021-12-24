@@ -1,5 +1,5 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AccordionItem from '../../../types/AccordionItem';
+import AccordionItem from '../../../../types/AccordionItem';
 import { AccordionSummary, Fade, Stack, Typography, useMediaQuery } from '@mui/material';
 import NewPage from './ResourceIcons/NewPage';
 import { useTheme } from '@mui/system';

@@ -1,7 +1,7 @@
 import { Container, Fade } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import ResourceList from '../ResourceList/ResourceList';
+import ResourceList from './ResourceList/ResourceList';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import SchoolIcon from '@mui/icons-material/School';
 import LinkIcon from '@mui/icons-material/Link';
