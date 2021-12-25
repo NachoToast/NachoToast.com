@@ -81,7 +81,7 @@ export const interpolateTitle = createAsyncThunk(
             // console.log(currentSubstring);
             newSubstring = newTitle.slice(0, index);
             dispatch(setTitle(currentSubstring));
-            await resolveAfterSomeTime();
+            await resolveAfterSomeTime(70);
             const isOverridden = getLatestOverride(getState() as StoreState);
             if (isOverridden > thisOverride) return;
         }
