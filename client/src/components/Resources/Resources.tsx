@@ -10,6 +10,7 @@ import MemoryIcon from '@mui/icons-material/Memory';
 import { interpolateTitle } from '../../redux/slices/main.slice';
 import Block from './CompSci110/Tools/Block/Block';
 import Caesar from './CompSci110/Tools/Caesar/Caesar';
+import Float from './CompSci110/Tools/Float/Float';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -38,6 +39,8 @@ const Resources = () => {
                                             titleAppend: 'Float',
                                             description: 'Floating Point Calculator',
                                             nameIconPrefix: <CalculateIcon sx={{ mr: 1 }} />,
+                                            navigatesTo: '110/float',
+                                            element: <Float dontChangeTitle />,
                                             ancient: true,
                                         },
                                         {
@@ -53,7 +56,7 @@ const Resources = () => {
                                             description: 'Decode/Encode Caesar Ciphers',
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                             navigatesTo: `110/caesar`,
-                                            element: <Caesar dontChangeTitle />,
+                                            element: <Caesar inline />,
                                             ancient: true,
                                         },
                                         {

@@ -19,6 +19,7 @@ export function shiftLetter(letter: string, amount: number): string | false {
  * @returns {number} Non-standardized confidence
  */
 export function estimateLikelihood(inputString: string): number {
+    // FIXME: this algorithm just kinda sucks lol
     const inputLower = inputString.toLowerCase();
 
     let confidence = 0;
@@ -45,8 +46,6 @@ export function estimateLikelihood(inputString: string): number {
 
             if (afterConsonant) confidence++;
             if (beforeConsonant) confidence++;
-
-            // if (afterConsonant && beforeConsonant) confidence += 3;
         }
     }
 
