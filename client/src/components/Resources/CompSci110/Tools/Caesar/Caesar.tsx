@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
 import { alphabet, estimateLikelihood, shiftLetter } from './caesarHelpers';
 import WarningIcon from '@mui/icons-material/Warning';
-import { Helmet } from 'react-helmet';
 import Head from '../../../../Head/Head';
 
 const Caesar = ({ inline }: { inline?: boolean }) => {
