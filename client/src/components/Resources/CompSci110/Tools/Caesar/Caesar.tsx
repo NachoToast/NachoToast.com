@@ -8,6 +8,7 @@ import {
     Switch,
     Tooltip,
     Typography,
+    Grid,
 } from '@mui/material';
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -100,16 +101,18 @@ const Caesar = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                 <Stack
                     spacing={2}
                     alignItems="center"
-                    divider={<Divider flexItem />}
+                    divider={
+                        <Fade in={!!inputString.length}>
+                            <Divider flexItem />
+                        </Fade>
+                    }
                     sx={{ pb: 2 }}
                 >
                     <Stack direction="row" sx={{ width: '100%' }} justifyContent="center">
                         <TextField
                             variant="outlined"
                             label="Input String"
-                            required
                             autoComplete="off"
-                            placeholder="mpmalluadlsclalu"
                             value={inputString}
                             onInput={handleStringInput}
                             color="primary"
@@ -150,73 +153,41 @@ const Caesar = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                         </Fade>
                     </Stack>
                     <Fade in={!!inputString.length}>
-                        <Stack>
-                            {outputs.map((e, i) => {
-                                if (conversionMode === 1 && i === bestOutput) {
-                                    return (
-                                        <Tooltip
-                                            key={i}
-                                            title="Most confident answer"
-                                            placement="right"
-                                            arrow
-                                        >
-                                            <span style={{ color: 'lightgreen' }}>
-                                                {i + 1}: {e}
-                                            </span>
-                                        </Tooltip>
-                                    );
-                                }
-                                // do stuff
+                        <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-evenly">
+                            {[
+                                [0, 8],
+                                [8, 17],
+                                [17, 26],
+                            ].map((e1, i1) => {
                                 return (
-                                    <span key={i}>
-                                        {i + 1}: {e}
-                                    </span>
+                                    <Stack key={i1} spacing={1}>
+                                        {outputs.slice(e1[0], e1[1]).map((e, i) => {
+                                            i += e1[0];
+                                            if (conversionMode === 1 && i === bestOutput) {
+                                                return (
+                                                    <Tooltip
+                                                        key={i}
+                                                        title="Most confident answer"
+                                                        placement="right"
+                                                        arrow
+                                                    >
+                                                        <span style={{ color: 'lightgreen' }}>
+                                                            {i + 1}: {e}
+                                                        </span>
+                                                    </Tooltip>
+                                                );
+                                            }
+                                            return (
+                                                <span key={i}>
+                                                    {i + 1}: {e}
+                                                </span>
+                                            );
+                                        })}
+                                    </Stack>
                                 );
                             })}
                         </Stack>
                     </Fade>
-                    <div>
-                        {badChars.map((e, i) => {
-                            return <span key={i}>{e}</span>;
-                        })}
-                    </div>
-                    {/* <Fade in={isMatrixValid}>
-                    <div>
-                        <Typography variant="body1" align="center" gutterBottom>
-                            Inverted Matrix: {invertedMatrix.join(', ')}
-                        </Typography>
-                        <Typography variant="body1" align="center">
-                            With Modulus: {wrappedInvertedMatrix.join(', ')}
-                        </Typography>
-                    </div>
-                </Fade>
-                <Fade in={isStringValid}>
-                    <div>
-                        <Typography variant="body1" align="center" gutterBottom>
-                            Numerical String: {encodedString.join(', ')}
-                        </Typography>
-                    </div>
-                </Fade>
-                <Fade in={isMatrixValid && isStringValid}>
-                    <div>
-                        <Typography variant="body1" align="center" gutterBottom>
-                            Diffused String: {diffusedString.join(', ')}
-                        </Typography>
-                        <Typography variant="body1" align="center">
-                            With Modulus: {wrappedString.join(', ')}
-                        </Typography>
-                    </div>
-                </Fade>
-                <Fade in={isMatrixValid && isStringValid}>
-                    <div>
-                        <Typography variant="h5" align="center" gutterBottom>
-                            {conversionMode === 0 ? 'Decoded' : 'Encoded'} String:{' '}
-                            <span style={{ color: 'gold' }}>
-                                {allUppercase ? decodedString.toUpperCase() : decodedString}
-                            </span>
-                        </Typography>
-                    </div>
-                </Fade> */}
                 </Stack>
             </Box>
         </Fade>
