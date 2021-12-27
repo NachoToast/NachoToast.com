@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { getHideTitle } from './redux/slices/main.slice';
 import Float from './components/Resources/CompSci110/Tools/Float/Float';
 import Head from './components/Head/Head';
-import Util from './components/Resources/CompSci110/Tools/Utiliz/Util';
+import Util from './components/Resources/CompSci110/Tools/Util/Util';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);

@@ -11,7 +11,7 @@ import { interpolateTitle } from '../../redux/slices/main.slice';
 import Block from './CompSci110/Tools/Block/Block';
 import Caesar from './CompSci110/Tools/Caesar/Caesar';
 import Float from './CompSci110/Tools/Float/Float';
-import Util from './CompSci110/Tools/Utiliz/Util';
+import Util from './CompSci110/Tools/Util/Util';
 
 const Resources = () => {
     const dispatch = useDispatch();
