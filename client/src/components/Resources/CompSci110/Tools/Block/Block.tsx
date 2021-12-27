@@ -12,6 +12,7 @@ import {
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
+import Head from '../../../../Head/Head';
 
 import {
     invertMatrix,
@@ -23,14 +24,14 @@ import {
 
 const stringValidationRegex = new RegExp(/^[a-zA-Z]+$/);
 
-const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
+const Block = ({ inline }: { inline?: boolean }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!dontChangeTitle) {
+        if (!inline) {
             dispatch(interpolateTitle(`Block Cipher Decoder`));
         }
-    }, [dispatch, dontChangeTitle]);
+    }, [dispatch, inline]);
 
     /// state management
 
@@ -102,9 +103,6 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
             setInvertedMatrix(invertedMatrix);
             finalInvertedMatrix = invertedMatrix.map((e) => (e < 0 ? e + 26 : e));
             setWrappedInvertedMatrix(finalInvertedMatrix);
-        } else {
-            // setInvertedMatrix([]);
-            // setWrappedInvertedMatrix([]);
         }
 
         if (stringValid) {
@@ -123,24 +121,18 @@ const Block = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
                 const decodedString = decodeString(wrappedString, basedIndex);
                 setDecodedString(decodedString);
             }
-        } else {
-            // setEncodedString([]);
         }
-
-        if (!stringValid || !matrixValid) {
-            // setDiffusedString([]);
-            // setWrappedString([]);
-            // setDecodedString('');
-        }
-
-        return () => {
-            // cleanup
-        };
     }, [basedIndex, conversionMode, inputMatrix, inputString]);
 
     return (
         <Fade in>
             <Box>
+                {!inline && (
+                    <Head
+                        title="Block Cipher Decoder"
+                        description="Decode and encode text via a block cipher."
+                    />
+                )}
                 <Stack
                     spacing={2}
                     alignItems="center"

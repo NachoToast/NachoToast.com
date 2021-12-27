@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export interface HeadProps {
     /** The 'name' of the tab */
@@ -7,7 +7,7 @@ export interface HeadProps {
 
     description?: string;
 
-    /** Always use '%PUBLIC_URL%/path/to/file.png' */
+    /** Always use `%PUBLIC_URL%/path/to/file.png` */
     image?: string;
 
     /** Hex string.

@@ -10,6 +10,7 @@ import Caesar from './components/Resources/CompSci110/Tools/Caesar/Caesar';
 import { useSelector } from 'react-redux';
 import { getHideTitle } from './redux/slices/main.slice';
 import Float from './components/Resources/CompSci110/Tools/Float/Float';
+import Head from './components/Head/Head';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
@@ -25,6 +26,13 @@ function App() {
                 backgroundSize: '100%, auto',
             }}
         >
+            <Head
+                title="NachoToast"
+                description="NachoToast's Website Is Cooler Than Yours"
+                image="%PUBLIC_URL%/logo512.png"
+                url="https://nachotoast.com"
+                themeColour="#FFFFFF"
+            />
             <BrowserRouter>
                 {showTitle && <Title />}
                 <Container maxWidth="xl">

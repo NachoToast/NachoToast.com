@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
 import WarningIcon from '@mui/icons-material/Warning';
 import { binaryToHex } from './floatHelpers';
+import Head from '../../../../Head/Head';
 
 const colors = {
     signOfMantissa: 'pink',
@@ -32,14 +33,14 @@ const MinusSign = ({ forExponent }: { forExponent?: boolean }) => {
     );
 };
 
-const Float = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
+const Float = ({ inline }: { inline?: boolean }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!dontChangeTitle) {
+        if (!inline) {
             dispatch(interpolateTitle(`Floating Point Calculator`));
         }
-    }, [dispatch, dontChangeTitle]);
+    }, [dispatch, inline]);
 
     const [decimalInput, setDecimalInput] = useState('');
     const [inputValid, setInputValid] = useState(false);
@@ -157,6 +158,12 @@ const Float = ({ dontChangeTitle }: { dontChangeTitle?: boolean }) => {
     return (
         <Fade in>
             <Box>
+                {!inline && (
+                    <Head
+                        title="Floating Point Calculator"
+                        description="Calculate the hexadecimal floating point number of a binary float under the CompSci 110 textbook standard."
+                    />
+                )}
                 <Stack
                     spacing={2}
                     alignItems="center"

@@ -40,7 +40,7 @@ const Resources = () => {
                                             description: 'Floating Point Calculator',
                                             nameIconPrefix: <CalculateIcon sx={{ mr: 1 }} />,
                                             navigatesTo: '110/float',
-                                            element: <Float dontChangeTitle />,
+                                            element: <Float inline />,
                                             ancient: true,
                                         },
                                         {
@@ -63,7 +63,7 @@ const Resources = () => {
                                             name: 'Block',
                                             titleAppend: 'Block',
                                             description: 'Decode/Encode Block Ciphers',
-                                            element: <Block dontChangeTitle />,
+                                            element: <Block inline />,
                                             navigatesTo: `110/block`,
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                             ancient: true,
