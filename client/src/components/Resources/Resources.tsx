@@ -32,6 +32,7 @@ const Resources = () => {
                             description: 'Introduction to Computer Systems',
                             nameIconPrefix: <SchoolIcon sx={{ mr: 1 }} />,
                             unlinkable: true,
+                            ancient: true,
                             element: (
                                 <ResourceList
                                     resources={[
@@ -42,7 +43,6 @@ const Resources = () => {
                                             nameIconPrefix: <CalculateIcon sx={{ mr: 1 }} />,
                                             navigatesTo: '110/float',
                                             element: <Float inline />,
-                                            ancient: true,
                                         },
                                         {
                                             name: 'Utilization',
@@ -51,7 +51,6 @@ const Resources = () => {
                                             nameIconPrefix: <MemoryIcon sx={{ mr: 1 }} />,
                                             navigatesTo: '110/utilization',
                                             element: <Util inline />,
-                                            ancient: true,
                                         },
                                         {
                                             name: 'Caesar',
@@ -60,7 +59,6 @@ const Resources = () => {
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
                                             navigatesTo: `110/caesar`,
                                             element: <Caesar inline />,
-                                            ancient: true,
                                         },
                                         {
                                             name: 'Block',
@@ -69,7 +67,6 @@ const Resources = () => {
                                             element: <Block inline />,
                                             navigatesTo: `110/block`,
                                             nameIconPrefix: <VpnKeyIcon sx={{ mr: 1 }} />,
-                                            ancient: true,
                                         },
                                     ]}
                                     parentResourceName="Resources/CompSci110"

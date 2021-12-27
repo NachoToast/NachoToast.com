@@ -6,7 +6,12 @@ const OldPage = () => {
     return (
         <Tooltip
             placement="top"
-            title={<Typography variant="body2">From an older version of the website</Typography>}
+            title={
+                <Typography variant="body2">
+                    Parts of this component are from an older version of the website, and may be
+                    undergoing updates.
+                </Typography>
+            }
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
