@@ -11,6 +11,7 @@ import { interpolateTitle } from '../../redux/slices/main.slice';
 import Block from './CompSci110/Tools/Block/Block';
 import Caesar from './CompSci110/Tools/Caesar/Caesar';
 import Float from './CompSci110/Tools/Float/Float';
+import Util from './CompSci110/Tools/Utiliz/Util';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const Resources = () => {
                                             titleAppend: 'Util',
                                             description: 'Processor Utilization Calculator',
                                             nameIconPrefix: <MemoryIcon sx={{ mr: 1 }} />,
+                                            navigatesTo: '110/utilization',
+                                            element: <Util inline />,
                                             ancient: true,
                                         },
                                         {

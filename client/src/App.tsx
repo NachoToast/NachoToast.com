@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { getHideTitle } from './redux/slices/main.slice';
 import Float from './components/Resources/CompSci110/Tools/Float/Float';
 import Head from './components/Head/Head';
+import Util from './components/Resources/CompSci110/Tools/Utiliz/Util';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
@@ -47,12 +48,16 @@ function App() {
                                 <Route path="block" element={<Block />} />
                                 <Route path="caesar" element={<Caesar />} />
                                 <Route path="float" element={<Float />} />
+                                <Route path="util" element={<Util />} />
+                                <Route path="utilization" element={<Util />} />
                             </Route>
                         </Route>
                         <Route path="110">
                             <Route path="block" element={<Block />} />
                             <Route path="caesar" element={<Caesar />} />
                             <Route path="float" element={<Float />} />
+                            <Route path="util" element={<Util />} />
+                            <Route path="utilization" element={<Util />} />
                         </Route>
                         <Route path="*" element={<NotFound />} />
                     </Routes>
