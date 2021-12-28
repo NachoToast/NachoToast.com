@@ -2,6 +2,8 @@ import { Container } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import { randomBackground } from './assets/images/backgrounds';
+import './App.css';
+
 import NotFound from './components/NotFound/NotFound';
 import Title from './components/Title/Title';
 import Resources from './components/Resources/Resources';
