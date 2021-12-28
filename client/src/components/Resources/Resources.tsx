@@ -12,6 +12,7 @@ import Block from './CompSci110/Tools/Block/Block';
 import Caesar from './CompSci110/Tools/Caesar/Caesar';
 import Float from './CompSci110/Tools/Float/Float';
 import Util from './CompSci110/Tools/Util/Util';
+import QuickLinks from './CompSci101/QuickLinks/QuickLinks';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const Resources = () => {
                                             name: 'Quick Links',
                                             nameIconPrefix: <LinkIcon sx={{ mr: 1 }} />,
                                             titleAppend: 'Links',
+                                            element: <QuickLinks />,
                                         },
                                         {
                                             name: 'Revision Exercise Answers',
