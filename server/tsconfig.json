@@ -2,14 +2,16 @@
     "compilerOptions": {
         "target": "ES2021",
         "module": "CommonJS",
-        "outDir": "./build/",
-        "rootDir": "./src/",
+        "sourceMap": true,
+        "outDir": "build",
+        "rootDir": "src",
         "strict": true,
-        "typeRoots": ["node_modules/@types"],
+        "alwaysStrict": true,
+        "typeRoots": ["@node_modules/@types"],
+        "types": ["node"],
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true
-    },
-    "exclude": ["arc", "build", "ext"]
+    }
 }
