@@ -16,7 +16,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import tilesSlice from './redux/slices/tiles.slice';
 import { Provider } from 'react-redux';
 import mainSlice from './redux/slices/main.slice';
-import { HelmetProvider } from 'react-helmet-async';
 
 let theme = createTheme({
     palette: {
@@ -44,10 +43,8 @@ ReactDOM.render(
     <StrictMode>
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <HelmetProvider>
-                    <CssBaseline />
-                    <App />
-                </HelmetProvider>
+                <CssBaseline />
+                <App />
             </ThemeProvider>
         </Provider>
     </StrictMode>,

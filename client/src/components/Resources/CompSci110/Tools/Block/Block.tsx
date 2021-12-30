@@ -12,7 +12,6 @@ import {
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
-import Head from '../../../../Head/Head';
 
 import {
     invertMatrix,
@@ -127,12 +126,12 @@ const Block = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {!inline && (
+                {/* {!inline && (
                     <Head
                         title="Block Cipher Decoder"
                         description="Decode and encode text via a block cipher."
                     />
-                )}
+                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"

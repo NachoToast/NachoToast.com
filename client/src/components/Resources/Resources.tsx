@@ -131,51 +131,6 @@ const Resources = () => {
                     parentResourceName="Resources"
                     parentResourceTitle="Resources"
                 />
-                {/* <Accordion
-                    expanded={expanded === '110'}
-                    onChange={(e, a) => {
-                        handleExpansion('110', e, a);
-                    }}
-                >
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        style={{
-                            overflow: 'hidden',
-                            justifyContent: 'flex-start',
-                        }}
-                    >
-                        <Typography sx={{ width: '33%', flexShrink: 0 }}>CompSci110</Typography>
-                        {notSmall && (
-                            <Fade in={notSmall}>
-                                <Typography
-                                    noWrap
-                                    textAlign="right"
-                                    sx={{ color: 'text.secondary', mr: 4 }}
-                                    style={{ flexGrow: 1 }}
-                                >
-                                    Introduction to Computer Systems
-                                </Typography>
-                            </Fade>
-                        )}
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Accordion>
-                            <AccordionSummary>
-                                <Typography>Block</Typography>
-                            </AccordionSummary>
-                        </Accordion>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>CompSci101</Typography>
-                    </AccordionSummary>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>Other</Typography>
-                    </AccordionSummary>
-                </Accordion> */}
             </Container>
         </Fade>
     );

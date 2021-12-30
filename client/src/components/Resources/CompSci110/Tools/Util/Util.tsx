@@ -2,7 +2,6 @@ import { Fade, Box, Stack, Divider, Typography, TextField } from '@mui/material'
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
-import Head from '../../../../Head/Head';
 
 const n = <span style={{ color: 'pink' }}>n</span>;
 
@@ -62,12 +61,12 @@ const Util = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {!inline && (
+                {/* {!inline && (
                     <Head
                         title="Utilization Calculator"
                         description="Calculate the number of programmes needed to be kept in memory to attain a specified % processor utilization."
                     />
-                )}
+                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"

@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../../../../redux/slices/main.slice';
 import { alphabet, estimateLikelihood, shiftLetter } from './caesarHelpers';
 import WarningIcon from '@mui/icons-material/Warning';
-import Head from '../../../../Head/Head';
 
 const Caesar = ({ inline }: { inline?: boolean }) => {
     const dispatch = useDispatch();
@@ -98,12 +97,12 @@ const Caesar = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {!inline && (
+                {/* {!inline && (
                     <Head
                         title="Caesar Cipher Decoder"
                         description="Decode text that has been encoded via Caesar cipher, or encode plain text with a Caesar cipher."
                     />
-                )}
+                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"
