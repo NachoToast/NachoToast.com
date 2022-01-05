@@ -10,21 +10,25 @@ import Resources from './components/Resources/Resources';
 import Block from './components/Resources/CompSci110/Tools/Block/Block';
 import Caesar from './components/Resources/CompSci110/Tools/Caesar/Caesar';
 import { useSelector } from 'react-redux';
-import { getHideTitle } from './redux/slices/main.slice';
+import { getBackgroundOverride, getHideTitle } from './redux/slices/main.slice';
 import Float from './components/Resources/CompSci110/Tools/Float/Float';
 import Util from './components/Resources/CompSci110/Tools/Util/Util';
 import Changelog from './components/Changes/Changelog';
 import Colour from './components/Resources/Colour/Colour';
+import Minecraft from './components/Minecraft/Minecraft';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
+    const backgroundOverride = useSelector(getBackgroundOverride);
 
     return (
         <div
             style={{
                 width: '100%',
                 minHeight: '100vh',
-                backgroundImage: `url(${randomBackground()})`,
+                backgroundImage: `url(${
+                    backgroundOverride ? backgroundOverride() : randomBackground()
+                })`,
                 backgroundColor: '#121212',
                 backgroundRepeat: 'repeat-y',
                 backgroundSize: '100%, auto',
@@ -64,6 +68,8 @@ function App() {
                             <Route path="util" element={<Util />} />
                             <Route path="utilization" element={<Util />} />
                         </Route>
+                        <Route path="minecraft" element={<Minecraft />} />
+                        <Route path="mc" element={<Minecraft />} />
                         <Route path="changelog" element={<Changelog />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
