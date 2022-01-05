@@ -46,7 +46,7 @@ export const getLatestOverride = (state: StoreState): number => state.main.lates
 
 export const getHideTitle = (state: StoreState): boolean => state.main.hideTitle;
 
-async function resolveAfterSomeTime(x: number = 100) {
+export async function resolveAfterSomeTime(x: number = 100) {
     // this is an alternative to
     // const wait = promisify(useTimeout)
     // which doesn't seem to work client-side :(
