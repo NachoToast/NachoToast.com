@@ -10,6 +10,7 @@ export const minecraftTile: Tile = {
     imageSource: minecraftLobbyPicture,
     imageAlt:
         'A Minecraft screenshot of an old server lobby, showcasing a close-up of 3 trees under the sun.',
+    destination: '/minecraft',
 };
 
 export const allProjectsTile: Tile = {
