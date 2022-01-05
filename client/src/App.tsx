@@ -14,6 +14,7 @@ import { getHideTitle } from './redux/slices/main.slice';
 import Float from './components/Resources/CompSci110/Tools/Float/Float';
 import Util from './components/Resources/CompSci110/Tools/Util/Util';
 import Changelog from './components/Changes/Changelog';
+import Colour from './components/Resources/Colour/Colour';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
@@ -53,6 +54,8 @@ function App() {
                                 <Route path="util" element={<Util />} />
                                 <Route path="utilization" element={<Util />} />
                             </Route>
+                            <Route path="colours" element={<Colour />} />
+                            <Route path="color" element={<Colour />} />
                         </Route>
                         <Route path="110">
                             <Route path="block" element={<Block />} />

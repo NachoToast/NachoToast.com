@@ -1,0 +1,11 @@
+.fileInput > h4 {
+    transition: color 0.1s linear;
+}
+
+.fileInput:hover > h4 {
+    color: pink;
+}
+
+.MuiLinearProgress-bar {
+    transition: none;
+}

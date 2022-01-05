@@ -13,6 +13,9 @@ import Caesar from './CompSci110/Tools/Caesar/Caesar';
 import Float from './CompSci110/Tools/Float/Float';
 import Util from './CompSci110/Tools/Util/Util';
 import QuickLinks from './CompSci101/QuickLinks/QuickLinks';
+import PastPapers from './CompSci101/PastPapers/PastPapers';
+import ArticleIcon from '@mui/icons-material/Article';
+import Colour from './Colour/Colour';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -33,7 +36,6 @@ const Resources = () => {
                             description: 'Introduction to Computer Systems',
                             nameIconPrefix: <SchoolIcon sx={{ mr: 1 }} />,
                             unlinkable: true,
-                            ancient: true,
                             element: (
                                 <ResourceList
                                     resources={[
@@ -92,24 +94,10 @@ const Resources = () => {
                                             element: <QuickLinks />,
                                         },
                                         {
-                                            name: 'Revision Exercise Answers',
-                                            titleAppend: 'Answers',
-                                        },
-                                        {
-                                            name: 'Assessment Answers',
-                                            titleAppend: 'Answers',
-                                        },
-                                        {
-                                            name: 'Assignments',
-                                            titleAppend: 'Answers',
-                                        },
-                                        {
                                             name: 'Past Papers',
-                                            titleAppend: 'Papers',
-                                        },
-                                        {
-                                            name: 'Walkthroughs',
-                                            titleAppend: 'Guides',
+                                            titleAppend: 'PP',
+                                            element: <PastPapers />,
+                                            nameIconPrefix: <ArticleIcon sx={{ mr: 1 }} />,
                                         },
                                     ]}
                                     parentResourceName="Resources/CompSci101"
@@ -121,6 +109,8 @@ const Resources = () => {
                             name: 'Colour Palette',
                             titleAppend: 'Colour',
                             ancient: true,
+                            element: <Colour inline />,
+                            navigatesTo: 'colours',
                         },
                         {
                             name: 'Dijkstra',
