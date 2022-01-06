@@ -13,8 +13,17 @@ const NotFound = () => {
         dispatch(interpolateTitle(`Not Found`));
     }, [dispatch]);
 
+    useEffect(() => {
+        document.body.className = 'noScroll';
+
+        return () => {
+            document.body.className = '';
+        };
+    }, []);
+
     return (
         <Container
+            className="noScroll"
             style={{
                 height: '3000vh',
                 alignItems: 'center',

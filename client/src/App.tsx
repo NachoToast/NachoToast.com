@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
-import { randomBackground } from './assets/images/backgrounds';
+import { backgroundMap, BackgroundMapKeys, randomBackground } from './assets/images/backgrounds';
 import './App.css';
 
 import NotFound from './components/NotFound/NotFound';
@@ -24,15 +24,13 @@ function App() {
     return (
         <div
             style={{
-                width: '100%',
-                minHeight: '100vh',
                 backgroundImage: `url(${
-                    backgroundOverride ? backgroundOverride() : randomBackground()
+                    backgroundOverride !== null
+                        ? backgroundMap[backgroundOverride as BackgroundMapKeys]()
+                        : randomBackground()
                 })`,
-                backgroundColor: '#121212',
-                backgroundRepeat: 'repeat-y',
-                backgroundSize: '100%, auto',
             }}
+            className="background"
         >
             {/* <Head
                 title="NachoToast"

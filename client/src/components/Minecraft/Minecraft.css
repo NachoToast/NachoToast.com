@@ -1,0 +1,21 @@
+.minecraftGrid {
+    background-color: rgba(27, 27, 27, 0.6);
+    border-radius: 0.5rem;
+    min-height: 50vh;
+}
+
+div.background {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+span.rulesChannel {
+    color: #99aab5;
+    transition: color 0.1s linear;
+    cursor: default;
+}
+
+span.rulesChannel:hover {
+    color: gray;
+}

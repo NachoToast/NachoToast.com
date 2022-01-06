@@ -36,6 +36,7 @@ const Title = () => {
                     }}
                     sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                     onClick={() => {
+                        if (title !== 'NachoToast.com') return;
                         setCurrentColorIndex(currentColorIndex + 1);
                         if (currentColorIndex === 20) {
                             setModalOpen(true);

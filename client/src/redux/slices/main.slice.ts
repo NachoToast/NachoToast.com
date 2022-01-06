@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { BackgroundMapKeys } from '../../assets/images/backgrounds';
 import StoreState from '../state';
 
 export interface State {
@@ -6,7 +7,7 @@ export interface State {
     inTransition: boolean;
     latestOverride: number;
     hideTitle: boolean;
-    backgroundOverride: (() => string) | null;
+    backgroundOverride: BackgroundMapKeys | null;
 }
 
 export const initialState: State = {
@@ -33,7 +34,7 @@ const mainSlice = createSlice({
         setHideTitle(state, action: { type: string; payload: boolean }) {
             state.hideTitle = action.payload;
         },
-        setBackgroundOverride(state, action: { type: string; payload: (() => string) | null }) {
+        setBackgroundOverride(state, action: { type: string; payload: BackgroundMapKeys | null }) {
             state.backgroundOverride = action.payload;
         },
     },
@@ -52,7 +53,7 @@ export const getLatestOverride = (state: StoreState): number => state.main.lates
 
 export const getHideTitle = (state: StoreState): boolean => state.main.hideTitle;
 
-export const getBackgroundOverride = (state: StoreState): (() => string) | null =>
+export const getBackgroundOverride = (state: StoreState): BackgroundMapKeys | null =>
     state.main.backgroundOverride;
 
 export async function resolveAfterSomeTime(x: number = 100) {

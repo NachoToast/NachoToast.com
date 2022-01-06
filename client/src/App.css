@@ -7,3 +7,11 @@
     user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 }
+
+div.background {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #121212;
+    background-repeat: repeat-y;
+    background-size: 100%, auto;
+}
