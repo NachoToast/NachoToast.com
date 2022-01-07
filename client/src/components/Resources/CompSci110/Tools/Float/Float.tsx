@@ -93,7 +93,7 @@ const Float = ({ inline }: { inline?: boolean }) => {
                 // in the case of small decimal binary values, e.g. 0.01, 0.1101
                 let decimalString = standardForm.substring(decimalPointIndex + 1); // gets part after decimal point
 
-                // i have no clue what this does lol
+                // gets number of 0's before first 1
                 let endIndex = decimalString.indexOf('1');
                 if (endIndex !== -1) {
                     decimalString = decimalString.substring(0, endIndex);
