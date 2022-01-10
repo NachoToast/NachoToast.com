@@ -44,8 +44,8 @@ const galleryMap: {
         title: "Honey's House",
         description: (
             <Typography>
-                Server regular HoneyCrumble\'s house made in the season 1 anarchy world. It was
-                later griefed :(
+                Server regular HoneyCrumble's house made in the season 1 anarchy world. It was later
+                griefed :(
             </Typography>
         ),
     },
