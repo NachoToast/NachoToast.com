@@ -130,7 +130,7 @@ const JoinStepper = () => {
         <Stepper activeStep={activeStep} orientation="vertical" sx={{ pb: 1 }}>
             {steps.map(({ label, description, icon }, index) => (
                 <Step
-                    key={index}
+                    key={`${label}${index}`}
                     completed={false}
                     onClick={(e) => {
                         e.preventDefault();

@@ -203,7 +203,7 @@ const Colour = ({ inline }: { inline?: boolean }) => {
                                     %)
                                 </Typography>
                                 {Object.keys(loading).map((e, i) => (
-                                    <Fade in key={i}>
+                                    <Fade in key={`${e}${i}`}>
                                         <Stack direction="column" sx={{ mb: 1 }}>
                                             <Typography variant="caption">{e}</Typography>
                                             <LinearProgressWithLabel
