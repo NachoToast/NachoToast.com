@@ -2,17 +2,15 @@ import {
     Container,
     Fade,
     Grid,
-    ImageList,
-    ImageListItem,
-    ImageListItemBar,
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    ListSubheader,
     Stack,
     Typography,
+    useMediaQuery,
+    useTheme,
 } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -21,7 +19,6 @@ import {
     lobbyStairs,
     nachoShack,
     savannaOasis,
-    seasonOneLobbyImages,
     workstation,
 } from '../../assets/images/minecraft/lobby';
 import { interpolateTitle, setBackgroundOverride } from '../../redux/slices/main.slice';
@@ -32,10 +29,13 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import JoinStepper from './JoinStepper';
 import { courtyard } from '../../assets/images/minecraft/daeani_castle';
 import ImageGallery from './ImageGallery';
-import { GalleryNames } from './galleries';
+import FadedImage from '../Misc/FadedImage';
 
 const Minecraft = () => {
     const dispatch = useDispatch();
+    const theme = useTheme();
+
+    const isLarge = useMediaQuery(theme.breakpoints.up('md'));
 
     useEffect(() => {
         dispatch(interpolateTitle(`Minecraft`));
@@ -48,7 +48,7 @@ const Minecraft = () => {
 
     return (
         <Fade in>
-            <Container maxWidth="xl" className="minecraftGrid">
+            <Container maxWidth="xl" className="minecraftGrid" sx={{ mt: isLarge ? undefined : 3 }}>
                 <Grid container spacing={2} columns={{ xs: 4, md: 12 }}>
                     <Grid item xs={7}>
                         <Typography variant="h2" gutterBottom>
@@ -106,25 +106,25 @@ const Minecraft = () => {
                         </List>
                     </Grid>
                     <Grid item xs={5}>
-                        <img
+                        <FadedImage
                             src={nachoShack.source}
                             alt={nachoShack.alt}
                             style={{ width: '100%' }}
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <img
+                        <FadedImage
                             src={workstation.source}
                             alt={workstation.alt}
                             style={{ width: '100%' }}
                         />
                         <Stack direction="row" overflow="hidden" spacing={1} sx={{ pb: 5 }}>
-                            <img
+                            <FadedImage
                                 src={courtyard.source}
                                 alt={savannaOasis.alt}
                                 style={{ maxWidth: '50%' }}
                             />
-                            <img
+                            <FadedImage
                                 src={lobbyStairs.source}
                                 alt={lobbyStairs.alt}
                                 style={{ maxWidth: '50%' }}
@@ -144,7 +144,7 @@ const Minecraft = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h2" gutterBottom textAlign="center">
-                            Community Builds
+                            Photo Gallery
                         </Typography>
                     </Grid>
                     <ImageGallery />
