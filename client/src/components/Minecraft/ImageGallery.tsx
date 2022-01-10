@@ -22,6 +22,7 @@ import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 import Looks4Icon from '@mui/icons-material/Looks4';
 import Looks5Icon from '@mui/icons-material/Looks5';
+import FadedImage from '../Misc/FadedImage';
 
 const numberIcons = [
     <LooksOneIcon />,
@@ -32,12 +33,6 @@ const numberIcons = [
 ];
 
 const ImageGallery = () => {
-    const theme = useTheme();
-    const isLarge = useMediaQuery(theme.breakpoints.up('md'));
-
-    const [fullWidth, setWidth] = useState(false);
-    const [widthLock, setWidthLock] = useState(!isLarge);
-
     const [cols, setCols] = useState(1);
 
     const [prevGalleryIndex, setPrevGalleryIndex] = useState(galleryMap.length - 1);
@@ -76,12 +71,8 @@ const ImageGallery = () => {
 
     const { title, description, sourceImages } = galleryMap[galleryIndex];
 
-    useEffect(() => {
-        setWidthLock(!isLarge);
-    }, [isLarge]);
-
     return (
-        <Grid item xs={fullWidth ? 12 : 6}>
+        <Grid item xs={12}>
             <Stack id="galleryBar" direction="row">
                 <Typography variant="h4" flexGrow={1} gutterBottom>
                     {title}
@@ -122,28 +113,13 @@ const ImageGallery = () => {
                         {numberIcons[cols]}
                     </Button>
                 </Tooltip>
-                {!widthLock && (
-                    <Tooltip
-                        title={fullWidth ? 'Make Half Width' : 'Make Full Width'}
-                        placement="top"
-                    >
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setWidth(!fullWidth);
-                            }}
-                        >
-                            {fullWidth ? <CloseFullscreenIcon /> : <OpenInFullIcon />}
-                        </Button>
-                    </Tooltip>
-                )}
             </Stack>
             {description}
             <ImageList cols={cols + 1}>
                 {sourceImages.map(({ source, alt }, index) => (
-                    <Tooltip title={<Typography>{alt}</Typography>} key={index}>
+                    <Tooltip title={<Typography>{alt}</Typography>} key={`${source}${index}`}>
                         <ImageListItem>
-                            <img src={`${source}`} alt={alt} loading="lazy" />
+                            <FadedImage src={source} alt={alt} style={{ width: '100%' }} />
                         </ImageListItem>
                     </Tooltip>
                 ))}
