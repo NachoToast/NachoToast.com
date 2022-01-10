@@ -1,18 +1,6 @@
-import {
-    Grid,
-    ImageList,
-    ImageListItem,
-    Typography,
-    Stack,
-    Tooltip,
-    Button,
-    useTheme,
-    useMediaQuery,
-} from '@mui/material';
+import { Grid, ImageList, ImageListItem, Typography, Stack, Tooltip, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import galleryMap from './galleries';
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
