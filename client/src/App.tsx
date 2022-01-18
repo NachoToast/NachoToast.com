@@ -32,13 +32,6 @@ function App() {
             }}
             className="background"
         >
-            {/* <Head
-                title="NachoToast"
-                description="NachoToast's Website Is Cooler Than Yours"
-                image="%PUBLIC_URL%/logo512.png"
-                url="https://nachotoast.com"
-                themeColour="#FFFFFF"
-            /> */}
             <BrowserRouter>
                 {showTitle && <Title />}
                 <Container maxWidth="xl">
@@ -57,8 +50,14 @@ function App() {
                                 <Route path="utilization" element={<Util />} />
                             </Route>
                             <Route path="colours" element={<Colour />} />
+                            <Route path="colour" element={<Colour />} />
+                            <Route path="colors" element={<Colour />} />
                             <Route path="color" element={<Colour />} />
                         </Route>
+                        <Route path="colours" element={<Colour />} />
+                        <Route path="colour" element={<Colour />} />
+                        <Route path="colors" element={<Colour />} />
+                        <Route path="color" element={<Colour />} />
                         <Route path="110">
                             <Route path="block" element={<Block />} />
                             <Route path="caesar" element={<Caesar />} />
