@@ -108,7 +108,6 @@ const Resources = () => {
                         {
                             name: 'Colour Palette',
                             titleAppend: 'Colour',
-                            ancient: true,
                             element: <Colour inline />,
                             navigatesTo: 'colours',
                         },
