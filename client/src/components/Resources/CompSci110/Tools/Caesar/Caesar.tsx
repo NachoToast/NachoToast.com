@@ -97,12 +97,6 @@ const Caesar = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {/* {!inline && (
-                    <Head
-                        title="Caesar Cipher Decoder"
-                        description="Decode text that has been encoded via Caesar cipher, or encode plain text with a Caesar cipher."
-                    />
-                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"
@@ -157,42 +151,48 @@ const Caesar = ({ inline }: { inline?: boolean }) => {
                             </Tooltip>
                         </Fade>
                     </Stack>
-                    <Fade in={!!inputString.length}>
-                        <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-evenly">
-                            {[
-                                [0, 8],
-                                [8, 17],
-                                [17, 26],
-                            ].map((e1, i1) => {
-                                return (
-                                    <Stack key={i1} spacing={1}>
-                                        {outputs.slice(e1[0], e1[1]).map((e, i) => {
-                                            i += e1[0];
-                                            if (conversionMode === 1 && i === bestOutput) {
+                    {!!inputString.length && (
+                        <Fade in>
+                            <Stack
+                                direction="row"
+                                sx={{ width: '100%' }}
+                                justifyContent="space-evenly"
+                            >
+                                {[
+                                    [0, 8],
+                                    [8, 17],
+                                    [17, 26],
+                                ].map((e1, i1) => {
+                                    return (
+                                        <Stack key={i1} spacing={1}>
+                                            {outputs.slice(e1[0], e1[1]).map((e, i) => {
+                                                i += e1[0];
+                                                if (conversionMode === 1 && i === bestOutput) {
+                                                    return (
+                                                        <Tooltip
+                                                            key={i}
+                                                            title="Most confident answer"
+                                                            placement="right"
+                                                            arrow
+                                                        >
+                                                            <span style={{ color: 'lightgreen' }}>
+                                                                {i + 1}: {e}
+                                                            </span>
+                                                        </Tooltip>
+                                                    );
+                                                }
                                                 return (
-                                                    <Tooltip
-                                                        key={i}
-                                                        title="Most confident answer"
-                                                        placement="right"
-                                                        arrow
-                                                    >
-                                                        <span style={{ color: 'lightgreen' }}>
-                                                            {i + 1}: {e}
-                                                        </span>
-                                                    </Tooltip>
+                                                    <span key={i}>
+                                                        {i + 1}: {e}
+                                                    </span>
                                                 );
-                                            }
-                                            return (
-                                                <span key={i}>
-                                                    {i + 1}: {e}
-                                                </span>
-                                            );
-                                        })}
-                                    </Stack>
-                                );
-                            })}
-                        </Stack>
-                    </Fade>
+                                            })}
+                                        </Stack>
+                                    );
+                                })}
+                            </Stack>
+                        </Fade>
+                    )}
                 </Stack>
             </Box>
         </Fade>

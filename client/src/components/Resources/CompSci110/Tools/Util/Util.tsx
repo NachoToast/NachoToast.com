@@ -61,12 +61,6 @@ const Util = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {/* {!inline && (
-                    <Head
-                        title="Utilization Calculator"
-                        description="Calculate the number of programmes needed to be kept in memory to attain a specified % processor utilization."
-                    />
-                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"
@@ -108,73 +102,86 @@ const Util = ({ inline }: { inline?: boolean }) => {
                             color={waitTimeValid || !waitTime.length ? 'primary' : 'error'}
                         />
                     </>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography color="gray" variant="h6">
-                                Formula:
-                                <sup />
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography color="gray" variant="h6">
+                                    Formula:
+                                    <sup />
+                                </Typography>
+                                <Typography variant="h6">
+                                    1 - <WaitSpan wait={Number(waitTime) / 100} />
+                                    <sup>{n}</sup> {'>'}={' '}
+                                    <UtilSpan util={Number(utilization) / 100} />
+                                </Typography>
+                            </Stack>
+                        </Fade>
+                    )}
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography color="gray" variant="h6">
+                                    Rearranged:
+                                    <sup />
+                                </Typography>
+                                <Typography variant="h6">
+                                    1 - <UtilSpan util={Number(utilization) / 100} />
+                                    <sup>{n}</sup> {'>'}= <WaitSpan wait={Number(waitTime) / 100} />
+                                </Typography>
+                            </Stack>
+                        </Fade>
+                    )}
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography color="gray" variant="h6">
+                                    Simplified:
+                                    <sup />
+                                </Typography>
+                                <Typography variant="h6">
+                                    <UtilSpan util={simplified} />
+                                    <sup>{n}</sup> {'>'}= <WaitSpan wait={Number(waitTime) / 100} />
+                                </Typography>
+                            </Stack>
+                        </Fade>
+                    )}
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography color="gray" variant="h6">
+                                    Take Logarithm:
+                                    <sub />
+                                </Typography>
+                                <Typography variant="h6">
+                                    log
+                                    <sub>
+                                        <WaitSpan wait={Number(waitTime) / 100} />
+                                    </sub>
+                                    (<UtilSpan util={simplified} />) {'<'}= {n}
+                                </Typography>
+                            </Stack>
+                        </Fade>
+                    )}
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography color="gray" variant="h6">
+                                    Solve:
+                                </Typography>
+                                <Typography variant="h6">
+                                    <UtilSpan util={solvedLog} />
+                                    {' <'}= {n}
+                                </Typography>
+                            </Stack>
+                        </Fade>
+                    )}
+                    {waitTimeValid && utilizationValid && (
+                        <Fade in>
+                            <Typography variant="h5">
+                                {n} = {finalAnswer}
                             </Typography>
-                            <Typography variant="h6">
-                                1 - <WaitSpan wait={Number(waitTime) / 100} />
-                                <sup>{n}</sup> {'>'}= <UtilSpan util={Number(utilization) / 100} />
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography color="gray" variant="h6">
-                                Rearranged:
-                                <sup />
-                            </Typography>
-                            <Typography variant="h6">
-                                1 - <UtilSpan util={Number(utilization) / 100} />
-                                <sup>{n}</sup> {'>'}= <WaitSpan wait={Number(waitTime) / 100} />
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography color="gray" variant="h6">
-                                Simplified:
-                                <sup />
-                            </Typography>
-                            <Typography variant="h6">
-                                <UtilSpan util={simplified} />
-                                <sup>{n}</sup> {'>'}= <WaitSpan wait={Number(waitTime) / 100} />
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography color="gray" variant="h6">
-                                Take Logarithm:
-                                <sub />
-                            </Typography>
-                            <Typography variant="h6">
-                                log
-                                <sub>
-                                    <WaitSpan wait={Number(waitTime) / 100} />
-                                </sub>
-                                (<UtilSpan util={simplified} />) {'<'}= {n}
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography color="gray" variant="h6">
-                                Solve:
-                            </Typography>
-                            <Typography variant="h6">
-                                <UtilSpan util={solvedLog} />
-                                {' <'}= {n}
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={waitTimeValid && utilizationValid}>
-                        <Typography variant="h5">
-                            {n} = {finalAnswer}
-                        </Typography>
-                    </Fade>
+                        </Fade>
+                    )}
                 </Stack>
             </Box>
         </Fade>

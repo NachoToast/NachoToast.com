@@ -126,12 +126,6 @@ const Block = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {/* {!inline && (
-                    <Head
-                        title="Block Cipher Decoder"
-                        description="Decode and encode text via a block cipher."
-                    />
-                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"
@@ -208,43 +202,51 @@ const Block = ({ inline }: { inline?: boolean }) => {
                             </Tooltip>
                         </Stack>
                     </>
-                    <Fade in={isMatrixValid}>
-                        <div>
-                            <Typography variant="body1" align="center" gutterBottom>
-                                Inverted Matrix: {invertedMatrix.join(', ')}
-                            </Typography>
-                            <Typography variant="body1" align="center">
-                                With Modulus: {wrappedInvertedMatrix.join(', ')}
-                            </Typography>
-                        </div>
-                    </Fade>
-                    <Fade in={isStringValid}>
-                        <div>
-                            <Typography variant="body1" align="center" gutterBottom>
-                                Numerical String: {encodedString.join(', ')}
-                            </Typography>
-                        </div>
-                    </Fade>
-                    <Fade in={isMatrixValid && isStringValid}>
-                        <div>
-                            <Typography variant="body1" align="center" gutterBottom>
-                                Diffused String: {diffusedString.join(', ')}
-                            </Typography>
-                            <Typography variant="body1" align="center">
-                                With Modulus: {wrappedString.join(', ')}
-                            </Typography>
-                        </div>
-                    </Fade>
-                    <Fade in={isMatrixValid && isStringValid}>
-                        <div>
-                            <Typography variant="h5" align="center" gutterBottom>
-                                {conversionMode === 0 ? 'Decoded' : 'Encoded'} String:{' '}
-                                <span style={{ color: 'gold' }}>
-                                    {allUppercase ? decodedString.toUpperCase() : decodedString}
-                                </span>
-                            </Typography>
-                        </div>
-                    </Fade>
+                    {isMatrixValid && (
+                        <Fade in>
+                            <div>
+                                <Typography variant="body1" align="center" gutterBottom>
+                                    Inverted Matrix: {invertedMatrix.join(', ')}
+                                </Typography>
+                                <Typography variant="body1" align="center">
+                                    With Modulus: {wrappedInvertedMatrix.join(', ')}
+                                </Typography>
+                            </div>
+                        </Fade>
+                    )}
+                    {isStringValid && (
+                        <Fade in>
+                            <div>
+                                <Typography variant="body1" align="center" gutterBottom>
+                                    Numerical String: {encodedString.join(', ')}
+                                </Typography>
+                            </div>
+                        </Fade>
+                    )}
+                    {isMatrixValid && isStringValid && (
+                        <Fade in>
+                            <div>
+                                <Typography variant="body1" align="center" gutterBottom>
+                                    Diffused String: {diffusedString.join(', ')}
+                                </Typography>
+                                <Typography variant="body1" align="center">
+                                    With Modulus: {wrappedString.join(', ')}
+                                </Typography>
+                            </div>
+                        </Fade>
+                    )}
+                    {isMatrixValid && isStringValid && (
+                        <Fade in>
+                            <div>
+                                <Typography variant="h5" align="center" gutterBottom>
+                                    {conversionMode === 0 ? 'Decoded' : 'Encoded'} String:{' '}
+                                    <span style={{ color: 'gold' }}>
+                                        {allUppercase ? decodedString.toUpperCase() : decodedString}
+                                    </span>
+                                </Typography>
+                            </div>
+                        </Fade>
+                    )}
                 </Stack>
             </Box>
         </Fade>

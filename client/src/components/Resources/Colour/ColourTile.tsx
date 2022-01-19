@@ -1,5 +1,6 @@
 import { Grid, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import './ColourTile.css';
 
 const ColourTile = ({ colour, size }: { colour: string; size: number }) => {
     const [tooltip, setTooltip] = useState(colour);
@@ -27,6 +28,7 @@ const ColourTile = ({ colour, size }: { colour: string; size: number }) => {
                     backgroundColor: colour,
                     filter: tooltip !== colour ? `brightness(50%)` : undefined,
                 }}
+                className="colourTile"
                 height={size}
                 width={size}
             ></Grid>

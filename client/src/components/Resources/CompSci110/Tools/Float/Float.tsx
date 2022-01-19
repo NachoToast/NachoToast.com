@@ -157,12 +157,6 @@ const Float = ({ inline }: { inline?: boolean }) => {
     return (
         <Fade in>
             <Box>
-                {/* {!inline && (
-                    <Head
-                        title="Floating Point Calculator"
-                        description="Calculate the hexadecimal floating point number of a binary float under the CompSci 110 textbook standard."
-                    />
-                )} */}
                 <Stack
                     spacing={2}
                     alignItems="center"
@@ -186,121 +180,138 @@ const Float = ({ inline }: { inline?: boolean }) => {
                         onInput={handleDecimalInput}
                         color={inputValid || !decimalInput.length ? 'primary' : 'error'}
                     />
-                    <Fade in={inputValid}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Typography>
-                                Binary Form ({binaryForm.replace('.', '').length} bit
-                                {binaryForm.length > 1 ? 's' : ''}):
-                            </Typography>
-                            <Typography>
-                                {signOfMantissa === 1 && <MinusSign />}
-                                {binaryForm}
-                            </Typography>
-                            {binaryForm !== fullBinaryForm && (
-                                <Tooltip
-                                    title={
-                                        <Typography variant="body1" textAlign="center">
-                                            Had to round down from{' '}
-                                            {fullBinaryForm.replace('.', '').length} bits:
-                                            <br />
-                                            {decimalInput} in binary = {signOfMantissa === 1 && '-'}
-                                            {fullBinaryForm
-                                                .replace('.', '')
-                                                .split('')
-                                                .slice(0, 13)
-                                                .map((e, i) => (
-                                                    <span key={i}>
-                                                        {fullBinaryForm[i] === '.' ? '.' : ''}
-                                                        {e}
-                                                        <sub
-                                                            style={{
-                                                                color:
-                                                                    i + 1 > 9
-                                                                        ? 'lightcoral'
-                                                                        : 'lightgreen',
-                                                            }}
-                                                        >
-                                                            {i + 1}
-                                                        </sub>
-                                                    </span>
-                                                ))}
-                                            {fullBinaryForm.replace('.', '').length > 13 && (
-                                                <span> ...</span>
-                                            )}
-                                        </Typography>
-                                    }
-                                >
-                                    <WarningIcon color="warning" fontSize="large" />
-                                </Tooltip>
-                            )}
-                        </Stack>
-                    </Fade>
-                    <Fade in={inputValid}>
-                        <Stack direction="row" alignItems="center" spacing={2}>
-                            <Typography>Standard Form:</Typography>
-                            <Typography>
-                                {signOfMantissa && (
-                                    <span>
-                                        <MinusSign />{' '}
-                                    </span>
+                    {inputValid && (
+                        <Fade in={inputValid}>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography>
+                                    Binary Form ({binaryForm.replace('.', '').length} bit
+                                    {binaryForm.length > 1 ? 's' : ''}):
+                                </Typography>
+                                <Typography>
+                                    {signOfMantissa === 1 && <MinusSign />}
+                                    {binaryForm}
+                                </Typography>
+                                {binaryForm !== fullBinaryForm && (
+                                    <Tooltip
+                                        title={
+                                            <Typography variant="body1" textAlign="center">
+                                                Had to round down from{' '}
+                                                {fullBinaryForm.replace('.', '').length} bits:
+                                                <br />
+                                                {decimalInput} in binary ={' '}
+                                                {signOfMantissa === 1 && '-'}
+                                                {fullBinaryForm
+                                                    .replace('.', '')
+                                                    .split('')
+                                                    .slice(0, 13)
+                                                    .map((e, i) => (
+                                                        <span key={i}>
+                                                            {fullBinaryForm[i] === '.' ? '.' : ''}
+                                                            {e}
+                                                            <sub
+                                                                style={{
+                                                                    color:
+                                                                        i + 1 > 9
+                                                                            ? 'lightcoral'
+                                                                            : 'lightgreen',
+                                                                }}
+                                                            >
+                                                                {i + 1}
+                                                            </sub>
+                                                        </span>
+                                                    ))}
+                                                {fullBinaryForm.replace('.', '').length > 13 && (
+                                                    <span> ...</span>
+                                                )}
+                                            </Typography>
+                                        }
+                                    >
+                                        <WarningIcon color="warning" fontSize="large" />
+                                    </Tooltip>
                                 )}
-                                .{<span style={{ color: colors.mantissa }}>{standardForm[0]}</span>}{' '}
-                                x 2<sup style={{ color: colors.exponent }}>{standardForm[1]}</sup>
-                            </Typography>
-                        </Stack>
-                    </Fade>
-                    <Fade in={inputValid}>
-                        <Stack direction="row" alignItems="center" spacing={4}>
-                            <Stack alignItems="center">
-                                <Typography>Sign of Mantissa</Typography>
-                                <Typography color={colors.signOfMantissa}>
-                                    {signOfMantissa}
+                            </Stack>
+                        </Fade>
+                    )}
+                    {inputValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                                <Typography>Standard Form:</Typography>
+                                <Typography>
+                                    {signOfMantissa && (
+                                        <span>
+                                            <MinusSign />{' '}
+                                        </span>
+                                    )}
+                                    .
+                                    {
+                                        <span style={{ color: colors.mantissa }}>
+                                            {standardForm[0]}
+                                        </span>
+                                    }{' '}
+                                    x 2
+                                    <sup style={{ color: colors.exponent }}>{standardForm[1]}</sup>
                                 </Typography>
                             </Stack>
-                            <Stack alignItems="center">
-                                <Typography>Mantissa</Typography>
-                                <Typography color={colors.mantissa}>{mantissa}</Typography>
+                        </Fade>
+                    )}
+                    {inputValid && (
+                        <Fade in>
+                            <Stack direction="row" alignItems="center" spacing={4}>
+                                <Stack alignItems="center">
+                                    <Typography>Sign of Mantissa</Typography>
+                                    <Typography color={colors.signOfMantissa}>
+                                        {signOfMantissa}
+                                    </Typography>
+                                </Stack>
+                                <Stack alignItems="center">
+                                    <Typography>Mantissa</Typography>
+                                    <Typography color={colors.mantissa}>{mantissa}</Typography>
+                                </Stack>
+                                <Stack alignItems="center">
+                                    <Typography>Sign of Exponent</Typography>
+                                    <Typography color={colors.signOfExponent}>
+                                        {signOfExponent}
+                                    </Typography>
+                                </Stack>
+                                <Stack alignItems="center">
+                                    <Typography>Exponent</Typography>
+                                    <Typography color={colors.exponent}>{exponent}</Typography>
+                                </Stack>
                             </Stack>
-                            <Stack alignItems="center">
-                                <Typography>Sign of Exponent</Typography>
-                                <Typography color={colors.signOfExponent}>
-                                    {signOfExponent}
-                                </Typography>
+                        </Fade>
+                    )}
+                    {inputValid && (
+                        <Fade in>
+                            <Stack direction="row" spacing={4}>
+                                {[0, 1, 2, 3].map((e) => (
+                                    <Typography variant="h5" key={e}>
+                                        {binaryFloat
+                                            .slice(4 * e, 4 * e + 4)
+                                            .split('')
+                                            .map((bit, i) => (
+                                                <span
+                                                    key={i}
+                                                    style={{ color: colourChooser(4 * e + i) }}
+                                                >
+                                                    {bit}
+                                                </span>
+                                            ))}
+                                    </Typography>
+                                ))}
                             </Stack>
-                            <Stack alignItems="center">
-                                <Typography>Exponent</Typography>
-                                <Typography color={colors.exponent}>{exponent}</Typography>
+                        </Fade>
+                    )}
+                    {inputValid && (
+                        <Fade in>
+                            <Stack direction="row" spacing={2}>
+                                {finalFloat.split('').map((e, i) => (
+                                    <Typography variant="h4" key={i}>
+                                        {e}
+                                    </Typography>
+                                ))}
                             </Stack>
-                        </Stack>
-                    </Fade>
-                    <Fade in={inputValid}>
-                        <Stack direction="row" spacing={4}>
-                            {[0, 1, 2, 3].map((e) => (
-                                <Typography variant="h5" key={e}>
-                                    {binaryFloat
-                                        .slice(4 * e, 4 * e + 4)
-                                        .split('')
-                                        .map((bit, i) => (
-                                            <span
-                                                key={i}
-                                                style={{ color: colourChooser(4 * e + i) }}
-                                            >
-                                                {bit}
-                                            </span>
-                                        ))}
-                                </Typography>
-                            ))}
-                        </Stack>
-                    </Fade>
-                    <Fade in={inputValid}>
-                        <Stack direction="row" spacing={2}>
-                            {finalFloat.split('').map((e, i) => (
-                                <Typography variant="h4" key={i}>
-                                    {e}
-                                </Typography>
-                            ))}
-                        </Stack>
-                    </Fade>
+                        </Fade>
+                    )}
                 </Stack>
             </Box>
         </Fade>

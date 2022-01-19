@@ -1,0 +1,7 @@
+.colourTile {
+    transition: filter 0.1s linear;
+}
+
+.colourTile:hover {
+    filter: brightness(70%);
+}
