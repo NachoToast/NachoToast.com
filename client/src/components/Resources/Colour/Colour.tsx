@@ -6,6 +6,7 @@ import LinearProgressWithLabel from '../../Misc/LinearProgressWithLabel';
 import { colourDifference, RGBToHex } from './colourHelpers';
 import './Colour.css';
 import Palette from './Palette';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 enum SortTypes {
     default = 'Default',
@@ -188,6 +189,7 @@ const Colour = ({ inline }: { inline?: boolean }) => {
                     gutterBottom
                     textOverflow="ellipsis"
                 >
+                    <UploadFileIcon sx={{ mb: -1, mr: 0.5 }} fontSize="large" />
                     {file?.name || `Select File`}
                 </Typography>
             </label>
