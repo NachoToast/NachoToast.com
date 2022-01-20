@@ -9,25 +9,16 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import githubProfile from '../../../assets/images/projectCardImages/githubProfile.png';
-import { Tile } from '../../../types/tile';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSelectedTileIndex, setSelectedTileIndex } from '../../../redux/slices/tiles.slice';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent } from 'react';
+import { TileType } from './Home';
 
-const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
+const Tile = ({ tile, index }: { tile: TileType; index: number }) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const selectedTileIndex = useSelector(getSelectedTileIndex);
-
-    const shouldFadeOut = selectedTileIndex !== -1 && selectedTileIndex !== index;
-
     const theme = useTheme();
     const notSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
     function handleClick(event: MouseEvent) {
-        dispatch(setSelectedTileIndex(index));
         event.preventDefault();
         if (tile?.destination) {
             navigate(tile.destination);
@@ -37,7 +28,7 @@ const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <Fade
-                in={!shouldFadeOut}
+                in
                 timeout={{ enter: 1000, exit: 1000 }}
                 style={{ transitionDelay: `${400 * Math.random() + index ** 2 * 10}ms` }}
             >
@@ -45,11 +36,8 @@ const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            image={tile?.imageSource || githubProfile}
-                            alt={
-                                tile?.imageAlt ||
-                                `The default photo, NachoToast's github profile picture.`
-                            }
+                            image={tile.imageSource}
+                            alt={tile.imageAlt}
                             style={{ display: notSmall ? 'unset' : 'none' }}
                         />
                         <CardContent>
@@ -64,4 +52,4 @@ const TileElement = ({ tile, index }: { tile: Tile; index: number }) => {
     );
 };
 
-export default TileElement;
+export default Tile;

@@ -13,7 +13,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { configureStore } from '@reduxjs/toolkit';
-import tilesSlice from './redux/slices/tiles.slice';
 import { Provider } from 'react-redux';
 import mainSlice from './redux/slices/main.slice';
 
@@ -34,7 +33,6 @@ theme = responsiveFontSizes(theme, { factor: 4 });
 
 const store = configureStore({
     reducer: {
-        tiles: tilesSlice,
         main: mainSlice,
     },
 });

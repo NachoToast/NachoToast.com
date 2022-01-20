@@ -1,29 +1,72 @@
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { interpolateTitle } from '../../redux/slices/main.slice';
-import {
-    getCurrentTiles,
-    SelectedTileList,
-    setSelectedTileIndex,
-    setSelectedTileList,
-} from '../../redux/slices/tiles.slice';
-import TileContainer from '../TileContainer/TileContainer';
+import * as pictures from '../../assets/images/tileImages';
+import Tile from './Tile';
 
-const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle?: string }) => {
+export interface TileType {
+    name: string;
+    imageSource: string;
+    imageAlt: string;
+    destination?: string;
+}
+
+const tiles: TileType[] = [
+    {
+        name: 'Minecraft',
+        imageSource: pictures.minecraftPicture,
+        imageAlt:
+            'A Minecraft screenshot of an old server lobby, showcasing a close-up of 3 trees under the sun.',
+        destination: '/minecraft',
+    },
+
+    {
+        name: 'All Projects',
+        imageSource: pictures.projectsPicture,
+        imageAlt:
+            'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
+    },
+
+    {
+        name: 'Resources',
+        imageSource: pictures.resourcesPicture,
+        imageAlt:
+            'A picture containing screenshots and other snippets from various code walkthroughs on the website.',
+        destination: '/resources',
+    },
+
+    {
+        name: 'Games',
+        imageSource: pictures.gamesPicture,
+        imageAlt:
+            "A collation of various image assets from my game Ignominy, such as a sword, a map of the kingdom 'Ignoma', and pixel art of a beer jug.",
+    },
+
+    {
+        name: 'Discord Bots',
+        imageSource: pictures.discordBotsPicture,
+        imageAlt:
+            'Various profile pictures of my Discord bots: CovidBot, NachoBot, MC Server Bot, and Jukebot.',
+    },
+
+    {
+        name: 'Other',
+        destination: '/pog',
+        imageSource: pictures.githubProfile,
+        imageAlt: 'idk',
+    },
+];
+
+const Home = ({ newTitle }: { newTitle?: string }) => {
     const dispatch = useDispatch();
-    const tiles = useSelector(getCurrentTiles);
 
     useEffect(() => {
-        if (tileList) {
-            dispatch(setSelectedTileIndex(-1));
-            dispatch(setSelectedTileList(tileList));
-        }
         if (newTitle) {
             dispatch(interpolateTitle(newTitle));
         }
         return () => {};
-    }, [tileList, newTitle, dispatch]);
+    }, [newTitle, dispatch]);
 
     return (
         <Container
@@ -33,7 +76,11 @@ const Home = ({ tileList, newTitle }: { tileList?: SelectedTileList; newTitle?: 
                 justifyContent: 'center',
             }}
         >
-            {tiles.length && <TileContainer tiles={tiles} />}
+            <Grid container spacing={3} columns={12}>
+                {tiles.map((tile, index) => (
+                    <Tile tile={tile} index={index} key={`${tile.name}${index}`} />
+                ))}
+            </Grid>
         </Container>
     );
 };

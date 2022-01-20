@@ -37,10 +37,7 @@ function App() {
                 {showTitle && <Title />}
                 <Container maxWidth="xl">
                     <Routes>
-                        <Route
-                            index
-                            element={<Home tileList="mainTiles" newTitle="NachoToast.com" />}
-                        />
+                        <Route index element={<Home newTitle="NachoToast.com" />} />
                         <Route path="resources">
                             <Route index element={<Resources />} />
                             <Route path="110">
