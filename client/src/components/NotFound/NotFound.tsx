@@ -32,7 +32,7 @@ const NotFound = () => {
             }}
         >
             <Fade in={!inTransition}>
-                <Typography align="center" variant="subtitle1">
+                <Typography align="center" variant="h6">
                     The page you are looking for doesn't exist.
                 </Typography>
             </Fade>
