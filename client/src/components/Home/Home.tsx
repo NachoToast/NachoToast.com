@@ -52,7 +52,6 @@ const tiles: TileType[] = [
 
     {
         name: 'Other',
-        destination: '/pog',
         imageSource: pictures.githubProfile,
         imageAlt: 'idk',
     },
@@ -71,7 +70,6 @@ const Home = ({ newTitle }: { newTitle?: string }) => {
     return (
         <Container
             style={{
-                height: '100vh',
                 alignItems: 'center',
                 justifyContent: 'center',
             }}
