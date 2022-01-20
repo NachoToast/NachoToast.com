@@ -20,14 +20,12 @@ const tiles: TileType[] = [
             'A Minecraft screenshot of an old server lobby, showcasing a close-up of 3 trees under the sun.',
         destination: '/minecraft',
     },
-
-    {
-        name: 'All Projects',
-        imageSource: pictures.projectsPicture,
-        imageAlt:
-            'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
-    },
-
+    // {
+    //     name: 'All Projects',
+    //     imageSource: pictures.projectsPicture,
+    //     imageAlt:
+    //         'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
+    // },
     {
         name: 'Resources',
         imageSource: pictures.resourcesPicture,
@@ -35,26 +33,18 @@ const tiles: TileType[] = [
             'A picture containing screenshots and other snippets from various code walkthroughs on the website.',
         destination: '/resources',
     },
-
-    {
-        name: 'Games',
-        imageSource: pictures.gamesPicture,
-        imageAlt:
-            "A collation of various image assets from my game Ignominy, such as a sword, a map of the kingdom 'Ignoma', and pixel art of a beer jug.",
-    },
-
-    {
-        name: 'Discord Bots',
-        imageSource: pictures.discordBotsPicture,
-        imageAlt:
-            'Various profile pictures of my Discord bots: CovidBot, NachoBot, MC Server Bot, and Jukebot.',
-    },
-
-    {
-        name: 'Other',
-        imageSource: pictures.githubProfile,
-        imageAlt: 'idk',
-    },
+    // {
+    //     name: 'Games',
+    //     imageSource: pictures.gamesPicture,
+    //     imageAlt:
+    //         "A collation of various image assets from my game Ignominy, such as a sword, a map of the kingdom 'Ignoma', and pixel art of a beer jug.",
+    // },
+    // {
+    //     name: 'Discord Bots',
+    //     imageSource: pictures.discordBotsPicture,
+    //     imageAlt:
+    //         'Various profile pictures of my Discord bots: CovidBot, NachoBot, MC Server Bot, and Jukebot.',
+    // },
 ];
 
 const Home = ({ newTitle }: { newTitle?: string }) => {
