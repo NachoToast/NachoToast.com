@@ -16,6 +16,7 @@ import QuickLinks from './CompSci101/QuickLinks/QuickLinks';
 import PastPapers from './CompSci101/PastPapers/PastPapers';
 import ArticleIcon from '@mui/icons-material/Article';
 import Colour from './Colour/Colour';
+import Dijkstra from './Dijkstra/Dijkstra';
 
 const Resources = () => {
     const dispatch = useDispatch();
@@ -114,7 +115,8 @@ const Resources = () => {
                         {
                             name: 'Dijkstra',
                             titleAppend: 'Dijkstra',
-                            ancient: true,
+                            element: <Dijkstra inline />,
+                            navigatesTo: 'dijkstra',
                         },
                     ]}
                     parentResourceName="Resources"

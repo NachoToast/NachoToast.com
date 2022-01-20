@@ -16,6 +16,7 @@ import Util from './components/Resources/CompSci110/Tools/Util/Util';
 import Changelog from './components/Changes/Changelog';
 import Colour from './components/Resources/Colour/Colour';
 import Minecraft from './components/Minecraft/Minecraft';
+import Dijkstra from './components/Resources/Dijkstra/Dijkstra';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
@@ -53,11 +54,18 @@ function App() {
                             <Route path="colour" element={<Colour />} />
                             <Route path="colors" element={<Colour />} />
                             <Route path="color" element={<Colour />} />
+                            <Route path="dijkstra" element={<Dijkstra />} />
                         </Route>
+                        <Route path="block" element={<Block />} />
+                        <Route path="caesar" element={<Caesar />} />
+                        <Route path="float" element={<Float />} />
+                        <Route path="util" element={<Util />} />
+                        <Route path="utilization" element={<Util />} />
                         <Route path="colours" element={<Colour />} />
                         <Route path="colour" element={<Colour />} />
                         <Route path="colors" element={<Colour />} />
                         <Route path="color" element={<Colour />} />
+                        <Route path="dijkstra" element={<Dijkstra />} />
                         <Route path="110">
                             <Route path="block" element={<Block />} />
                             <Route path="caesar" element={<Caesar />} />

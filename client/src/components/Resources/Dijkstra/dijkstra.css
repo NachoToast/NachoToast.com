@@ -1,0 +1,17 @@
+.adjMatTable {
+    border-collapse: collapse;
+}
+
+.adjMatTable tr:nth-child(even) {
+    background-color: #333;
+}
+
+.adjMatTable td {
+    padding: 10px;
+    text-align: center;
+}
+
+.adjMatTable th {
+    width: 40px;
+    height: 40px;
+}
