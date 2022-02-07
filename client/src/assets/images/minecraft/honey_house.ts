@@ -1,4 +1,4 @@
-import Image from '../../../../types/Image';
+import Image from '../../../types/Image';
 
 export const masterBedroom: Image = {
     source: 'https://cdn.discordapp.com/attachments/818250035350339624/818259621910413322/Base_Profile_Screenshot_2021.03.08_-_11.51.41.34.png',

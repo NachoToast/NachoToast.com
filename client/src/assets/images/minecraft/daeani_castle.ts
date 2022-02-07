@@ -1,4 +1,4 @@
-import Image from '../../../../types/Image';
+import Image from '../../../types/Image';
 
 export const courtyard: Image = {
     source: 'https://cdn.discordapp.com/attachments/818250035350339624/829712288872136744/unknown.png',

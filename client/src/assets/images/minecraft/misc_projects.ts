@@ -1,4 +1,4 @@
-import Image from '../../../../types/Image';
+import Image from '../../../types/Image';
 
 export const syssticHouse: Image = {
     source: 'https://cdn.discordapp.com/attachments/818250035350339624/821270779647361054/2021-03-16_19.19.49.png',

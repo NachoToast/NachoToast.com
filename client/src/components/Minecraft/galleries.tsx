@@ -1,13 +1,10 @@
 import { Typography } from '@mui/material';
 import { daeaniCastleImages } from '../../assets/images/minecraft/daeani_castle';
+import { daeaniOtherImages } from '../../assets/images/minecraft/daeani_other';
 import { honeyHouseImages } from '../../assets/images/minecraft/honey_house';
 import { seasonOneLobbyImages } from '../../assets/images/minecraft/lobby';
 import { miscProjects } from '../../assets/images/minecraft/misc_projects';
 import Image from '../../types/Image';
-
-export enum GalleryNames {
-    minecraft,
-}
 
 const galleryMap: {
     sourceImages: Image[];
@@ -48,6 +45,11 @@ const galleryMap: {
                 griefed :(
             </Typography>
         ),
+    },
+    {
+        sourceImages: daeaniOtherImages,
+        title: "Daeani's Other Projects",
+        description: <Typography>Various other creations from Daeani.</Typography>,
     },
     {
         sourceImages: miscProjects,

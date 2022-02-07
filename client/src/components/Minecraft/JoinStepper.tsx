@@ -15,7 +15,6 @@ import DiscordIcon from './DiscordIcon';
 import GavelIcon from '@mui/icons-material/Gavel';
 import CreateIcon from '@mui/icons-material/Create';
 import TimerIcon from '@mui/icons-material/Timer';
-import exampleWhitelist from '../../assets/images/minecraft/utility/exampleWhitelist.png';
 
 const steps: { label: string; description: JSX.Element; icon?: JSX.Element }[] = [
     {
@@ -77,15 +76,6 @@ const steps: { label: string; description: JSX.Element; icon?: JSX.Element }[] =
                     </span>{' '}
                     in the #bot-commands channel to apply.
                 </Typography>
-                <img
-                    loading="eager"
-                    src={exampleWhitelist}
-                    style={{
-                        maxWidth: '100%',
-                        borderRadius: '3px',
-                    }}
-                    alt="An example interaction of how to get whitelisted, Discord user NachoToast types 'neko w NachoToast' to which the bot (NachoBot) responds 'Successfully submitted a whitelist application for NachoToast' "
-                />
             </>
         ),
     },
