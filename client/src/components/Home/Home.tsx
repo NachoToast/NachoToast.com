@@ -20,12 +20,13 @@ const tiles: TileType[] = [
             'A Minecraft screenshot of an old server lobby, showcasing a close-up of 3 trees under the sun.',
         destination: '/minecraft',
     },
-    // {
-    //     name: 'All Projects',
-    //     imageSource: pictures.projectsPicture,
-    //     imageAlt:
-    //         'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
-    // },
+    {
+        name: 'All Projects',
+        imageSource: pictures.projectsPicture,
+        imageAlt:
+            'A picture containing icons, code snippets, and other miscellaneous assets from my various projects.',
+        destination: '/projects',
+    },
     {
         name: 'Resources',
         imageSource: pictures.resourcesPicture,

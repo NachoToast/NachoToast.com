@@ -17,6 +17,7 @@ import Changelog from './components/Changes/Changelog';
 import Colour from './components/Resources/Colour/Colour';
 import Minecraft from './components/Minecraft/Minecraft';
 import Dijkstra from './components/Resources/Dijkstra/Dijkstra';
+import Projects from './components/Projects/Projects';
 
 function App() {
     const showTitle = !useSelector(getHideTitle);
@@ -74,6 +75,7 @@ function App() {
                         <Route path="mc" element={<Minecraft />} />
                         <Route path="changelog" element={<Changelog />} />
                         <Route path="*" element={<NotFound />} />
+                        <Route path="projects" element={<Projects />} />
                     </Routes>
                 </Container>
             </BrowserRouter>
